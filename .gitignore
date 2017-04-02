@@ -1,0 +1,10 @@
+*.zip
+*.db
+**/.DS_Store
+**/Thumbs.db
+**/ehthumbs.db
+**/*.lnk
+**/.Trash-*
+**/.directory
+*.hash
+*.map

@@ -1,0 +1,9 @@
+-main Main
+
+-lib sure
+
+# Uncomment to use the primitive-haxe haxelib
+#-lib primitive-haxe
+
+# Uncomment to use primitive-haxe as a git submodule
+-cp lib/primitive

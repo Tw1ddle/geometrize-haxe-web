@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-GB" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,user-scalable=yes,initial-scale=1,maximum-scale=1">
+		<title>Primitive Haxe - Recreate images with geometric primitives</title>
+		<meta name="author" content="Sam Twidale">
+		<meta name="description" content="A tool for recreating images using geometric primitives.">
+		<meta name="keywords" content="geometrize, geometrizer, primitive, haxe, geometric, procedural, hillclimbing, art, shapes, geometry">
+		<meta name="subject" content="Geometrize Images">
+		<meta name="robots" content="index, follow">
+		<link rel="canonical" href="https://www.samcodes.co.uk/project/primitive-haxe/" />
+		<meta property="og:title" content="Primitive Haxe">
+		<meta property="og:description" content="Recreate images using geometric primitives.">
+		<meta property="og:site_name" content="Samcodes">
+		<meta name="twitter:title" content="Image Geometrizer">
+		<meta name="twitter:description" content="Recreate images using geometric primitives.">
+		<link rel="icon" type="image/x-icon" href="icon/favicon.png">
+		<link rel="apple-touch-icon-precomposed" type="image/x-icon" href="icon/apple-touch-icon-precomposed.png">
+		<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="icon/favicon.ico"><![endif]-->
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/nouislider.css">
+		<link rel="stylesheet" type="text/css" href="css/nouislider.pips.css">
+	</head>
+	
+    <body>
+		<section id="header">
+			<div class="inner">
+				<!-- Icon -->
+				<h1><strong>Primitive</strong> Haxe</h1>
+				<h2>Recreate images with geometric primitives</h2>
+				
+				<a href="https://github.com/Tw1ddle/primitive-haxe-web/" target="_blank">
+					<img class="logo" src="assets/images/primitive_haxe_logo.png" alt="primitive haxe image geometrizer logo">
+				</a>
+				
+				<p>A free and <a href="https://github.com/Tw1ddle/primitive-haxe-web" target="_blank">open source</a> tool for <a href="https://en.wiktionary.org/wiki/geometrize" target="_blank">geometrizing</a> images. Written in <a href="http://haxe.org/" target="_blank">Haxe</a> by <a href="https://twitter.com/Sam_Twidale" target="_blank">Sam Twidale</a>. Based on <a href="https://github.com/fogleman/primitive" target="_blank">primitive</a> by <a href="https://github.com/fogleman" target="_blank">Michael Fogleman</a>.</p>
+			</div>
+		</section>
+		
+		<!-- Options and filters -->
+		<section id="accordion">
+			<div>
+				<input type="checkbox" id="check-1">
+				<h2><label for="check-1">Settings</label></h2>
+
+				<div class="settings">
+				
+					<div class="sliders stitched">
+						<div class="container">
+							<h3>Shape Opacity</h3>
+							<div id="shapeopacity" class="black"></div>
+						</div>
+						<div class="container">
+							<h3>Random Shapes Per Step</h3>
+							<div id="randomshapesperstep" class="red"></div>
+						</div>
+						
+						<div class="container">
+							<h3>Shape Mutations Per Step</h3>
+							<div id="shapemutationsperstep" class="green"></div>
+						</div>
+						<div class="container">
+							<h3>Reduced Search Iterations</h3>
+							<div id="reducedsearchiterations" class="orange"></div>
+						</div>
+						<div class="container">
+							<h3>Min Time Per Step</h3>
+							<div id="mintimeperstep" class="blue"></div>
+						</div>
+					</div>
+					
+					<br>
+					
+					<div class="textboxes stitched">
+						<div class="container"> <h3>Rectangles</h3> <input type="checkbox" id="rectangles" class="control"> </div>
+						<div class="container"> <h3>Rotated Rectangles</h3> <input type="checkbox" id="rotated_rectangles" class="control"> </div>
+						<div class="container"> <h3>Triangles</h3> <input type="checkbox" id="triangles" class="control"> </div>
+						<div class="container"> <h3>Ellipses</h3> <input type="checkbox" id="ellipses" class="control"> </div>
+						<div class="container"> <h3>Rotated Ellipses</h3> <input type="checkbox" id="rotated_ellipses" class="control"> </div>
+						<div class="container"> <h3>Circles</h3> <input type="checkbox" id="circles" class="control"> </div>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+		
+		<br>
+		
+		<div class="container stitched">
+		</div>
+		
+		<br>
+		<br>
+		
+		<div class="container stitched">
+			<div id="controls">
+				<a class="button" id="runpausebutton">
+					<h2>Pause</h2>
+				</a>
+				<a class="button" id="stepbutton">
+					<h2>Step</h2>
+				</a>
+				<a class="button" id="openimagebutton">
+					<h2>Open Image</h2>
+				</a>
+			</div>
+		</div>
+		
+		<div class="container stitched">
+			<div id="resetoptions">
+				<a class="button" id="resetbutton">
+					<h2>Reset</h2>
+				</a>
+			</div>
+		</div>
+		
+		<div class="container stitched">
+			<div id="saveoptions">
+				<a class="button" id="saveimagebutton">
+					<h2>Save Image</h2>
+				</a>
+			</div>
+		</div>
+		
+		<br>
+		
+		<div class="container stitched">
+			<h2>How It Works</h2>
+			<p>This site uses the <a href="https://github.com/Tw1ddle/primitive-haxe/" target="_blank">primitive-haxe</a> library to recreate images as geometric primitives. Given a target image to recreate with shapes, the library generates random shapes and repeatedly mutates them as part of a hillclimbing optimization approach, only picking the best-fitting shapes. The settings can be changed interactively via the settings dropdown to find a good balance of speed and quality.</p>
+			<p>If you have any suggestions, requests or comments then feel free to <a href="http://samcodes.co.uk/contact/" target="_blank">contact me</a>.</p>
+		</div>
+		
+		<script type="text/javascript" src="js/wNumb.js"></script>
+		<script type="text/javascript" src="js/nouislider.js"></script>
+		<script type="text/javascript" src="js/primitive.js"></script>
+    </body>
+	
+</html>
