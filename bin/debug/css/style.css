@@ -42,20 +42,20 @@ p a {
     text-decoration: none;
 }
 html { 
-	user-select: none;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	-ms-user-select: none;
-	-webkit-user-select: none;
-	-o-user-select: none;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
 }
 li {
-	user-select: text;
-	-moz-user-select: text;
-	-khtml-user-select: text;
-	-ms-user-select: text;
-	-webkit-user-select: text;
-	-o-user-select: text;
+    user-select: text;
+    -moz-user-select: text;
+    -khtml-user-select: text;
+    -ms-user-select: text;
+    -webkit-user-select: text;
+    -o-user-select: text;
 }
 img {
     max-width:90%;
@@ -118,13 +118,13 @@ input:hover, textarea:hover, input:focus, textarea:focus {
     -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px; 
 }
 input[type=checkbox] {
-	-ms-transform: scale(1.5);
-	-moz-transform: scale(1.5);
-	-webkit-transform: scale(1.5);
-	-o-transform: scale(1.5);
-	margin: 30px;
-	width: 90px;
-	height: 20px;
+    -ms-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    margin: 30px;
+    width: 90px;
+    height: 20px;
 }
 label { 
     margin-left: 10px; 
@@ -149,6 +149,7 @@ select {
 }
 
 .button {
+    width: auto;
     margin: 10px;
     -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
     -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -167,11 +168,11 @@ select {
     display:inline-block;
     cursor:pointer;
     color:#666666;
-    font-size:15px;
-    font-weight:bold;
     padding:6px 24px;
     text-decoration:none;
     text-shadow:0px 1px 0px #ffffff;
+    font: 400 30px "Open Sans";
+	letter-spacing: -2px;
 }
 .button:hover {
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
@@ -228,6 +229,16 @@ select {
 }
 #accordion input:checked ~ .settings {
     height: auto;
+}
+.textbox {
+    resize: horizontal;
+    min-width: 80vw;
+    min-height: 120px;
+    max-height: 600px;
+    border: 3px solid #cccccc;
+    padding: 5px;
+    background-position: bottom right;
+    background-repeat: no-repeat;
 }
 
 .container {

@@ -32,10 +32,10 @@
 				<h2>Recreate images with geometric primitives</h2>
 				
 				<a href="https://github.com/Tw1ddle/primitive-haxe-web/" target="_blank">
-					<img class="logo" src="assets/images/primitive_haxe_logo.png" alt="primitive haxe image geometrizer logo">
+					<img id="primitivehaxelogo" class="logo" src="assets/images/primitive_haxe_logo.png" alt="primitive haxe image geometrizer logo">
 				</a>
 				
-				<p>A free and <a href="https://github.com/Tw1ddle/primitive-haxe-web" target="_blank">open source</a> tool for <a href="https://en.wiktionary.org/wiki/geometrize" target="_blank">geometrizing</a> images. Written in <a href="http://haxe.org/" target="_blank">Haxe</a> by <a href="https://twitter.com/Sam_Twidale" target="_blank">Sam Twidale</a>. Based on <a href="https://github.com/fogleman/primitive" target="_blank">primitive</a> by <a href="https://github.com/fogleman" target="_blank">Michael Fogleman</a>.</p>
+				<p>A free and <a href="https://github.com/Tw1ddle/primitive-haxe-web" target="_blank">open source</a> tool for <a href="https://en.wiktionary.org/wiki/geometrize" target="_blank">geometrizing</a> images. Written in <a href="http://haxe.org/" target="_blank">Haxe</a> by <a href="https://twitter.com/Sam_Twidale" target="_blank">Sam Twidale</a>. <a href="https://github.com/Tw1ddle/primitive-haxe" target="_blank">Primitive Haxe</a> is based on <a href="https://github.com/fogleman/primitive" target="_blank">primitive</a> by <a href="https://github.com/fogleman" target="_blank">Michael Fogleman</a>.</p>
 			</div>
 		</section>
 		
@@ -61,27 +61,32 @@
 							<h3>Shape Mutations Per Step</h3>
 							<div id="shapemutationsperstep" class="green"></div>
 						</div>
-						<div class="container">
-							<h3>Reduced Search Iterations</h3>
-							<div id="reducedsearchiterations" class="orange"></div>
-						</div>
-						<div class="container">
-							<h3>Min Time Per Step</h3>
-							<div id="mintimeperstep" class="blue"></div>
-						</div>
 					</div>
 					
 					<br>
 					
 					<div class="textboxes stitched">
 						<div class="container"> <h3>Rectangles</h3> <input type="checkbox" id="rectangles" class="control"> </div>
-						<div class="container"> <h3>Rotated Rectangles</h3> <input type="checkbox" id="rotated_rectangles" class="control"> </div>
+						<div class="container"> <h3>Rotated Rectangles</h3> <input type="checkbox" id="rotatedrectangles" class="control"> </div>
 						<div class="container"> <h3>Triangles</h3> <input type="checkbox" id="triangles" class="control"> </div>
 						<div class="container"> <h3>Ellipses</h3> <input type="checkbox" id="ellipses" class="control"> </div>
-						<div class="container"> <h3>Rotated Ellipses</h3> <input type="checkbox" id="rotated_ellipses" class="control"> </div>
+						<div class="container"> <h3>Rotated Ellipses</h3> <input type="checkbox" id="rotatedellipses" class="control"> </div>
 						<div class="container"> <h3>Circles</h3> <input type="checkbox" id="circles" class="control"> </div>
 					</div>
 					
+					<br>
+					
+					<div class="stitched">
+						<h3>SVG Data</h3>
+						<textarea id="svgoutput" class="textbox"></textarea>
+					</div>
+					
+					<br>
+					
+					<div class="stitched">
+						<h3>Event Log</h3>
+						<textarea id="eventlog" class="textbox"></textarea>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -89,6 +94,12 @@
 		<br>
 		
 		<div class="container stitched">
+			<canvas id="currentimagecanvas"/>
+		</div>
+		
+		<br>
+		
+		<div id="currentsvgcontainer" class="container stitched">
 		</div>
 		
 		<br>
@@ -97,19 +108,15 @@
 		<div class="container stitched">
 			<div id="controls">
 				<a class="button" id="runpausebutton">
-					<h2>Pause</h2>
+					<h2>Run</h2>
 				</a>
 				<a class="button" id="stepbutton">
 					<h2>Step</h2>
 				</a>
-				<a class="button" id="openimagebutton">
-					<h2>Open Image</h2>
-				</a>
-			</div>
-		</div>
-		
-		<div class="container stitched">
-			<div id="resetoptions">
+				
+				<input id="openimageinput" type="file" style="display:none;" accept="image/*"/>
+				<input type="button" class="button" id="openimagebutton" value="Open Image" onclick="document.getElementById('openimageinput').click();"</input>
+				
 				<a class="button" id="resetbutton">
 					<h2>Reset</h2>
 				</a>
@@ -120,6 +127,9 @@
 			<div id="saveoptions">
 				<a class="button" id="saveimagebutton">
 					<h2>Save Image</h2>
+				</a>
+				<a class="button" id="savesvgbutton">
+					<h2>Save Svg</h2>
 				</a>
 			</div>
 		</div>

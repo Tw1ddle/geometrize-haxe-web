@@ -116,33 +116,127 @@ var Main = function() {
 	window.onload = $bind(this,this.onWindowLoaded);
 };
 Main.__name__ = true;
+Main.getElement = function(id) {
+	return window.document.getElementById(id);
+};
 Main.main = function() {
 	var main = new Main();
 };
 Main.prototype = {
 	onWindowLoaded: function() {
 		this.shapeTypes = _$ArraySet_ArraySet_$Impl_$.create([primitive_shape_ShapeType.CIRCLE]);
-		this.shapeAlpha = 128;
-		this.reducedSearchRepeats = 1;
+		this.shapeOpacity = 128;
 		this.candidateShapesPerStep = 50;
 		this.shapeMutationsPerStep = 100;
-		this.runner = new primitive_runner_ImageRunner(this.inputImage);
-		null;
+		this.shapeResults = [];
+		this.set_running(false);
+		this.set_targetImage(this.getDefaultBitmap());
+		Main.circlesCheckbox.checked = true;
+		this.appendEventText("Initialized, waiting...");
+		this.createSliders();
+		this.addEventListeners();
 	}
 	,constructRunnerOptions: function() {
-		return new primitive_runner_ImageRunnerOptions(_$ArraySet_ArraySet_$Impl_$.toArray(this.shapeTypes),this.shapeAlpha,this.reducedSearchRepeats,this.candidateShapesPerStep,this.shapeMutationsPerStep);
+		return new primitive_runner_ImageRunnerOptions(_$ArraySet_ArraySet_$Impl_$.toArray(this.shapeTypes),this.shapeOpacity,1,this.candidateShapesPerStep,this.shapeMutationsPerStep);
 	}
-	,reset: function() {
+	,init: function() {
 		this.shapeTypes = _$ArraySet_ArraySet_$Impl_$.create([primitive_shape_ShapeType.CIRCLE]);
-		this.shapeAlpha = 128;
-		this.reducedSearchRepeats = 1;
+		this.shapeOpacity = 128;
 		this.candidateShapesPerStep = 50;
 		this.shapeMutationsPerStep = 100;
-		this.runner = new primitive_runner_ImageRunner(this.inputImage);
+		this.shapeResults = [];
+		this.set_running(false);
+		this.set_targetImage(this.getDefaultBitmap());
+		Main.circlesCheckbox.checked = true;
+		this.appendEventText("Initialized, waiting...");
 	}
 	,createSliders: function() {
+		var _g = this;
+		noUiSlider.create(Main.shapeOpacitySlider,{ start : [this.shapeOpacity], connect : "lower", range : { 'min' : [1,1], 'max' : [255]}, pips : { mode : "range", density : 10}});
+		this.createTooltips(Main.shapeOpacitySlider);
+		Main.shapeOpacitySlider.noUiSlider.on("change",function(values,handle,rawValues) {
+			_g.shapeOpacity = values[handle] | 0;
+		});
+		Main.shapeOpacitySlider.noUiSlider.on("update",function(values1,handle1,rawValues1) {
+			_g.updateTooltips(Main.shapeOpacitySlider,handle1,values1[handle1] | 0);
+		});
+		noUiSlider.create(Main.randomShapesPerStepSlider,{ start : [this.candidateShapesPerStep], connect : "lower", range : { 'min' : [10,1], 'max' : [300]}, pips : { mode : "range", density : 10}});
+		this.createTooltips(Main.randomShapesPerStepSlider);
+		Main.randomShapesPerStepSlider.noUiSlider.on("change",function(values2,handle2,rawValues2) {
+			_g.candidateShapesPerStep = values2[handle2] | 0;
+		});
+		Main.randomShapesPerStepSlider.noUiSlider.on("update",function(values3,handle3,rawValues3) {
+			_g.updateTooltips(Main.randomShapesPerStepSlider,handle3,values3[handle3] | 0);
+		});
+		noUiSlider.create(Main.shapeMutationsPerStepSlider,{ start : [this.shapeMutationsPerStep], connect : "lower", range : { 'min' : [10,1], 'max' : [300]}, pips : { mode : "range", density : 10}});
+		this.createTooltips(Main.shapeMutationsPerStepSlider);
+		Main.shapeMutationsPerStepSlider.noUiSlider.on("change",function(values4,handle4,rawValues4) {
+			_g.shapeMutationsPerStep = values4[handle4] | 0;
+		});
+		Main.shapeMutationsPerStepSlider.noUiSlider.on("update",function(values5,handle5,rawValues5) {
+			_g.updateTooltips(Main.shapeMutationsPerStepSlider,handle5,values5[handle5] | 0);
+		});
 	}
 	,addEventListeners: function() {
+		var _g = this;
+		Main.runPauseButton.addEventListener("click",function() {
+			_g.set_running(!_g.running);
+		},false);
+		Main.openImageFileInput.addEventListener("change",function(e) {
+			if(Main.openImageFileInput.files == null || Main.openImageFileInput.files.length == 0) return;
+			var file = Main.openImageFileInput.files[0];
+			var fileReader = new FileReader();
+			fileReader.onload = function(e1) {
+				var image = new Image();
+				image.src = fileReader.result;
+				_g.set_targetImage(_g.canvasToBitmap(_g.imageToCanvas(image)));
+			};
+			fileReader.readAsDataURL(file);
+		},false);
+		Main.stepButton.addEventListener("click",function() {
+			_g.appendShapeResults(_g.runner.step(new primitive_runner_ImageRunnerOptions(_$ArraySet_ArraySet_$Impl_$.toArray(_g.shapeTypes),_g.shapeOpacity,1,_g.candidateShapesPerStep,_g.shapeMutationsPerStep)));
+			_g.drawBitmapToCanvas(_g.runner.getImageData(),Main.currentImageCanvas);
+		},false);
+		Main.resetButton.addEventListener("click",function() {
+			_g.set_targetImage(_g.getDefaultBitmap());
+		},false);
+		Main.saveImageButton.addEventListener("click",function(e2) {
+			var canvas;
+			var _this = window.document;
+			canvas = _this.createElement("canvas");
+			_g.drawBitmapToCanvas(_g.runner.getImageData(),canvas);
+			var data = canvas.toDataURL("image/png");
+			Main.saveImageButton.download = "geometrized_image.png";
+			Main.saveImageButton.href = data;
+		},false);
+		Main.saveSvgButton.addEventListener("click",function(e3) {
+			var data1 = primitive_exporters_SvgExporter["export"](_g.runner.model);
+			var svgBlob = new Blob([data1],{ type : "image/svg+xml;charset=utf-8"});
+			var svgUrl = URL.createObjectURL(svgBlob);
+			Main.saveSvgButton.download = "geometrized_svg.svg";
+			Main.saveSvgButton.href = svgUrl;
+		},false);
+		var setShapeOption = function(option,enable) {
+			if(enable) _$ArraySet_ArraySet_$Impl_$.add(_g.shapeTypes,option); else HxOverrides.remove(_g.shapeTypes,option);
+		};
+		Main.rectanglesCheckbox.addEventListener("click",function() {
+			setShapeOption(primitive_shape_ShapeType.RECTANGLE,Main.rectanglesCheckbox.checked);
+		},false);
+		Main.rotatedRectanglesCheckbox.addEventListener("click",function() {
+			setShapeOption(primitive_shape_ShapeType.ROTATED_RECTANGLE,Main.rotatedRectanglesCheckbox.checked);
+		},false);
+		Main.trianglesCheckbox.addEventListener("click",function() {
+			setShapeOption(primitive_shape_ShapeType.TRIANGLE,Main.trianglesCheckbox.checked);
+		},false);
+		Main.ellipsesCheckbox.addEventListener("click",function() {
+			setShapeOption(primitive_shape_ShapeType.ELLIPSE,Main.ellipsesCheckbox.checked);
+		},false);
+		Main.rotatedEllipsesCheckbox.addEventListener("click",function() {
+			setShapeOption(primitive_shape_ShapeType.ROTATED_ELLIPSE,Main.rotatedEllipsesCheckbox.checked);
+		},false);
+		Main.circlesCheckbox.addEventListener("click",function() {
+			setShapeOption(primitive_shape_ShapeType.CIRCLE,Main.circlesCheckbox.checked);
+		},false);
 	}
 	,createTooltips: function(slider) {
 		var tipHandles = slider.getElementsByClassName("noUi-handle");
@@ -159,6 +253,69 @@ Main.prototype = {
 	,updateTooltips: function(slider,handleIdx,value) {
 		var tipHandles = slider.getElementsByClassName("noUi-handle");
 		tipHandles[handleIdx].innerHTML = "<span class='tooltip'>" + (value == null?"null":"" + value) + "</span>";
+	}
+	,appendEventText: function(message) {
+		if(Main.eventLogElement.value == null) Main.eventLogElement.value = "";
+		Main.eventLogElement.value += message + "\n";
+	}
+	,appendSvgText: function(message) {
+		if(Main.svgTextElement.value == null) Main.svgTextElement.value = "";
+		Main.svgTextElement.value += message;
+	}
+	,appendShapeResults: function(results) {
+		this.shapeResults = this.shapeResults.concat(results);
+	}
+	,drawBitmapToCanvas: function(bitmap,canvas) {
+		canvas.width = bitmap.width;
+		canvas.height = bitmap.height;
+		var context = canvas.getContext("2d",null);
+		var imageData = context.createImageData(canvas.width,canvas.height);
+		var bytesData = bitmap.getBytes();
+		var _g1 = 0;
+		var _g = bytesData.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			imageData.data[i] = bytesData.b[i];
+		}
+		context.putImageData(imageData,0,0);
+		return canvas;
+	}
+	,canvasToBitmap: function(canvas) {
+		var context = canvas.getContext("2d",null);
+		var imageData = context.getImageData(0,0,canvas.width,canvas.height);
+		var bytesData = haxe_io_Bytes.alloc(imageData.data.length);
+		var _g1 = 0;
+		var _g = bytesData.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			bytesData.b[i] = imageData.data[i] & 255;
+		}
+		var bitmap = primitive_bitmap_Bitmap.createFromBytes(canvas.width,canvas.height,bytesData);
+		return bitmap;
+	}
+	,imageToCanvas: function(image) {
+		var canvas;
+		var _this = window.document;
+		canvas = _this.createElement("canvas");
+		canvas.width = image.width;
+		canvas.height = image.height;
+		var context = canvas.getContext("2d",null);
+		context.drawImage(image,0,0);
+		return canvas;
+	}
+	,getDefaultBitmap: function() {
+		return this.canvasToBitmap(this.imageToCanvas(Main.logoImageElement));
+	}
+	,set_targetImage: function(bitmap) {
+		this.targetImage = bitmap;
+		this.runner = new primitive_runner_ImageRunner(this.targetImage);
+		this.drawBitmapToCanvas(this.runner.getImageData(),Main.currentImageCanvas);
+		if(this.runner == null) this.appendEventText("Initializing image runner and setting default bitmap..."); else this.appendEventText("Resetting current image and removing shapes...");
+		return this.targetImage;
+	}
+	,set_running: function(running) {
+		if(running) Main.runPauseButton.innerHTML = "<h2>Pause</h2>"; else Main.runPauseButton.innerHTML = "<h2>Run</h2>";
+		return this.running = running;
 	}
 	,__class__: Main
 };
@@ -594,7 +751,6 @@ var primitive_Model = function(target,backgroundColor,outputSize) {
 	if(!(target != null)) throw new js__$Boot_HaxeError("FAIL: target != null");
 	this.width = target.width;
 	this.height = target.height;
-	this.backgroundColor = backgroundColor;
 	this.target = target;
 	this.current = primitive_bitmap_Bitmap.create(target.width,target.height,backgroundColor);
 	this.buffer = primitive_bitmap_Bitmap.create(target.width,target.height,backgroundColor);
@@ -1209,6 +1365,11 @@ primitive_bitmap__$Rgba_Rgba_$Impl_$.get_b = function(this1) {
 primitive_bitmap__$Rgba_Rgba_$Impl_$.get_a = function(this1) {
 	return this1 & 255;
 };
+var primitive_exporters_SvgExporter = function() { };
+primitive_exporters_SvgExporter.__name__ = true;
+primitive_exporters_SvgExporter["export"] = function(model) {
+	return "";
+};
 var primitive_runner_ImageRunner = function(inputImage) {
 	this.model = null;
 	this.model = new primitive_Model(inputImage,primitive_Primitive.getAverageImageColor(inputImage),inputImage.width);
@@ -1221,9 +1382,6 @@ primitive_runner_ImageRunner.prototype = {
 	,getImageData: function() {
 		if(!(this.model != null)) throw new js__$Boot_HaxeError("FAIL: model != null");
 		return this.model.current;
-	}
-	,get_backgroundColor: function() {
-		return this.model.backgroundColor;
 	}
 	,__class__: primitive_runner_ImageRunner
 };
@@ -1624,24 +1782,52 @@ if(ArrayBuffer.prototype.slice == null) ArrayBuffer.prototype.slice = js_html_co
 var DataView = $global.DataView || js_html_compat_DataView;
 var Uint8Array = $global.Uint8Array || js_html_compat_Uint8Array._new;
 ID.header = "header";
+ID.primitivehaxelogo = "primitivehaxelogo";
 ID.accordion = "accordion";
-ID.minmaxlength = "minmaxlength";
-ID.order = "order";
-ID.prior = "prior";
-ID.maxwordstogenerate = "maxwordstogenerate";
-ID.maxtime = "maxtime";
-ID.rectangle = "rectangle";
-ID.triangle = "triangle";
-ID.ellipse = "ellipse";
+ID.shapeopacity = "shapeopacity";
+ID.randomshapesperstep = "randomshapesperstep";
+ID.shapemutationsperstep = "shapemutationsperstep";
+ID.rectangles = "rectangles";
+ID.rotatedrectangles = "rotatedrectangles";
+ID.triangles = "triangles";
+ID.ellipses = "ellipses";
+ID.rotatedellipses = "rotatedellipses";
 ID.circles = "circles";
+ID.svgoutput = "svgoutput";
+ID.eventlog = "eventlog";
+ID.currentimagecanvas = "currentimagecanvas";
+ID.currentsvgcontainer = "currentsvgcontainer";
 ID.controls = "controls";
 ID.runpausebutton = "runpausebutton";
 ID.stepbutton = "stepbutton";
-ID.pickimagebutton = "pickimagebutton";
+ID.openimageinput = "openimageinput";
+ID.openimagebutton = "openimagebutton";
 ID.resetbutton = "resetbutton";
 ID.saveoptions = "saveoptions";
-ID.savebutton = "savebutton";
+ID.saveimagebutton = "saveimagebutton";
+ID.savesvgbutton = "savesvgbutton";
 Main.WEBSITE_URL = "http://www.samcodes.co.uk/project/primitive-haxe/";
+Main.runPauseButton = window.document.getElementById("runpausebutton");
+Main.stepButton = window.document.getElementById("stepbutton");
+Main.openImageButton = window.document.getElementById("openimagebutton");
+Main.openImageFileInput = window.document.getElementById("openimageinput");
+Main.resetButton = window.document.getElementById("resetbutton");
+Main.saveImageButton = window.document.getElementById("saveimagebutton");
+Main.saveSvgButton = window.document.getElementById("savesvgbutton");
+Main.rectanglesCheckbox = window.document.getElementById("rectangles");
+Main.rotatedRectanglesCheckbox = window.document.getElementById("rotatedrectangles");
+Main.trianglesCheckbox = window.document.getElementById("triangles");
+Main.ellipsesCheckbox = window.document.getElementById("ellipses");
+Main.rotatedEllipsesCheckbox = window.document.getElementById("rotatedellipses");
+Main.circlesCheckbox = window.document.getElementById("circles");
+Main.shapeOpacitySlider = window.document.getElementById("shapeopacity");
+Main.randomShapesPerStepSlider = window.document.getElementById("randomshapesperstep");
+Main.shapeMutationsPerStepSlider = window.document.getElementById("shapemutationsperstep");
+Main.currentImageCanvas = window.document.getElementById("currentimagecanvas");
+Main.svgTextElement = window.document.getElementById("svgoutput");
+Main.eventLogElement = window.document.getElementById("eventlog");
+Main.logoImageElement = window.document.getElementById("primitivehaxelogo");
+Main.currentSvgContainer = window.document.getElementById("currentsvgcontainer");
 haxe_io_FPHelper.i64tmp = (function($this) {
 	var $r;
 	var x = new haxe__$Int64__$_$_$Int64(0,0);
