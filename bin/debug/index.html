@@ -35,7 +35,7 @@
 					<img id="primitivehaxelogo" class="logo" src="assets/images/primitive_haxe_logo.png" alt="primitive haxe image geometrizer logo">
 				</a>
 				
-				<p>A free and <a href="https://github.com/Tw1ddle/primitive-haxe-web" target="_blank">open source</a> tool for <a href="https://en.wiktionary.org/wiki/geometrize" target="_blank">geometrizing</a> images. Written in <a href="http://haxe.org/" target="_blank">Haxe</a> by <a href="https://twitter.com/Sam_Twidale" target="_blank">Sam Twidale</a>. <a href="https://github.com/Tw1ddle/primitive-haxe" target="_blank">Primitive Haxe</a> is based on <a href="https://github.com/fogleman/primitive" target="_blank">primitive</a> by <a href="https://github.com/fogleman" target="_blank">Michael Fogleman</a>.</p>
+				<p><a href="https://github.com/Tw1ddle/primitive-haxe" target="_blank">Primitive Haxe</a> is a free and <a href="https://github.com/Tw1ddle/primitive-haxe-web" target="_blank">open source</a> tool for <a href="https://en.wiktionary.org/wiki/geometrize" target="_blank">geometrizing</a> images. Written in <a href="http://haxe.org/" target="_blank">Haxe</a> by <a href="https://twitter.com/Sam_Twidale" target="_blank">Sam Twidale</a>. Based on <a href="https://github.com/fogleman/primitive" target="_blank">primitive</a> by <a href="https://github.com/fogleman" target="_blank">Michael Fogleman</a>.</p>
 			</div>
 		</section>
 		
@@ -72,6 +72,7 @@
 						<div class="container"> <h3>Ellipses</h3> <input type="checkbox" id="ellipses" class="control"> </div>
 						<div class="container"> <h3>Rotated Ellipses</h3> <input type="checkbox" id="rotatedellipses" class="control"> </div>
 						<div class="container"> <h3>Circles</h3> <input type="checkbox" id="circles" class="control"> </div>
+						<div class="container"> <h3>Lines</h3> <input type="checkbox" id="lines" class="control"> </div>
 					</div>
 					
 					<br>
@@ -84,7 +85,7 @@
 					<br>
 					
 					<div class="stitched">
-						<h3>Event Log</h3>
+						<h3>Log</h3>
 						<textarea id="eventlog" class="textbox"></textarea>
 					</div>
 				</div>
@@ -94,13 +95,13 @@
 		<br>
 		
 		<div class="container stitched">
-			<canvas id="currentimagecanvas"/>
+			<canvas id="currentimagecanvas"></div>
 		</div>
 		
 		<br>
+		<br>
 		
-		<div id="currentsvgcontainer" class="container stitched">
-		</div>
+		<div id="currentsvgcontainer" class="container stitched"></div>
 		
 		<br>
 		<br>
@@ -138,7 +139,8 @@
 		
 		<div class="container stitched">
 			<h2>How It Works</h2>
-			<p>This site uses the <a href="https://github.com/Tw1ddle/primitive-haxe/" target="_blank">primitive-haxe</a> library to recreate images as geometric primitives. Given a target image to recreate with shapes, the library generates random shapes and repeatedly mutates them as part of a hillclimbing optimization approach, only picking the best-fitting shapes. The settings can be changed interactively via the settings dropdown to find a good balance of speed and quality.</p>
+			<p>This site uses the <a href="https://github.com/Tw1ddle/primitive-haxe/" target="_blank">primitive-haxe</a> library to recreate images as geometric primitives. Given a target image to recreate with shapes, the library generates random shapes and repeatedly mutates them as part of a hillclimbing optimization approach, only picking the best-fitting shapes. The settings can be changed interactively via the settings dropdown to find a balance of speed and quality.</p>
+			<p>There is a repository of <a href="https://github.com/Tw1ddle/geometrize-resources" target="_blank">sample images</a> and <a href="https://github.com/Tw1ddle/geometrize-templates" target="_blank">templates</a> to browse. When choosing your own images, prefer small images - 300x300 is usually sufficient, you do not need the detail anyway.</p>
 			<p>If you have any suggestions, requests or comments then feel free to <a href="https://twitter.com/Sam_Twidale" target="_blank">contact me</a>.</p>
 		</div>
 		

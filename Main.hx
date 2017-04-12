@@ -14,11 +14,16 @@ import js.html.InputElement;
 import js.html.TextAreaElement;
 import js.html.URL;
 import js.nouislider.NoUiSlider;
+import primitive.ArraySet;
 import primitive.Model.ShapeResult;
+import primitive.Util;
 import primitive.bitmap.Bitmap;
-import primitive.exporters.SvgExporter;
+import primitive.bitmap.Rgba;
+import primitive.exporter.SvgExporter;
 import primitive.runner.ImageRunner;
 import primitive.runner.ImageRunnerOptions;
+import primitive.shape.Rectangle;
+import primitive.shape.Shape;
 import primitive.shape.ShapeType;
 
 // Automatic HTML code completion, you need to point these to your debug/release HTML
@@ -31,11 +36,13 @@ import primitive.shape.ShapeType;
 class ID {}
 
 /**
+ * A one-page website that demonstrates the Primitive Haxe library
  * @author Sam Twidale (http://www.samcodes.co.uk/)
  */
 class Main {
 	private static inline var WEBSITE_URL:String = "http://www.samcodes.co.uk/project/primitive-haxe/"; // Hosted demo URL
 
+	// All the required references to the HTML page elements
 	private static inline function getElement(id:String):Dynamic {
 		return Browser.document.getElementById(id);
 	}
@@ -52,18 +59,22 @@ class Main {
 	private static var ellipsesCheckbox:InputElement = getElement(ID.ellipses);
 	private static var rotatedEllipsesCheckbox:InputElement = getElement(ID.rotatedellipses);
 	private static var circlesCheckbox:InputElement = getElement(ID.circles);
+	private static var linesCheckbox:InputElement = getElement(ID.lines);
 	private static var shapeOpacitySlider:Element = getElement(ID.shapeopacity);
 	private static var randomShapesPerStepSlider:Element = getElement(ID.randomshapesperstep);
 	private static var shapeMutationsPerStepSlider:Element = getElement(ID.shapemutationsperstep);
 	private static var currentImageCanvas:CanvasElement = getElement(ID.currentimagecanvas);
-	private static var svgTextElement:TextAreaElement = getElement(ID.svgoutput);
-	private static var eventLogElement:TextAreaElement = getElement(ID.eventlog);
 	private static var logoImageElement:Image = getElement(ID.primitivehaxelogo);
 	private static var currentSvgContainer:DivElement = getElement(ID.currentsvgcontainer);
-
+	#if debug
+	private static var eventLogElement:TextAreaElement = getElement(ID.eventlog);
+	private static var svgTextElement:TextAreaElement = getElement(ID.svgoutput);
+	#end
+	
 	private var runner:ImageRunner; // The image runner reproduces an image as geometric primitives
 	private var targetImage(default, set):Bitmap; // A bitmap representation of the image to geometrize
 
+	private var maxShapeAdditionRate:Float; // The number of times to step the model per second when running
 	private var shapeTypes:ArraySet<ShapeType>;
 	private var shapeOpacity:Int;
 	private var candidateShapesPerStep:Int;
@@ -84,30 +95,53 @@ class Main {
 		init();
 		createSliders();
 		addEventListeners();
+		animate();
+	}
+	
+	/**
+	 * Main update loop.
+	 */
+	private function animate():Void {
+		if(running) {
+			stepRunner(); // Step the runner
+		}
+		
+		var nextFrameDelay = Std.int((1.0 / this.maxShapeAdditionRate) * 1000.0);
+		Browser.window.setTimeout(function():Void {
+			this.animate();
+		}, nextFrameDelay);
+	}
+	
+	/**
+	 * Step the image runner and update the canvases.
+	 */
+	private function stepRunner():Void {
+		appendShapeResults(runner.step(constructRunnerOptions()));
+		drawBitmapToCanvas(runner.getImageData(), currentImageCanvas);
 	}
 
 	private inline function constructRunnerOptions():ImageRunnerOptions {
-		return new ImageRunnerOptions(shapeTypes, shapeOpacity, 1, candidateShapesPerStep, shapeMutationsPerStep);
+		return new ImageRunnerOptions(shapeTypes.length == 0 ? [ ShapeType.CIRCLE ] : shapeTypes, shapeOpacity, candidateShapesPerStep, shapeMutationsPerStep);
 	}
 
 	private inline function init():Void {
+		maxShapeAdditionRate = 15.0;
+		running = false;
+		
 		// Reset the runner options
 		shapeTypes = ArraySet.create([ShapeType.CIRCLE]);
 		shapeOpacity = 128;
 		candidateShapesPerStep = 50;
 		shapeMutationsPerStep = 100;
 		shapeResults = [];
-		running = false;
 		
 		// Set the target image, which also sets up the image runner etc
-		targetImage = getDefaultBitmap();
+		targetImage = createDefaultBitmap();
 		
 		circlesCheckbox.checked = true;
-		
-		appendEventText("Initialized, waiting...");
 	}
 
-	/*
+	/**
 	 * Create the settings sliders that go on the page
 	 */
 	private inline function createSliders():Void {
@@ -172,7 +206,7 @@ class Main {
 		});
 	}
 
-	/*
+	/**
 	 * Add event listeners to the input elements, in order to update the values we feed the runner
 	 */
 	private inline function addEventListeners():Void {
@@ -196,12 +230,11 @@ class Main {
 		}, false);
 		
 		stepButton.addEventListener("click", function() {
-			appendShapeResults(runner.step(constructRunnerOptions()));
-			drawBitmapToCanvas(runner.getImageData(), currentImageCanvas);
+			stepRunner();
 		}, false);
 		
 		resetButton.addEventListener("click", function() {
-			targetImage = targetImage; // TODO make this cleaner
+			targetImage = targetImage;
 		}, false);
 		
 		saveImageButton.addEventListener("click", function(e:Dynamic):Void {
@@ -213,7 +246,7 @@ class Main {
 		}, false);
 		
 		saveSvgButton.addEventListener("click", function(e:Dynamic):Void {
-			var data = SvgExporter.export(runner.model);
+			var data = SvgExporter.export(shapeResults, runner.model.width, runner.model.height);
 			var svgBlob = new Blob([data], { type: "image/svg+xml;charset=utf-8" });
 			var svgUrl = URL.createObjectURL(svgBlob);
 			saveSvgButton.download = "geometrized_svg.svg";
@@ -245,9 +278,12 @@ class Main {
 		circlesCheckbox.addEventListener("click", function() {
 			setShapeOption(ShapeType.CIRCLE, circlesCheckbox.checked);
 		}, false);
+		linesCheckbox.addEventListener("click", function() {
+			setShapeOption(ShapeType.LINE, linesCheckbox.checked);
+		}, false);
 	}
 
-	/*
+	/**
 	 * Helper method to create tooltips on the sliders
 	 */
 	private function createTooltips(slider:Element):Void {
@@ -260,7 +296,7 @@ class Main {
 		}
 	}
 
-	/*
+	/**
 	 * Helper method to update the tooltips on the sliders
 	 */
 	private function updateTooltips(slider:Element, handleIdx:Int, value:Float):Void {
@@ -272,20 +308,42 @@ class Main {
 	 * Appends a message to an onscreen event log/text area
 	 */
 	private function appendEventText(message:String):Void {
+		#if debug
 		if (eventLogElement.value == null) {
 			eventLogElement.value = "";
 		}
 		eventLogElement.value += message + "\n";
+		#end
+	}
+	
+	/**
+	 * Clears the onscreen event log/text area
+	 */
+	private function clearEventText():Void {
+		#if debug
+		eventLogElement.value = "";
+		#end
 	}
 	
 	/**
 	 * Appends text to the SVG export text area
 	 */
 	private function appendSvgText(message:String):Void {
+		#if debug
 		if (svgTextElement.value == null) {
 			svgTextElement.value = "";
 		}
-		svgTextElement.value += message;
+		svgTextElement.value += message + "\n";
+		#end
+	}
+	
+	/**
+	 * Clears the onscreen SVG shape data output log/text area
+	 */
+	private function clearSvgText():Void {
+		#if debug
+		svgTextElement.value = "";
+		#end
 	}
 	
 	/**
@@ -293,6 +351,14 @@ class Main {
 	 */
 	private function appendShapeResults(results:Array<ShapeResult>) {
 		shapeResults = shapeResults.concat(results);
+		
+		for (result in results) {
+			var shape:Shape = result.shape;
+			appendEventText("Added shape " + shapeResults.length + ": " + shape.getType() + " with data " + shape.getRawShapeData());
+			appendSvgText(SvgExporter.exportShape(result));
+		}
+		
+		setSvgElement(SvgExporter.export(shapeResults, runner.model.width, runner.model.height)); // NOTE should really append shape-by-shape rather than doing the whole SVG
 	}
 	
 	/**
@@ -338,20 +404,45 @@ class Main {
 		return canvas;
 	}
 	
-	private function getDefaultBitmap():Bitmap {
+	/**
+	 * Sets up the initial SVG image element.
+	 * @param	The code for the initial SVG element.
+	 */
+	private function setSvgElement(svgCode:String) {
+		currentSvgContainer.innerHTML = svgCode;
+	}
+	
+	/**
+	 * Creates the default bitmap image used for the demo.
+	 * @return	The default bitmap image.
+	 */
+	private function createDefaultBitmap():Bitmap {
 		return canvasToBitmap(imageToCanvas(logoImageElement));
 	}
 	
 	private function set_targetImage(bitmap:Bitmap):Bitmap {
-		this.targetImage = bitmap;
-		runner = new ImageRunner(targetImage);
-		drawBitmapToCanvas(runner.getImageData(), currentImageCanvas);
-		
 		if (runner == null) {
 			appendEventText("Initializing image runner and setting default bitmap...");
 		} else {
 			appendEventText("Resetting current image and removing shapes...");
 		}
+		
+		this.targetImage = bitmap;
+		var backgroundColor:Rgba = Util.getAverageImageColor(bitmap);
+		runner = new ImageRunner(targetImage, backgroundColor);
+		drawBitmapToCanvas(runner.getImageData(), currentImageCanvas);
+		
+		clearEventText();
+		clearSvgText();
+		
+		shapeResults = [];
+		
+		var backgroundRect = new Rectangle(0, 0);
+		backgroundRect.x1 = 0;
+		backgroundRect.y1 = 0;
+		backgroundRect.x2 = bitmap.width;
+		backgroundRect.y2 = bitmap.height;
+		appendShapeResults([ { score : 0.0, color: backgroundColor, shape: backgroundRect } ]);
 		
 		return this.targetImage;
 	}

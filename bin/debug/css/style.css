@@ -61,6 +61,15 @@ img {
     max-width:90%;
 }
 
+canvas {
+	min-width: 50px;
+	width: 70vw;
+}
+
+svg {
+	width: auto;
+}
+
 .red, .green, .blue, .black, .orange {
     margin: 20px;
     width: 200px;
