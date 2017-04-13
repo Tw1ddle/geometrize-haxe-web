@@ -406,11 +406,11 @@ Main.prototype = {
 		this.clearEventText();
 		this.clearSvgText();
 		this.shapeResults = [];
-		var backgroundRect = new geometrize_shape_Rectangle(0,0);
+		var backgroundRect = new geometrize_shape_Rectangle(bitmap.width,bitmap.height);
 		backgroundRect.x1 = 0;
 		backgroundRect.y1 = 0;
-		backgroundRect.x2 = bitmap.width;
-		backgroundRect.y2 = bitmap.height;
+		backgroundRect.x2 = bitmap.width - 1;
+		backgroundRect.y2 = bitmap.height - 1;
 		this.appendShapeResults([{ score : 0.0, color : backgroundColor, shape : backgroundRect}]);
 		return this.targetImage;
 	}
@@ -2650,8 +2650,6 @@ ID.ellipses = "ellipses";
 ID.rotatedellipses = "rotatedellipses";
 ID.circles = "circles";
 ID.lines = "lines";
-ID.svgoutput = "svgoutput";
-ID.eventlog = "eventlog";
 ID.currentimagecanvas = "currentimagecanvas";
 ID.currentsvgcontainer = "currentsvgcontainer";
 ID.controls = "controls";
