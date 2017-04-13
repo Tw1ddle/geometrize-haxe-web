@@ -224,7 +224,9 @@ class Main {
 			fileReader.onload = function(e) {
 				var image = new Image();
 				image.src = fileReader.result;
-				targetImage = canvasToBitmap(imageToCanvas(image));
+				image.onload = function(e) {
+					targetImage = canvasToBitmap(imageToCanvas(image));
+				}
 			};
 			fileReader.readAsDataURL(file);
 		}, false);
@@ -238,19 +240,32 @@ class Main {
 		}, false);
 		
 		saveImageButton.addEventListener("click", function(e:Dynamic):Void {
-			var canvas:CanvasElement = Browser.document.createCanvasElement();
+			var canvas:Dynamic = Browser.document.createCanvasElement();
 			drawBitmapToCanvas(runner.getImageData(), canvas);
-			var data = canvas.toDataURL("image/png");
-			saveImageButton.download = "geometrized_image.png";
-			saveImageButton.href = data;
+			
+			if (canvas.msToBlob != null) {
+				var blob = canvas.msToBlob();
+				var navigator:Dynamic = Browser.window.navigator;
+				navigator.msSaveBlob(blob, "geometrized_image.png");
+			} else {
+				var data = canvas.toDataURL("image/png");
+				saveImageButton.download = "geometrized_image.png";
+				saveImageButton.href = data;
+			}
 		}, false);
 		
 		saveSvgButton.addEventListener("click", function(e:Dynamic):Void {
 			var data = SvgExporter.export(shapeResults, runner.model.width, runner.model.height);
 			var svgBlob = new Blob([data], { type: "image/svg+xml;charset=utf-8" });
-			var svgUrl = URL.createObjectURL(svgBlob);
-			saveSvgButton.download = "geometrized_svg.svg";
-			saveSvgButton.href = svgUrl;
+			
+			var navigator:Dynamic = Browser.window.navigator;
+			if (navigator.msSaveBlob != null) {
+				navigator.msSaveBlob(svgBlob, "geometrized_svg.svg");
+			} else {
+				var svgUrl = URL.createObjectURL(svgBlob);
+				saveSvgButton.download = "geometrized_svg.svg";
+				saveSvgButton.href = svgUrl;
+			}
 		}, false);
 		
 		var setShapeOption = function(option:ShapeType, enable:Bool):Void {
