@@ -1,0 +1,9 @@
+-main Main
+
+-lib sure
+
+# Uncomment to use the geometrize-haxe haxelib
+#-lib geometrize-haxe
+
+# Uncomment to use geometrize-haxe as a git submodule
+-cp lib/geometrize

@@ -39,7 +39,7 @@ Main.prototype = {
 	onWindowLoaded: function() {
 		this.maxShapeAdditionRate = 15.0;
 		this.set_running(false);
-		this.shapeTypes = primitive__$ArraySet_ArraySet_$Impl_$.create([primitive_shape_ShapeType.CIRCLE]);
+		this.shapeTypes = geometrize__$ArraySet_ArraySet_$Impl_$.create([geometrize_shape_ShapeType.CIRCLE]);
 		this.shapeOpacity = 128;
 		this.candidateShapesPerStep = 50;
 		this.shapeMutationsPerStep = 100;
@@ -105,7 +105,7 @@ Main.prototype = {
 			Main.saveImageButton.href = data;
 		},false);
 		Main.saveSvgButton.addEventListener("click",function(e3) {
-			var data1 = primitive_exporter_SvgExporter["export"](_gthis1.shapeResults,_gthis1.runner.model.width,_gthis1.runner.model.height);
+			var data1 = geometrize_exporter_SvgExporter["export"](_gthis1.shapeResults,_gthis1.runner.model.width,_gthis1.runner.model.height);
 			var svgBlob = new Blob([data1],{ type : "image/svg+xml;charset=utf-8"});
 			var svgUrl = URL.createObjectURL(svgBlob);
 			Main.saveSvgButton.download = "geometrized_svg.svg";
@@ -113,31 +113,31 @@ Main.prototype = {
 		},false);
 		var setShapeOption = function(option,enable) {
 			if(enable) {
-				primitive__$ArraySet_ArraySet_$Impl_$.add(_gthis1.shapeTypes,option);
+				geometrize__$ArraySet_ArraySet_$Impl_$.add(_gthis1.shapeTypes,option);
 			} else {
 				HxOverrides.remove(_gthis1.shapeTypes,option);
 			}
 		};
 		Main.rectanglesCheckbox.addEventListener("click",function() {
-			setShapeOption(primitive_shape_ShapeType.RECTANGLE,Main.rectanglesCheckbox.checked);
+			setShapeOption(geometrize_shape_ShapeType.RECTANGLE,Main.rectanglesCheckbox.checked);
 		},false);
 		Main.rotatedRectanglesCheckbox.addEventListener("click",function() {
-			setShapeOption(primitive_shape_ShapeType.ROTATED_RECTANGLE,Main.rotatedRectanglesCheckbox.checked);
+			setShapeOption(geometrize_shape_ShapeType.ROTATED_RECTANGLE,Main.rotatedRectanglesCheckbox.checked);
 		},false);
 		Main.trianglesCheckbox.addEventListener("click",function() {
-			setShapeOption(primitive_shape_ShapeType.TRIANGLE,Main.trianglesCheckbox.checked);
+			setShapeOption(geometrize_shape_ShapeType.TRIANGLE,Main.trianglesCheckbox.checked);
 		},false);
 		Main.ellipsesCheckbox.addEventListener("click",function() {
-			setShapeOption(primitive_shape_ShapeType.ELLIPSE,Main.ellipsesCheckbox.checked);
+			setShapeOption(geometrize_shape_ShapeType.ELLIPSE,Main.ellipsesCheckbox.checked);
 		},false);
 		Main.rotatedEllipsesCheckbox.addEventListener("click",function() {
-			setShapeOption(primitive_shape_ShapeType.ROTATED_ELLIPSE,Main.rotatedEllipsesCheckbox.checked);
+			setShapeOption(geometrize_shape_ShapeType.ROTATED_ELLIPSE,Main.rotatedEllipsesCheckbox.checked);
 		},false);
 		Main.circlesCheckbox.addEventListener("click",function() {
-			setShapeOption(primitive_shape_ShapeType.CIRCLE,Main.circlesCheckbox.checked);
+			setShapeOption(geometrize_shape_ShapeType.CIRCLE,Main.circlesCheckbox.checked);
 		},false);
 		Main.linesCheckbox.addEventListener("click",function() {
-			setShapeOption(primitive_shape_ShapeType.LINE,Main.linesCheckbox.checked);
+			setShapeOption(geometrize_shape_ShapeType.LINE,Main.linesCheckbox.checked);
 		},false);
 		this.animate();
 	}
@@ -152,16 +152,16 @@ Main.prototype = {
 		},nextFrameDelay);
 	}
 	,stepRunner: function() {
-		this.appendShapeResults(this.runner.step(new primitive_runner_ImageRunnerOptions(this.shapeTypes.length == 0 ? [primitive_shape_ShapeType.CIRCLE] : primitive__$ArraySet_ArraySet_$Impl_$.toArray(this.shapeTypes),this.shapeOpacity,this.candidateShapesPerStep,this.shapeMutationsPerStep)));
+		this.appendShapeResults(this.runner.step(new geometrize_runner_ImageRunnerOptions(this.shapeTypes.length == 0 ? [geometrize_shape_ShapeType.CIRCLE] : geometrize__$ArraySet_ArraySet_$Impl_$.toArray(this.shapeTypes),this.shapeOpacity,this.candidateShapesPerStep,this.shapeMutationsPerStep)));
 		this.drawBitmapToCanvas(this.runner.getImageData(),Main.currentImageCanvas);
 	}
 	,constructRunnerOptions: function() {
-		return new primitive_runner_ImageRunnerOptions(this.shapeTypes.length == 0 ? [primitive_shape_ShapeType.CIRCLE] : primitive__$ArraySet_ArraySet_$Impl_$.toArray(this.shapeTypes),this.shapeOpacity,this.candidateShapesPerStep,this.shapeMutationsPerStep);
+		return new geometrize_runner_ImageRunnerOptions(this.shapeTypes.length == 0 ? [geometrize_shape_ShapeType.CIRCLE] : geometrize__$ArraySet_ArraySet_$Impl_$.toArray(this.shapeTypes),this.shapeOpacity,this.candidateShapesPerStep,this.shapeMutationsPerStep);
 	}
 	,init: function() {
 		this.maxShapeAdditionRate = 15.0;
 		this.set_running(false);
-		this.shapeTypes = primitive__$ArraySet_ArraySet_$Impl_$.create([primitive_shape_ShapeType.CIRCLE]);
+		this.shapeTypes = geometrize__$ArraySet_ArraySet_$Impl_$.create([geometrize_shape_ShapeType.CIRCLE]);
 		this.shapeOpacity = 128;
 		this.candidateShapesPerStep = 50;
 		this.shapeMutationsPerStep = 100;
@@ -231,7 +231,7 @@ Main.prototype = {
 			Main.saveImageButton.href = data;
 		},false);
 		Main.saveSvgButton.addEventListener("click",function(e3) {
-			var data1 = primitive_exporter_SvgExporter["export"](_gthis.shapeResults,_gthis.runner.model.width,_gthis.runner.model.height);
+			var data1 = geometrize_exporter_SvgExporter["export"](_gthis.shapeResults,_gthis.runner.model.width,_gthis.runner.model.height);
 			var svgBlob = new Blob([data1],{ type : "image/svg+xml;charset=utf-8"});
 			var svgUrl = URL.createObjectURL(svgBlob);
 			Main.saveSvgButton.download = "geometrized_svg.svg";
@@ -239,31 +239,31 @@ Main.prototype = {
 		},false);
 		var setShapeOption = function(option,enable) {
 			if(enable) {
-				primitive__$ArraySet_ArraySet_$Impl_$.add(_gthis.shapeTypes,option);
+				geometrize__$ArraySet_ArraySet_$Impl_$.add(_gthis.shapeTypes,option);
 			} else {
 				HxOverrides.remove(_gthis.shapeTypes,option);
 			}
 		};
 		Main.rectanglesCheckbox.addEventListener("click",function() {
-			setShapeOption(primitive_shape_ShapeType.RECTANGLE,Main.rectanglesCheckbox.checked);
+			setShapeOption(geometrize_shape_ShapeType.RECTANGLE,Main.rectanglesCheckbox.checked);
 		},false);
 		Main.rotatedRectanglesCheckbox.addEventListener("click",function() {
-			setShapeOption(primitive_shape_ShapeType.ROTATED_RECTANGLE,Main.rotatedRectanglesCheckbox.checked);
+			setShapeOption(geometrize_shape_ShapeType.ROTATED_RECTANGLE,Main.rotatedRectanglesCheckbox.checked);
 		},false);
 		Main.trianglesCheckbox.addEventListener("click",function() {
-			setShapeOption(primitive_shape_ShapeType.TRIANGLE,Main.trianglesCheckbox.checked);
+			setShapeOption(geometrize_shape_ShapeType.TRIANGLE,Main.trianglesCheckbox.checked);
 		},false);
 		Main.ellipsesCheckbox.addEventListener("click",function() {
-			setShapeOption(primitive_shape_ShapeType.ELLIPSE,Main.ellipsesCheckbox.checked);
+			setShapeOption(geometrize_shape_ShapeType.ELLIPSE,Main.ellipsesCheckbox.checked);
 		},false);
 		Main.rotatedEllipsesCheckbox.addEventListener("click",function() {
-			setShapeOption(primitive_shape_ShapeType.ROTATED_ELLIPSE,Main.rotatedEllipsesCheckbox.checked);
+			setShapeOption(geometrize_shape_ShapeType.ROTATED_ELLIPSE,Main.rotatedEllipsesCheckbox.checked);
 		},false);
 		Main.circlesCheckbox.addEventListener("click",function() {
-			setShapeOption(primitive_shape_ShapeType.CIRCLE,Main.circlesCheckbox.checked);
+			setShapeOption(geometrize_shape_ShapeType.CIRCLE,Main.circlesCheckbox.checked);
 		},false);
 		Main.linesCheckbox.addEventListener("click",function() {
-			setShapeOption(primitive_shape_ShapeType.LINE,Main.linesCheckbox.checked);
+			setShapeOption(geometrize_shape_ShapeType.LINE,Main.linesCheckbox.checked);
 		},false);
 	}
 	,createTooltips: function(slider) {
@@ -283,22 +283,12 @@ Main.prototype = {
 		tipHandles[handleIdx].innerHTML = "<span class='tooltip'>" + (value == null ? "null" : "" + value) + "</span>";
 	}
 	,appendEventText: function(message) {
-		if(Main.eventLogElement.value == null) {
-			Main.eventLogElement.value = "";
-		}
-		Main.eventLogElement.value += message + "\n";
 	}
 	,clearEventText: function() {
-		Main.eventLogElement.value = "";
 	}
 	,appendSvgText: function(message) {
-		if(Main.svgTextElement.value == null) {
-			Main.svgTextElement.value = "";
-		}
-		Main.svgTextElement.value += message + "\n";
 	}
 	,clearSvgText: function() {
-		Main.svgTextElement.value = "";
 	}
 	,appendShapeResults: function(results) {
 		this.shapeResults = this.shapeResults.concat(results);
@@ -308,9 +298,9 @@ Main.prototype = {
 			++_g;
 			var shape = result.shape;
 			this.appendEventText("Added shape " + this.shapeResults.length + ": " + Std.string(shape.getType()) + " with data " + Std.string(shape.getRawShapeData()));
-			this.appendSvgText(primitive_exporter_SvgExporter.exportShape(result));
+			this.appendSvgText(geometrize_exporter_SvgExporter.exportShape(result));
 		}
-		this.setSvgElement(primitive_exporter_SvgExporter["export"](this.shapeResults,this.runner.model.width,this.runner.model.height));
+		this.setSvgElement(geometrize_exporter_SvgExporter["export"](this.shapeResults,this.runner.model.width,this.runner.model.height));
 	}
 	,drawBitmapToCanvas: function(bitmap,canvas) {
 		canvas.width = bitmap.width;
@@ -349,7 +339,7 @@ Main.prototype = {
 		}
 		var w = canvas.width;
 		var h = canvas.height;
-		var bitmap = new primitive_bitmap_Bitmap();
+		var bitmap = new geometrize_bitmap_Bitmap();
 		if(!(bytesData != null)) {
 			throw new js__$Boot_HaxeError("FAIL: bytes != null");
 		}
@@ -410,13 +400,13 @@ Main.prototype = {
 			this.appendEventText("Resetting current image and removing shapes...");
 		}
 		this.targetImage = bitmap;
-		var backgroundColor = primitive_Util.getAverageImageColor(bitmap);
-		this.runner = new primitive_runner_ImageRunner(this.targetImage,backgroundColor);
+		var backgroundColor = geometrize_Util.getAverageImageColor(bitmap);
+		this.runner = new geometrize_runner_ImageRunner(this.targetImage,backgroundColor);
 		this.drawBitmapToCanvas(this.runner.getImageData(),Main.currentImageCanvas);
 		this.clearEventText();
 		this.clearSvgText();
 		this.shapeResults = [];
-		var backgroundRect = new primitive_shape_Rectangle(0,0);
+		var backgroundRect = new geometrize_shape_Rectangle(0,0);
 		backgroundRect.x1 = 0;
 		backgroundRect.y1 = 0;
 		backgroundRect.x2 = bitmap.width;
@@ -457,6 +447,1836 @@ _$UInt_UInt_$Impl_$.toFloat = function(this1) {
 	} else {
 		return $int + 0.0;
 	}
+};
+var geometrize__$ArraySet_ArraySet_$Impl_$ = {};
+geometrize__$ArraySet_ArraySet_$Impl_$.__name__ = true;
+geometrize__$ArraySet_ArraySet_$Impl_$.create = function(array) {
+	if(array == null) {
+		var this1 = [];
+		return this1;
+	}
+	return geometrize__$ArraySet_ArraySet_$Impl_$.toSet(array);
+};
+geometrize__$ArraySet_ArraySet_$Impl_$.intersection = function(this1,set) {
+	var result = [];
+	var _g = 0;
+	while(_g < this1.length) {
+		var element = this1[_g];
+		++_g;
+		if(geometrize__$ArraySet_ArraySet_$Impl_$.contains(set,element)) {
+			result.push(element);
+		}
+	}
+	var this2 = result;
+	return this2;
+};
+geometrize__$ArraySet_ArraySet_$Impl_$.union = function(this1,set) {
+	return geometrize__$ArraySet_ArraySet_$Impl_$.toSet(this1.concat(geometrize__$ArraySet_ArraySet_$Impl_$.toArray(set)));
+};
+geometrize__$ArraySet_ArraySet_$Impl_$.unionArray = function(this1,array) {
+	return geometrize__$ArraySet_ArraySet_$Impl_$.toSet(this1.concat(array));
+};
+geometrize__$ArraySet_ArraySet_$Impl_$.difference = function(this1,set) {
+	var this2 = this1.slice();
+	var result = this2;
+	var element = HxOverrides.iter(set);
+	while(element.hasNext()) {
+		var element1 = element.next();
+		HxOverrides.remove(result,element1);
+	}
+	var this3 = geometrize__$ArraySet_ArraySet_$Impl_$.toArray(result);
+	return this3;
+};
+geometrize__$ArraySet_ArraySet_$Impl_$.add = function(this1,element) {
+	if(!(element != null)) {
+		throw new js__$Boot_HaxeError("FAIL: element != null");
+	}
+	if(geometrize__$ArraySet_ArraySet_$Impl_$.contains(this1,element)) {
+		return false;
+	}
+	this1.push(element);
+	return true;
+};
+geometrize__$ArraySet_ArraySet_$Impl_$.contains = function(this1,element) {
+	var _g = 0;
+	while(_g < this1.length) {
+		var i = this1[_g];
+		++_g;
+		if(i == element) {
+			return true;
+		}
+	}
+	return false;
+};
+geometrize__$ArraySet_ArraySet_$Impl_$.copy = function(this1) {
+	var this2 = this1.slice();
+	return this2;
+};
+geometrize__$ArraySet_ArraySet_$Impl_$.slice = function(this1,position,end) {
+	var this2 = this1.slice(position,end);
+	return this2;
+};
+geometrize__$ArraySet_ArraySet_$Impl_$.splice = function(this1,position,length) {
+	var this2 = this1.splice(position,length);
+	return this2;
+};
+geometrize__$ArraySet_ArraySet_$Impl_$.toArray = function(this1) {
+	return this1.slice();
+};
+geometrize__$ArraySet_ArraySet_$Impl_$.toSet = function(array) {
+	var this1 = [];
+	var set = this1;
+	var _g = 0;
+	while(_g < array.length) {
+		var v = array[_g];
+		++_g;
+		geometrize__$ArraySet_ArraySet_$Impl_$.add(set,v);
+	}
+	return set;
+};
+geometrize__$ArraySet_ArraySet_$Impl_$._new = function(array) {
+	var this1 = array;
+	return this1;
+};
+var geometrize_Core = function() { };
+geometrize_Core.__name__ = true;
+geometrize_Core.energy = function(shape,alpha,target,current,buffer,score) {
+	if(!(shape != null)) {
+		throw new js__$Boot_HaxeError("FAIL: shape != null");
+	}
+	if(!(target != null)) {
+		throw new js__$Boot_HaxeError("FAIL: target != null");
+	}
+	if(!(current != null)) {
+		throw new js__$Boot_HaxeError("FAIL: current != null");
+	}
+	if(!(buffer != null)) {
+		throw new js__$Boot_HaxeError("FAIL: buffer != null");
+	}
+	var lines = shape.rasterize();
+	var color = geometrize_Core.computeColor(target,current,lines,alpha);
+	geometrize_rasterizer_Rasterizer.copyLines(buffer,current,lines);
+	geometrize_rasterizer_Rasterizer.drawLines(buffer,color,lines);
+	return geometrize_Core.differencePartial(target,current,buffer,score,lines);
+};
+geometrize_Core.computeColor = function(target,current,lines,alpha) {
+	if(!(target != null)) {
+		throw new js__$Boot_HaxeError("FAIL: target != null");
+	}
+	if(!(current != null)) {
+		throw new js__$Boot_HaxeError("FAIL: current != null");
+	}
+	if(!(lines != null)) {
+		throw new js__$Boot_HaxeError("FAIL: lines != null");
+	}
+	if(!(alpha >= 0)) {
+		throw new js__$Boot_HaxeError("FAIL: alpha >= 0");
+	}
+	var totalRed = 0;
+	var totalGreen = 0;
+	var totalBlue = 0;
+	var count = 0;
+	var f = 65535 / alpha;
+	var a = f | 0;
+	var _g = 0;
+	while(_g < lines.length) {
+		var line = lines[_g];
+		++_g;
+		var y = line.y;
+		var _g2 = line.x1;
+		var _g1 = line.x2 + 1;
+		while(_g2 < _g1) {
+			var x = _g2++;
+			var t = target.data[target.width * y + x];
+			var c = current.data[current.width * y + x];
+			totalRed += ((t >>> 24 & 255) - (c >>> 24 & 255)) * a + (c >>> 24 & 255) * 257;
+			totalGreen += ((t >>> 16 & 255) - (c >>> 16 & 255)) * a + (c >>> 16 & 255) * 257;
+			totalBlue += ((t >>> 8 & 255) - (c >>> 8 & 255)) * a + (c >>> 8 & 255) * 257;
+			++count;
+		}
+	}
+	if(count == 0) {
+		return 0;
+	}
+	var value = (totalRed / count | 0) >> 8;
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	var r = value < 0 ? 0 : value > 255 ? 255 : value;
+	var value1 = (totalGreen / count | 0) >> 8;
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	var g = value1 < 0 ? 0 : value1 > 255 ? 255 : value1;
+	var value2 = (totalBlue / count | 0) >> 8;
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	var b = value2 < 0 ? 0 : value2 > 255 ? 255 : value2;
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	return ((r < 0 ? 0 : r > 255 ? 255 : r) << 24) + ((g < 0 ? 0 : g > 255 ? 255 : g) << 16) + ((b < 0 ? 0 : b > 255 ? 255 : b) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
+};
+geometrize_Core.differenceFull = function(first,second) {
+	if(!(first != null)) {
+		throw new js__$Boot_HaxeError("FAIL: first != null");
+	}
+	if(!(second != null)) {
+		throw new js__$Boot_HaxeError("FAIL: second != null");
+	}
+	var actual = first.width;
+	var expected = second.width;
+	if(actual != expected) {
+		throw new js__$Boot_HaxeError("FAIL: values are not equal (expected: " + expected + ", actual: " + actual + ")");
+	}
+	var actual1 = first.height;
+	var expected1 = second.height;
+	if(actual1 != expected1) {
+		throw new js__$Boot_HaxeError("FAIL: values are not equal (expected: " + expected1 + ", actual: " + actual1 + ")");
+	}
+	var total = 0;
+	var width = first.width;
+	var height = first.height;
+	var _g1 = 0;
+	var _g = height;
+	while(_g1 < _g) {
+		var y = _g1++;
+		var _g3 = 0;
+		var _g2 = width;
+		while(_g3 < _g2) {
+			var x = _g3++;
+			var f = first.data[first.width * y + x];
+			var s = second.data[second.width * y + x];
+			var dr = (f >>> 24 & 255) - (s >>> 24 & 255);
+			var dg = (f >>> 16 & 255) - (s >>> 16 & 255);
+			var db = (f >>> 8 & 255) - (s >>> 8 & 255);
+			var da = (f & 255) - (s & 255);
+			total = total + (dr * dr + dg * dg + db * db + da * da);
+		}
+	}
+	return Math.sqrt(_$UInt_UInt_$Impl_$.toFloat(total) / (width * height * 4.0)) / 255;
+};
+geometrize_Core.differencePartial = function(target,before,after,score,lines) {
+	if(!(target != null)) {
+		throw new js__$Boot_HaxeError("FAIL: target != null");
+	}
+	if(!(before != null)) {
+		throw new js__$Boot_HaxeError("FAIL: before != null");
+	}
+	if(!(after != null)) {
+		throw new js__$Boot_HaxeError("FAIL: after != null");
+	}
+	if(!(lines != null)) {
+		throw new js__$Boot_HaxeError("FAIL: lines != null");
+	}
+	var width = target.width;
+	var height = target.height;
+	var rgbaCount = width * height * 4;
+	var total = Math.pow(score * 255,2) * rgbaCount | 0;
+	var _g = 0;
+	while(_g < lines.length) {
+		var line = lines[_g];
+		++_g;
+		var y = line.y;
+		var _g2 = line.x1;
+		var _g1 = line.x2 + 1;
+		while(_g2 < _g1) {
+			var x = _g2++;
+			var t = target.data[target.width * y + x];
+			var b = before.data[before.width * y + x];
+			var a = after.data[after.width * y + x];
+			var dtbr = (t >>> 24 & 255) - (b >>> 24 & 255);
+			var dtbg = (t >>> 16 & 255) - (b >>> 16 & 255);
+			var dtbb = (t >>> 8 & 255) - (b >>> 8 & 255);
+			var dtba = (t & 255) - (b & 255);
+			var dtar = (t >>> 24 & 255) - (a >>> 24 & 255);
+			var dtag = (t >>> 16 & 255) - (a >>> 16 & 255);
+			var dtab = (t >>> 8 & 255) - (a >>> 8 & 255);
+			var dtaa = (t & 255) - (a & 255);
+			total = total - (dtbr * dtbr + dtbg * dtbg + dtbb * dtbb + dtba * dtba);
+			total = total + (dtar * dtar + dtag * dtag + dtab * dtab + dtaa * dtaa);
+		}
+	}
+	return Math.sqrt(_$UInt_UInt_$Impl_$.toFloat(total) / _$UInt_UInt_$Impl_$.toFloat(rgbaCount)) / 255;
+};
+geometrize_Core.bestRandomState = function(shapes,alpha,n,target,current,buffer,lastScore) {
+	var bestEnergy = 0;
+	var bestState = null;
+	var _g1 = 0;
+	var _g = n;
+	while(_g1 < _g) {
+		var i = _g1++;
+		var state = new geometrize_State(geometrize_shape_ShapeFactory.randomShapeOf(shapes,current.width,current.height),alpha,target,current,buffer);
+		var energy = state.energy(lastScore);
+		if(i == 0 || energy < bestEnergy) {
+			bestEnergy = energy;
+			bestState = state;
+		}
+	}
+	return bestState;
+};
+geometrize_Core.bestHillClimbState = function(shapes,alpha,n,age,target,current,buffer,lastScore) {
+	var state = geometrize_Core.bestRandomState(shapes,alpha,n,target,current,buffer,lastScore);
+	state = geometrize_Core.hillClimb(state,age,lastScore);
+	return state;
+};
+geometrize_Core.hillClimb = function(state,maxAge,lastScore) {
+	if(!(state != null)) {
+		throw new js__$Boot_HaxeError("FAIL: state != null");
+	}
+	if(!(maxAge >= 0)) {
+		throw new js__$Boot_HaxeError("FAIL: maxAge >= 0");
+	}
+	var state1 = state.clone();
+	var bestState = state1.clone();
+	var bestEnergy = state1.energy(lastScore);
+	var age = 0;
+	while(age < maxAge) {
+		var undo = state1.mutate();
+		var energy = state1.energy(lastScore);
+		if(energy >= bestEnergy) {
+			state1 = undo;
+		} else {
+			bestEnergy = energy;
+			bestState = state1.clone();
+			age = -1;
+		}
+		++age;
+	}
+	return bestState;
+};
+var geometrize_Model = function(target,backgroundColor) {
+	if(!(target != null)) {
+		throw new js__$Boot_HaxeError("FAIL: target != null");
+	}
+	this.width = target.width;
+	this.height = target.height;
+	this.target = target;
+	var w = target.width;
+	var h = target.height;
+	var bitmap = new geometrize_bitmap_Bitmap();
+	bitmap.width = w;
+	bitmap.height = h;
+	var this1 = new Array(w * h);
+	bitmap.data = this1;
+	var i = 0;
+	while(i < bitmap.data.length) {
+		bitmap.data[i] = backgroundColor;
+		++i;
+	}
+	this.current = bitmap;
+	var w1 = target.width;
+	var h1 = target.height;
+	var bitmap1 = new geometrize_bitmap_Bitmap();
+	bitmap1.width = w1;
+	bitmap1.height = h1;
+	var this2 = new Array(w1 * h1);
+	bitmap1.data = this2;
+	var i1 = 0;
+	while(i1 < bitmap1.data.length) {
+		bitmap1.data[i1] = backgroundColor;
+		++i1;
+	}
+	this.buffer = bitmap1;
+	this.score = geometrize_Core.differenceFull(target,this.current);
+};
+geometrize_Model.__name__ = true;
+geometrize_Model.prototype = {
+	step: function(shapeTypes,alpha,n,age) {
+		var state = geometrize_Core.bestHillClimbState(shapeTypes,alpha,n,age,this.target,this.current,this.buffer,this.score);
+		var results = [this.addShape(state.shape,state.alpha)];
+		return results;
+	}
+	,addShape: function(shape,alpha) {
+		if(!(shape != null)) {
+			throw new js__$Boot_HaxeError("FAIL: shape != null");
+		}
+		var _this = this.current;
+		var bitmap = new geometrize_bitmap_Bitmap();
+		bitmap.width = _this.width;
+		bitmap.height = _this.height;
+		var length = _this.data.length;
+		var this1 = new Array(length);
+		bitmap.data = this1;
+		var _g1 = 0;
+		var _g = _this.data.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			bitmap.data[i] = _this.data[i];
+		}
+		var before = bitmap;
+		var lines = shape.rasterize();
+		var color = geometrize_Core.computeColor(this.target,this.current,lines,alpha);
+		geometrize_rasterizer_Rasterizer.drawLines(this.current,color,lines);
+		this.score = geometrize_Core.differencePartial(this.target,before,this.current,this.score,lines);
+		var result = { score : this.score, color : color, shape : shape};
+		return result;
+	}
+	,__class__: geometrize_Model
+};
+var geometrize_State = function(shape,alpha,target,current,buffer) {
+	if(!(shape != null)) {
+		throw new js__$Boot_HaxeError("FAIL: shape != null");
+	}
+	this.shape = shape;
+	this.alpha = alpha;
+	this.score = -1;
+	this.target = target;
+	this.current = current;
+	this.buffer = buffer;
+};
+geometrize_State.__name__ = true;
+geometrize_State.prototype = {
+	energy: function(lastScore) {
+		if(this.score < 0) {
+			this.score = geometrize_Core.energy(this.shape,this.alpha,this.target,this.current,this.buffer,lastScore);
+		}
+		return this.score;
+	}
+	,mutate: function() {
+		var oldState = this.clone();
+		this.shape.mutate();
+		return oldState;
+	}
+	,clone: function() {
+		return new geometrize_State(this.shape.clone(),this.alpha,this.target,this.current,this.buffer);
+	}
+	,__class__: geometrize_State
+};
+var geometrize_Util = function() { };
+geometrize_Util.__name__ = true;
+geometrize_Util.getAverageImageColor = function(image) {
+	if(!(image != null)) {
+		throw new js__$Boot_HaxeError("FAIL: image != null");
+	}
+	var totalRed = 0;
+	var totalGreen = 0;
+	var totalBlue = 0;
+	var _g1 = 0;
+	var _g = image.width;
+	while(_g1 < _g) {
+		var x = _g1++;
+		var _g3 = 0;
+		var _g2 = image.height;
+		while(_g3 < _g2) {
+			var y = _g3++;
+			var pixel = image.data[image.width * y + x];
+			totalRed += pixel >>> 24 & 255;
+			totalGreen += pixel >>> 16 & 255;
+			totalBlue += pixel >>> 8 & 255;
+		}
+	}
+	var size = image.width * image.height;
+	var red = totalRed / size | 0;
+	var green = totalGreen / size | 0;
+	var blue = totalBlue / size | 0;
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	return ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + 255;
+};
+geometrize_Util.clamp = function(value,min,max) {
+	if(!(min <= max)) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	if(value < min) {
+		return min;
+	} else if(value > max) {
+		return max;
+	} else {
+		return value;
+	}
+};
+geometrize_Util.min = function(first,second) {
+	if(first < second) {
+		return first;
+	} else {
+		return second;
+	}
+};
+geometrize_Util.max = function(first,second) {
+	if(first > second) {
+		return first;
+	} else {
+		return second;
+	}
+};
+geometrize_Util.toRadians = function(degrees) {
+	return degrees * Math.PI / 180;
+};
+geometrize_Util.toDegrees = function(radians) {
+	return radians * 180 / Math.PI;
+};
+geometrize_Util.random = function(lower,upper) {
+	if(!(lower <= upper)) {
+		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+	}
+	return lower + Math.floor((upper - lower + 1) * Math.random());
+};
+geometrize_Util.randomArrayItem = function(a) {
+	if(!(a != null && a.length > 0)) {
+		throw new js__$Boot_HaxeError("FAIL: a != null && a.length > 0");
+	}
+	var upper = a.length - 1;
+	if(!(0 <= upper)) {
+		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+	}
+	return a[Math.floor((upper + 1) * Math.random())];
+};
+geometrize_Util.minMaxElements = function(a) {
+	if(a == null || a.length == 0) {
+		return { min : 0, max : 0};
+	}
+	var min = a[0];
+	var max = a[0];
+	var _g = 0;
+	while(_g < a.length) {
+		var value = a[_g];
+		++_g;
+		if(min > value) {
+			min = value;
+		}
+		if(max < value) {
+			max = value;
+		}
+	}
+	return { min : min, max : max};
+};
+geometrize_Util.abs = function(value) {
+	if(value < 0) {
+		return -value;
+	}
+	return value;
+};
+var geometrize_bitmap_Bitmap = function() {
+};
+geometrize_bitmap_Bitmap.__name__ = true;
+geometrize_bitmap_Bitmap.create = function(w,h,color) {
+	var bitmap = new geometrize_bitmap_Bitmap();
+	bitmap.width = w;
+	bitmap.height = h;
+	var this1 = new Array(w * h);
+	bitmap.data = this1;
+	var i = 0;
+	while(i < bitmap.data.length) {
+		bitmap.data[i] = color;
+		++i;
+	}
+	return bitmap;
+};
+geometrize_bitmap_Bitmap.createFromBytes = function(w,h,bytes) {
+	var bitmap = new geometrize_bitmap_Bitmap();
+	if(!(bytes != null)) {
+		throw new js__$Boot_HaxeError("FAIL: bytes != null");
+	}
+	var actual = bytes.length;
+	var expected = w * h * 4;
+	if(actual != expected) {
+		throw new js__$Boot_HaxeError("FAIL: values are not equal (expected: " + expected + ", actual: " + actual + ")");
+	}
+	bitmap.width = w;
+	bitmap.height = h;
+	var length = bytes.length / 4 | 0;
+	var this1 = new Array(length);
+	bitmap.data = this1;
+	var i = 0;
+	var x = 0;
+	while(i < bytes.length) {
+		var red = bytes.b[i];
+		var green = bytes.b[i + 1];
+		var blue = bytes.b[i + 2];
+		var alpha = bytes.b[i + 3];
+		if(!true) {
+			throw new js__$Boot_HaxeError("FAIL: min <= max");
+		}
+		if(!true) {
+			throw new js__$Boot_HaxeError("FAIL: min <= max");
+		}
+		if(!true) {
+			throw new js__$Boot_HaxeError("FAIL: min <= max");
+		}
+		if(!true) {
+			throw new js__$Boot_HaxeError("FAIL: min <= max");
+		}
+		bitmap.data[x] = ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
+		i += 4;
+		++x;
+	}
+	return bitmap;
+};
+geometrize_bitmap_Bitmap.prototype = {
+	getPixel: function(x,y) {
+		return this.data[this.width * y + x];
+	}
+	,setPixel: function(x,y,color) {
+		this.data[this.width * y + x] = color;
+	}
+	,clone: function() {
+		var bitmap = new geometrize_bitmap_Bitmap();
+		bitmap.width = this.width;
+		bitmap.height = this.height;
+		var length = this.data.length;
+		var this1 = new Array(length);
+		bitmap.data = this1;
+		var _g1 = 0;
+		var _g = this.data.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			bitmap.data[i] = this.data[i];
+		}
+		return bitmap;
+	}
+	,fill: function(color) {
+		var idx = 0;
+		while(idx < this.data.length) {
+			this.data[idx] = color >>> 24 & 255;
+			this.data[idx + 1] = color >>> 16 & 255;
+			this.data[idx + 2] = color >>> 8 & 255;
+			this.data[idx + 3] = color & 255;
+			idx += 4;
+		}
+	}
+	,getBytes: function() {
+		var bytes = new haxe_io_Bytes(new ArrayBuffer(this.data.length * 4));
+		var i = 0;
+		while(i < this.data.length) {
+			var idx = i * 4;
+			bytes.b[idx] = this.data[i] >>> 24 & 255 & 255;
+			bytes.b[idx + 1] = this.data[i] >>> 16 & 255 & 255;
+			bytes.b[idx + 2] = this.data[i] >>> 8 & 255 & 255;
+			bytes.b[idx + 3] = this.data[i] & 255 & 255;
+			++i;
+		}
+		return bytes;
+	}
+	,__class__: geometrize_bitmap_Bitmap
+};
+var geometrize_bitmap__$Rgba_Rgba_$Impl_$ = {};
+geometrize_bitmap__$Rgba_Rgba_$Impl_$.__name__ = true;
+geometrize_bitmap__$Rgba_Rgba_$Impl_$._new = function(rgba) {
+	var this1 = rgba;
+	return this1;
+};
+geometrize_bitmap__$Rgba_Rgba_$Impl_$.create = function(red,green,blue,alpha) {
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	return ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
+};
+geometrize_bitmap__$Rgba_Rgba_$Impl_$.add = function(lhs,rhs) {
+	var red = (lhs >>> 24 & 255) + (rhs >>> 24 & 255);
+	var green = (lhs >>> 16 & 255) + (rhs >>> 16 & 255);
+	var blue = (lhs >>> 8 & 255) + (rhs >>> 8 & 255);
+	var alpha = (lhs & 255) + (rhs & 255);
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	return ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
+};
+geometrize_bitmap__$Rgba_Rgba_$Impl_$.subtract = function(lhs,rhs) {
+	var red = (lhs >>> 24 & 255) - (rhs >>> 24 & 255);
+	var green = (lhs >>> 16 & 255) - (rhs >>> 16 & 255);
+	var blue = (lhs >>> 8 & 255) - (rhs >>> 8 & 255);
+	var alpha = (lhs & 255) - (rhs & 255);
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	return ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
+};
+geometrize_bitmap__$Rgba_Rgba_$Impl_$.fromInt = function(rgba) {
+	return rgba;
+};
+geometrize_bitmap__$Rgba_Rgba_$Impl_$.get_r = function(this1) {
+	return this1 >>> 24 & 255;
+};
+geometrize_bitmap__$Rgba_Rgba_$Impl_$.get_g = function(this1) {
+	return this1 >>> 16 & 255;
+};
+geometrize_bitmap__$Rgba_Rgba_$Impl_$.get_b = function(this1) {
+	return this1 >>> 8 & 255;
+};
+geometrize_bitmap__$Rgba_Rgba_$Impl_$.get_a = function(this1) {
+	return this1 & 255;
+};
+var geometrize_exporter_SvgExporter = function() { };
+geometrize_exporter_SvgExporter.__name__ = true;
+geometrize_exporter_SvgExporter["export"] = function(shapes,width,height) {
+	var results = geometrize_exporter_SvgExporter.getPrelude();
+	results += geometrize_exporter_SvgExporter.getSvgNodeOpen(width,height);
+	results += geometrize_exporter_SvgExporter.exportShapes(shapes);
+	results += geometrize_exporter_SvgExporter.getSvgNodeClose();
+	return results;
+};
+geometrize_exporter_SvgExporter.exportShapes = function(shapes) {
+	var results = "";
+	var _g1 = 0;
+	var _g = shapes.length;
+	while(_g1 < _g) {
+		var i = _g1++;
+		results += geometrize_exporter_SvgExporter.exportShape(shapes[i]);
+		if(i != shapes.length - 1) {
+			results += "\n";
+		}
+	}
+	return results;
+};
+geometrize_exporter_SvgExporter.exportShape = function(shape) {
+	return StringTools.replace(shape.shape.getSvgShapeData(),geometrize_exporter_SvgExporter.SVG_STYLE_HOOK,geometrize_exporter_SvgExporter.stylesForShape(shape));
+};
+geometrize_exporter_SvgExporter.stylesForShape = function(shape) {
+	var _g = shape.shape.getType();
+	if(_g[1] == 6) {
+		return geometrize_exporter_SvgExporter.strokeForColor(shape.color) + " stroke-width=\"1\" fill=\"none\" " + geometrize_exporter_SvgExporter.strokeOpacityForAlpha(shape.color & 255);
+	} else {
+		return geometrize_exporter_SvgExporter.fillForColor(shape.color) + " " + geometrize_exporter_SvgExporter.fillOpacityForAlpha(shape.color & 255);
+	}
+};
+geometrize_exporter_SvgExporter.rgbForColor = function(color) {
+	return "rgb(" + (color >>> 24 & 255) + "," + (color >>> 16 & 255) + "," + (color >>> 8 & 255) + ")";
+};
+geometrize_exporter_SvgExporter.strokeForColor = function(color) {
+	return "stroke=\"" + geometrize_exporter_SvgExporter.rgbForColor(color) + "\"";
+};
+geometrize_exporter_SvgExporter.fillForColor = function(color) {
+	return "fill=\"" + geometrize_exporter_SvgExporter.rgbForColor(color) + "\"";
+};
+geometrize_exporter_SvgExporter.fillOpacityForAlpha = function(alpha) {
+	return "fill-opacity=\"" + alpha / 255.0 + "\"";
+};
+geometrize_exporter_SvgExporter.strokeOpacityForAlpha = function(alpha) {
+	return "stroke-opacity=\"" + alpha / 255.0 + "\"";
+};
+geometrize_exporter_SvgExporter.getPrelude = function() {
+	return "<?xml version=\"1.0\" standalone=\"no\"?>\n";
+};
+geometrize_exporter_SvgExporter.getSvgNodeOpen = function(width,height) {
+	return "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.2\" baseProfile=\"tiny\" width=\"" + width + "\" height=\"" + height + "\">\n";
+};
+geometrize_exporter_SvgExporter.getSvgNodeClose = function() {
+	return "</svg>";
+};
+var geometrize_rasterizer_Rasterizer = function() { };
+geometrize_rasterizer_Rasterizer.__name__ = true;
+geometrize_rasterizer_Rasterizer.drawLines = function(image,c,lines) {
+	if(!(image != null)) {
+		throw new js__$Boot_HaxeError("FAIL: image != null");
+	}
+	if(!(lines != null)) {
+		throw new js__$Boot_HaxeError("FAIL: lines != null");
+	}
+	var sr = c >>> 24 & 255;
+	sr |= sr << 8;
+	sr *= c & 255;
+	sr = sr / 255 | 0;
+	var sg = c >>> 16 & 255;
+	sg |= sg << 8;
+	sg *= c & 255;
+	sg = sg / 255 | 0;
+	var sb = c >>> 8 & 255;
+	sb |= sb << 8;
+	sb *= c & 255;
+	sb = sb / 255 | 0;
+	var sa = c & 255;
+	sa |= sa << 8;
+	var _g = 0;
+	while(_g < lines.length) {
+		var line = lines[_g];
+		++_g;
+		var y = line.y;
+		var ma = 65535;
+		var m = 65535;
+		var $as = (m - sa * (ma / m)) * 257;
+		var a = $as | 0;
+		var _g2 = line.x1;
+		var _g1 = line.x2 + 1;
+		while(_g2 < _g1) {
+			var x = _g2++;
+			var d = image.data[image.width * y + x];
+			var dr = d >>> 24 & 255;
+			var dg = d >>> 16 & 255;
+			var db = d >>> 8 & 255;
+			var da = d & 255;
+			var r = (_$UInt_UInt_$Impl_$.toFloat(dr * a + sr * ma) / _$UInt_UInt_$Impl_$.toFloat(m) | 0) >> 8;
+			var g = (_$UInt_UInt_$Impl_$.toFloat(dg * a + sg * ma) / _$UInt_UInt_$Impl_$.toFloat(m) | 0) >> 8;
+			var b = (_$UInt_UInt_$Impl_$.toFloat(db * a + sb * ma) / _$UInt_UInt_$Impl_$.toFloat(m) | 0) >> 8;
+			var a1 = (_$UInt_UInt_$Impl_$.toFloat(da * a + sa * ma) / _$UInt_UInt_$Impl_$.toFloat(m) | 0) >> 8;
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			image.data[image.width * y + x] = ((r < 0 ? 0 : r > 255 ? 255 : r) << 24) + ((g < 0 ? 0 : g > 255 ? 255 : g) << 16) + ((b < 0 ? 0 : b > 255 ? 255 : b) << 8) + (a1 < 0 ? 0 : a1 > 255 ? 255 : a1);
+		}
+	}
+};
+geometrize_rasterizer_Rasterizer.copyLines = function(destination,source,lines) {
+	if(!(destination != null)) {
+		throw new js__$Boot_HaxeError("FAIL: destination != null");
+	}
+	if(!(source != null)) {
+		throw new js__$Boot_HaxeError("FAIL: source != null");
+	}
+	if(!(lines != null)) {
+		throw new js__$Boot_HaxeError("FAIL: lines != null");
+	}
+	var _g = 0;
+	while(_g < lines.length) {
+		var line = lines[_g];
+		++_g;
+		var y = line.y;
+		var _g2 = line.x1;
+		var _g1 = line.x2 + 1;
+		while(_g2 < _g1) {
+			var x = _g2++;
+			destination.data[destination.width * y + x] = source.data[source.width * y + x];
+		}
+	}
+};
+geometrize_rasterizer_Rasterizer.bresenham = function(x1,y1,x2,y2) {
+	var dx = x2 - x1;
+	var ix = (dx > 0 ? 1 : 0) - (dx < 0 ? 1 : 0);
+	dx = (dx < 0 ? -dx : dx) << 1;
+	var dy = y2 - y1;
+	var iy = (dy > 0 ? 1 : 0) - (dy < 0 ? 1 : 0);
+	dy = (dy < 0 ? -dy : dy) << 1;
+	var points = [];
+	points.push({ x : x1, y : y1});
+	if(dx >= dy) {
+		var error = dy - (dx >> 1);
+		while(x1 != x2) {
+			if(error >= 0 && (error != 0 || ix > 0)) {
+				error -= dx;
+				y1 += iy;
+			}
+			error += dy;
+			x1 += ix;
+			points.push({ x : x1, y : y1});
+		}
+	} else {
+		var error1 = dx - (dy >> 1);
+		while(y1 != y2) {
+			if(error1 >= 0 && (error1 != 0 || iy > 0)) {
+				error1 -= dy;
+				x1 += ix;
+			}
+			error1 += dx;
+			y1 += iy;
+			points.push({ x : x1, y : y1});
+		}
+	}
+	return points;
+};
+geometrize_rasterizer_Rasterizer.scanlinesForPolygon = function(points) {
+	var lines = [];
+	var edges = [];
+	var _g1 = 0;
+	var _g = points.length;
+	while(_g1 < _g) {
+		var i = _g1++;
+		var p1 = points[i];
+		var p2 = i == points.length - 1 ? points[0] : points[i + 1];
+		var p1p2 = geometrize_rasterizer_Rasterizer.bresenham(p1.x,p1.y,p2.x,p2.y);
+		edges = edges.concat(p1p2);
+	}
+	var yToXs = new haxe_ds_IntMap();
+	var _g2 = 0;
+	while(_g2 < edges.length) {
+		var point = edges[_g2];
+		++_g2;
+		var s = yToXs.h[point.y];
+		if(s != null) {
+			geometrize__$ArraySet_ArraySet_$Impl_$.add(s,point.x);
+		} else {
+			s = geometrize__$ArraySet_ArraySet_$Impl_$.create();
+			geometrize__$ArraySet_ArraySet_$Impl_$.add(s,point.x);
+			yToXs.h[point.y] = s;
+		}
+	}
+	var key = yToXs.keys();
+	while(key.hasNext()) {
+		var key1 = key.next();
+		var a = geometrize__$ArraySet_ArraySet_$Impl_$.toArray(yToXs.h[key1]);
+		var minMaxElements;
+		if(a == null || a.length == 0) {
+			minMaxElements = { min : 0, max : 0};
+		} else {
+			var min = a[0];
+			var max = a[0];
+			var _g3 = 0;
+			while(_g3 < a.length) {
+				var value = a[_g3];
+				++_g3;
+				if(min > value) {
+					min = value;
+				}
+				if(max < value) {
+					max = value;
+				}
+			}
+			minMaxElements = { min : min, max : max};
+		}
+		lines.push(new geometrize_rasterizer_Scanline(key1,minMaxElements.min,minMaxElements.max));
+	}
+	return lines;
+};
+var geometrize_rasterizer_Scanline = function(y,x1,x2) {
+	this.y = y;
+	this.x1 = x1;
+	this.x2 = x2;
+};
+geometrize_rasterizer_Scanline.__name__ = true;
+geometrize_rasterizer_Scanline.trim = function(scanlines,w,h) {
+	if(!(scanlines != null)) {
+		throw new js__$Boot_HaxeError("FAIL: scanlines != null");
+	}
+	var w1 = w;
+	var h1 = h;
+	return scanlines.filter(function(a1) {
+		return geometrize_rasterizer_Scanline.trimHelper(a1,w1,h1);
+	});
+};
+geometrize_rasterizer_Scanline.trimHelper = function(line,w,h) {
+	if(line.y < 0 || line.y >= h || line.x1 >= w || line.x2 < 0) {
+		return false;
+	}
+	var value = line.x1;
+	var max = w - 1;
+	if(!(0 <= max)) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	line.x1 = value < 0 ? 0 : value > max ? max : value;
+	var value1 = line.x2;
+	var max1 = w - 1;
+	if(!(0 <= max1)) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	line.x2 = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
+	if(line.x1 > line.x2) {
+		return false;
+	}
+	return true;
+};
+geometrize_rasterizer_Scanline.prototype = {
+	__class__: geometrize_rasterizer_Scanline
+};
+var geometrize_runner_ImageRunner = function(inputImage,backgroundColor) {
+	this.model = null;
+	this.model = new geometrize_Model(inputImage,backgroundColor);
+};
+geometrize_runner_ImageRunner.__name__ = true;
+geometrize_runner_ImageRunner.prototype = {
+	step: function(options) {
+		return this.model.step(options.shapeTypes,options.alpha,options.candidateShapesPerStep,options.shapeMutationsPerStep);
+	}
+	,getImageData: function() {
+		if(!(this.model != null)) {
+			throw new js__$Boot_HaxeError("FAIL: model != null");
+		}
+		return this.model.current;
+	}
+	,__class__: geometrize_runner_ImageRunner
+};
+var geometrize_runner_ImageRunnerOptions = function(shapeTypes,alpha,candidateShapesPerStep,shapeMutationsPerStep) {
+	if(shapeMutationsPerStep == null) {
+		shapeMutationsPerStep = 50;
+	}
+	if(candidateShapesPerStep == null) {
+		candidateShapesPerStep = 100;
+	}
+	if(alpha == null) {
+		alpha = 128;
+	}
+	if(shapeTypes == null) {
+		shapeTypes = [geometrize_shape_ShapeType.RECTANGLE];
+	}
+	this.shapeTypes = shapeTypes;
+	this.alpha = alpha;
+	this.candidateShapesPerStep = candidateShapesPerStep;
+	this.shapeMutationsPerStep = shapeMutationsPerStep;
+};
+geometrize_runner_ImageRunnerOptions.__name__ = true;
+geometrize_runner_ImageRunnerOptions.prototype = {
+	__class__: geometrize_runner_ImageRunnerOptions
+};
+var geometrize_shape_Shape = function() { };
+geometrize_shape_Shape.__name__ = true;
+geometrize_shape_Shape.prototype = {
+	__class__: geometrize_shape_Shape
+};
+var geometrize_shape_Ellipse = function(xBound,yBound) {
+	this.x = Std.random(xBound);
+	this.y = Std.random(yBound);
+	this.rx = Std.random(32) + 1;
+	this.ry = Std.random(32) + 1;
+	this.xBound = xBound;
+	this.yBound = yBound;
+};
+geometrize_shape_Ellipse.__name__ = true;
+geometrize_shape_Ellipse.__interfaces__ = [geometrize_shape_Shape];
+geometrize_shape_Ellipse.prototype = {
+	rasterize: function() {
+		var lines = [];
+		var aspect = this.rx / this.ry;
+		var w = this.xBound;
+		var h = this.yBound;
+		var _g1 = 0;
+		var _g = this.ry;
+		while(_g1 < _g) {
+			var dy = _g1++;
+			var y1 = this.y - dy;
+			var y2 = this.y + dy;
+			if((y1 < 0 || y1 >= h) && (y2 < 0 || y2 >= h)) {
+				continue;
+			}
+			var s = Math.sqrt(this.ry * this.ry - dy * dy) * aspect | 0;
+			var x1 = this.x - s;
+			var x2 = this.x + s;
+			if(x1 < 0) {
+				x1 = 0;
+			}
+			if(x2 >= w) {
+				x2 = w - 1;
+			}
+			if(y1 >= 0 && y1 < h) {
+				lines.push(new geometrize_rasterizer_Scanline(y1,x1,x2));
+			}
+			if(y2 >= 0 && y2 < h && dy > 0) {
+				lines.push(new geometrize_rasterizer_Scanline(y2,x1,x2));
+			}
+		}
+		return lines;
+	}
+	,mutate: function() {
+		var r = Std.random(3);
+		switch(r) {
+		case 0:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value = this.x + (-16 + Math.floor(33 * Math.random()));
+			var max = this.xBound - 1;
+			if(!(0 <= max)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.x = value < 0 ? 0 : value > max ? max : value;
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value1 = this.y + (-16 + Math.floor(33 * Math.random()));
+			var max1 = this.yBound - 1;
+			if(!(0 <= max1)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.y = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
+			break;
+		case 1:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value2 = this.rx + (-16 + Math.floor(33 * Math.random()));
+			var max2 = this.xBound - 1;
+			if(!(1 <= max2)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.rx = value2 < 1 ? 1 : value2 > max2 ? max2 : value2;
+			break;
+		case 2:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value3 = this.ry + (-16 + Math.floor(33 * Math.random()));
+			var max3 = this.xBound - 1;
+			if(!(1 <= max3)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.ry = value3 < 1 ? 1 : value3 > max3 ? max3 : value3;
+			break;
+		}
+	}
+	,clone: function() {
+		var ellipse = new geometrize_shape_Ellipse(this.xBound,this.yBound);
+		ellipse.x = this.x;
+		ellipse.y = this.y;
+		ellipse.rx = this.rx;
+		ellipse.ry = this.ry;
+		return ellipse;
+	}
+	,getType: function() {
+		return geometrize_shape_ShapeType.ELLIPSE;
+	}
+	,getRawShapeData: function() {
+		return [this.x,this.y,this.rx,this.ry];
+	}
+	,getSvgShapeData: function() {
+		return "<ellipse cx=\"" + this.x + "\" cy=\"" + this.y + "\" rx=\"" + this.rx + "\" ry=\"" + this.ry + "\" " + geometrize_exporter_SvgExporter.SVG_STYLE_HOOK + " />";
+	}
+	,__class__: geometrize_shape_Ellipse
+};
+var geometrize_shape_Circle = function(xBound,yBound) {
+	geometrize_shape_Ellipse.call(this,xBound,yBound);
+	this.rx = Std.random(32) + 1;
+	this.ry = this.rx;
+};
+geometrize_shape_Circle.__name__ = true;
+geometrize_shape_Circle.__super__ = geometrize_shape_Ellipse;
+geometrize_shape_Circle.prototype = $extend(geometrize_shape_Ellipse.prototype,{
+	mutate: function() {
+		var r = Std.random(2);
+		switch(r) {
+		case 0:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value = this.x + (-16 + Math.floor(33 * Math.random()));
+			var max = this.xBound - 1;
+			if(!(0 <= max)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.x = value < 0 ? 0 : value > max ? max : value;
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value1 = this.y + (-16 + Math.floor(33 * Math.random()));
+			var max1 = this.yBound - 1;
+			if(!(0 <= max1)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.y = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
+			break;
+		case 1:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value2 = this.rx + (-16 + Math.floor(33 * Math.random()));
+			var max2 = this.xBound - 1;
+			if(!(1 <= max2)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			var r1 = value2 < 1 ? 1 : value2 > max2 ? max2 : value2;
+			this.rx = r1;
+			this.ry = r1;
+			break;
+		}
+	}
+	,clone: function() {
+		var circle = new geometrize_shape_Circle(this.xBound,this.yBound);
+		circle.x = this.x;
+		circle.y = this.y;
+		circle.rx = this.rx;
+		circle.ry = this.ry;
+		return circle;
+	}
+	,getType: function() {
+		return geometrize_shape_ShapeType.CIRCLE;
+	}
+	,getRawShapeData: function() {
+		return [this.x,this.y,this.rx];
+	}
+	,getSvgShapeData: function() {
+		return "<circle cx=\"" + this.x + "\" cy=\"" + this.y + "\" r=\"" + this.rx + "\" " + geometrize_exporter_SvgExporter.SVG_STYLE_HOOK + " />";
+	}
+	,__class__: geometrize_shape_Circle
+});
+var geometrize_shape_Line = function(xBound,yBound) {
+	this.x1 = Std.random(xBound);
+	this.y1 = Std.random(yBound);
+	var value = this.x1 + Std.random(32) + 1;
+	if(!(0 <= xBound)) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	this.x2 = value < 0 ? 0 : value > xBound ? xBound : value;
+	var value1 = this.y1 + Std.random(32) + 1;
+	if(!(0 <= yBound)) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	this.y2 = value1 < 0 ? 0 : value1 > yBound ? yBound : value1;
+	this.xBound = xBound;
+	this.yBound = yBound;
+};
+geometrize_shape_Line.__name__ = true;
+geometrize_shape_Line.__interfaces__ = [geometrize_shape_Shape];
+geometrize_shape_Line.prototype = {
+	rasterize: function() {
+		var lines = [];
+		var points = geometrize_rasterizer_Rasterizer.bresenham(this.x1,this.y1,this.x2,this.y2);
+		var _g = 0;
+		while(_g < points.length) {
+			var point = points[_g];
+			++_g;
+			lines.push(new geometrize_rasterizer_Scanline(point.y,point.x,point.x));
+		}
+		return geometrize_rasterizer_Scanline.trim(lines,this.xBound,this.yBound);
+	}
+	,mutate: function() {
+		var r = Std.random(4);
+		switch(r) {
+		case 0:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value = this.x1 + (-16 + Math.floor(33 * Math.random()));
+			var max = this.xBound - 1;
+			if(!(0 <= max)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.x1 = value < 0 ? 0 : value > max ? max : value;
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value1 = this.y1 + (-16 + Math.floor(33 * Math.random()));
+			var max1 = this.yBound - 1;
+			if(!(0 <= max1)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.y1 = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
+			break;
+		case 1:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value2 = this.x2 + (-16 + Math.floor(33 * Math.random()));
+			var max2 = this.xBound - 1;
+			if(!(0 <= max2)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.x2 = value2 < 0 ? 0 : value2 > max2 ? max2 : value2;
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value3 = this.y2 + (-16 + Math.floor(33 * Math.random()));
+			var max3 = this.yBound - 1;
+			if(!(0 <= max3)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.y2 = value3 < 0 ? 0 : value3 > max3 ? max3 : value3;
+			break;
+		}
+	}
+	,clone: function() {
+		var line = new geometrize_shape_Line(this.xBound,this.yBound);
+		line.x1 = this.x1;
+		line.y1 = this.y1;
+		line.x2 = this.x2;
+		line.y2 = this.y2;
+		return line;
+	}
+	,getType: function() {
+		return geometrize_shape_ShapeType.LINE;
+	}
+	,getRawShapeData: function() {
+		return [this.x1,this.y1,this.x2,this.y2];
+	}
+	,getSvgShapeData: function() {
+		return "<line x1=\"" + this.x1 + "\" y1=\"" + this.y1 + "\" x2=\"" + this.x2 + "\" y2=\"" + this.y2 + "\" " + geometrize_exporter_SvgExporter.SVG_STYLE_HOOK + " />";
+	}
+	,__class__: geometrize_shape_Line
+};
+var geometrize_shape_Rectangle = function(xBound,yBound) {
+	this.x1 = Std.random(xBound);
+	this.y1 = Std.random(yBound);
+	var value = this.x1 + Std.random(32) + 1;
+	var max = xBound - 1;
+	if(!(0 <= max)) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	this.x2 = value < 0 ? 0 : value > max ? max : value;
+	var value1 = this.y1 + Std.random(32) + 1;
+	var max1 = yBound - 1;
+	if(!(0 <= max1)) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	this.y2 = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
+	this.xBound = xBound;
+	this.yBound = yBound;
+};
+geometrize_shape_Rectangle.__name__ = true;
+geometrize_shape_Rectangle.__interfaces__ = [geometrize_shape_Shape];
+geometrize_shape_Rectangle.prototype = {
+	rasterize: function() {
+		var lines = [];
+		var _g1 = this.y1;
+		var _g = this.y2;
+		while(_g1 < _g) {
+			var y = _g1++;
+			if(this.x1 != this.x2) {
+				var first = this.x1;
+				var second = this.x2;
+				var first1 = this.x1;
+				var second1 = this.x2;
+				lines.push(new geometrize_rasterizer_Scanline(y,first < second ? first : second,first1 > second1 ? first1 : second1));
+			}
+		}
+		return lines;
+	}
+	,mutate: function() {
+		var r = Std.random(2);
+		switch(r) {
+		case 0:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value = this.x1 + (-16 + Math.floor(33 * Math.random()));
+			var max = this.xBound - 1;
+			if(!(0 <= max)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.x1 = value < 0 ? 0 : value > max ? max : value;
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value1 = this.y1 + (-16 + Math.floor(33 * Math.random()));
+			var max1 = this.yBound - 1;
+			if(!(0 <= max1)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.y1 = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
+			break;
+		case 1:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value2 = this.x2 + (-16 + Math.floor(33 * Math.random()));
+			var max2 = this.xBound - 1;
+			if(!(0 <= max2)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.x2 = value2 < 0 ? 0 : value2 > max2 ? max2 : value2;
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value3 = this.y2 + (-16 + Math.floor(33 * Math.random()));
+			var max3 = this.yBound - 1;
+			if(!(0 <= max3)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.y2 = value3 < 0 ? 0 : value3 > max3 ? max3 : value3;
+			break;
+		}
+	}
+	,clone: function() {
+		var rectangle = new geometrize_shape_Rectangle(this.xBound,this.yBound);
+		rectangle.x1 = this.x1;
+		rectangle.y1 = this.y1;
+		rectangle.x2 = this.x2;
+		rectangle.y2 = this.y2;
+		return rectangle;
+	}
+	,getType: function() {
+		return geometrize_shape_ShapeType.RECTANGLE;
+	}
+	,getRawShapeData: function() {
+		var first = this.x1;
+		var second = this.x2;
+		var first1 = this.y1;
+		var second1 = this.y2;
+		var first2 = this.x1;
+		var second2 = this.x2;
+		var first3 = this.y1;
+		var second3 = this.y2;
+		return [first < second ? first : second,first1 < second1 ? first1 : second1,first2 > second2 ? first2 : second2,first3 > second3 ? first3 : second3];
+	}
+	,getSvgShapeData: function() {
+		var first = this.x1;
+		var second = this.x2;
+		var first1 = this.y1;
+		var second1 = this.y2;
+		var first2 = this.x1;
+		var second2 = this.x2;
+		var first3 = this.x1;
+		var second3 = this.x2;
+		var first4 = this.y1;
+		var second4 = this.y2;
+		var first5 = this.y1;
+		var second5 = this.y2;
+		return "<rect x=\"" + (first < second ? first : second) + "\" y=\"" + (first1 < second1 ? first1 : second1) + "\" width=\"" + ((first2 > second2 ? first2 : second2) - (first3 < second3 ? first3 : second3)) + "\" height=\"" + ((first4 > second4 ? first4 : second4) - (first5 < second5 ? first5 : second5)) + "\" " + geometrize_exporter_SvgExporter.SVG_STYLE_HOOK + " />";
+	}
+	,__class__: geometrize_shape_Rectangle
+};
+var geometrize_shape_RotatedEllipse = function(xBound,yBound) {
+	this.x = Std.random(xBound);
+	this.y = Std.random(yBound);
+	this.rx = Std.random(32) + 1;
+	this.ry = Std.random(32) + 1;
+	this.angle = Std.random(360);
+	this.xBound = xBound;
+	this.yBound = yBound;
+};
+geometrize_shape_RotatedEllipse.__name__ = true;
+geometrize_shape_RotatedEllipse.__interfaces__ = [geometrize_shape_Shape];
+geometrize_shape_RotatedEllipse.prototype = {
+	rasterize: function() {
+		var pointCount = 20;
+		var points = [];
+		var rads = this.angle * (Math.PI / 180.0);
+		var c = Math.cos(rads);
+		var s = Math.sin(rads);
+		var _g1 = 0;
+		var _g = pointCount;
+		while(_g1 < _g) {
+			var i = _g1++;
+			var rot = 360.0 / pointCount * i * (Math.PI / 180.0);
+			var crx = this.rx * Math.cos(rot);
+			var cry = this.ry * Math.sin(rot);
+			var tx = crx * c - cry * s + this.x | 0;
+			var ty = crx * s + cry * c + this.y | 0;
+			points.push({ x : tx, y : ty});
+		}
+		return geometrize_rasterizer_Scanline.trim(geometrize_rasterizer_Rasterizer.scanlinesForPolygon(points),this.xBound,this.yBound);
+	}
+	,mutate: function() {
+		var r = Std.random(4);
+		switch(r) {
+		case 0:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value = this.x + (-16 + Math.floor(33 * Math.random()));
+			var max = this.xBound - 1;
+			if(!(0 <= max)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.x = value < 0 ? 0 : value > max ? max : value;
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value1 = this.y + (-16 + Math.floor(33 * Math.random()));
+			var max1 = this.yBound - 1;
+			if(!(0 <= max1)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.y = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
+			break;
+		case 1:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value2 = this.rx + (-16 + Math.floor(33 * Math.random()));
+			var max2 = this.xBound - 1;
+			if(!(1 <= max2)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.rx = value2 < 1 ? 1 : value2 > max2 ? max2 : value2;
+			break;
+		case 2:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value3 = this.ry + (-16 + Math.floor(33 * Math.random()));
+			var max3 = this.xBound - 1;
+			if(!(1 <= max3)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.ry = value3 < 1 ? 1 : value3 > max3 ? max3 : value3;
+			break;
+		case 3:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value4 = this.angle + (-4 + Math.floor(9 * Math.random()));
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.angle = value4 < 0 ? 0 : value4 > 360 ? 360 : value4;
+			break;
+		}
+	}
+	,clone: function() {
+		var ellipse = new geometrize_shape_RotatedEllipse(this.xBound,this.yBound);
+		ellipse.x = this.x;
+		ellipse.y = this.y;
+		ellipse.rx = this.rx;
+		ellipse.ry = this.ry;
+		ellipse.angle = this.angle;
+		return ellipse;
+	}
+	,getType: function() {
+		return geometrize_shape_ShapeType.ROTATED_ELLIPSE;
+	}
+	,getRawShapeData: function() {
+		return [this.x,this.y,this.rx,this.ry,this.angle];
+	}
+	,getSvgShapeData: function() {
+		var s = "<g transform=\"translate(" + this.x + " " + this.y + ") rotate(" + this.angle + ") scale(" + this.rx + " " + this.ry + ")\">";
+		s += "<ellipse cx=\"" + 0 + "\" cy=\"" + 0 + "\" rx=\"" + 1 + "\" ry=\"" + 1 + "\" " + geometrize_exporter_SvgExporter.SVG_STYLE_HOOK + " />";
+		s += "</g>";
+		return s;
+	}
+	,__class__: geometrize_shape_RotatedEllipse
+};
+var geometrize_shape_RotatedRectangle = function(xBound,yBound) {
+	this.x1 = Std.random(xBound);
+	this.y1 = Std.random(yBound);
+	var value = this.x1 + Std.random(32) + 1;
+	if(!(0 <= xBound)) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	this.x2 = value < 0 ? 0 : value > xBound ? xBound : value;
+	var value1 = this.y1 + Std.random(32) + 1;
+	if(!(0 <= yBound)) {
+		throw new js__$Boot_HaxeError("FAIL: min <= max");
+	}
+	this.y2 = value1 < 0 ? 0 : value1 > yBound ? yBound : value1;
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+	}
+	this.angle = Math.floor(361 * Math.random());
+	this.xBound = xBound;
+	this.yBound = yBound;
+};
+geometrize_shape_RotatedRectangle.__name__ = true;
+geometrize_shape_RotatedRectangle.__interfaces__ = [geometrize_shape_Shape];
+geometrize_shape_RotatedRectangle.prototype = {
+	rasterize: function() {
+		var first = this.x1;
+		var second = this.x2;
+		var xm1 = first < second ? first : second;
+		var first1 = this.x1;
+		var second1 = this.x2;
+		var xm2 = first1 > second1 ? first1 : second1;
+		var first2 = this.y1;
+		var second2 = this.y2;
+		var ym1 = first2 < second2 ? first2 : second2;
+		var first3 = this.y1;
+		var second3 = this.y2;
+		var ym2 = first3 > second3 ? first3 : second3;
+		var cx = (xm1 + xm2) / 2 | 0;
+		var cy = (ym1 + ym2) / 2 | 0;
+		var ox1 = xm1 - cx;
+		var ox2 = xm2 - cx;
+		var oy1 = ym1 - cy;
+		var oy2 = ym2 - cy;
+		var rads = this.angle * Math.PI / 180.0;
+		var c = Math.cos(rads);
+		var s = Math.sin(rads);
+		var ulx = ox1 * c - oy1 * s + cx | 0;
+		var uly = ox1 * s + oy1 * c + cy | 0;
+		var blx = ox1 * c - oy2 * s + cx | 0;
+		var bly = ox1 * s + oy2 * c + cy | 0;
+		var urx = ox2 * c - oy1 * s + cx | 0;
+		var ury = ox2 * s + oy1 * c + cy | 0;
+		var brx = ox2 * c - oy2 * s + cx | 0;
+		var bry = ox2 * s + oy2 * c + cy | 0;
+		return geometrize_rasterizer_Scanline.trim(geometrize_rasterizer_Rasterizer.scanlinesForPolygon([{ x : ulx, y : uly},{ x : urx, y : ury},{ x : brx, y : bry},{ x : blx, y : bly}]),this.xBound,this.yBound);
+	}
+	,mutate: function() {
+		var r = Std.random(3);
+		switch(r) {
+		case 0:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value = this.x1 + (-16 + Math.floor(33 * Math.random()));
+			var max = this.xBound - 1;
+			if(!(0 <= max)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.x1 = value < 0 ? 0 : value > max ? max : value;
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value1 = this.y1 + (-16 + Math.floor(33 * Math.random()));
+			var max1 = this.yBound - 1;
+			if(!(0 <= max1)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.y1 = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
+			break;
+		case 1:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value2 = this.x2 + (-16 + Math.floor(33 * Math.random()));
+			var max2 = this.xBound - 1;
+			if(!(0 <= max2)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.x2 = value2 < 0 ? 0 : value2 > max2 ? max2 : value2;
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value3 = this.y2 + (-16 + Math.floor(33 * Math.random()));
+			var max3 = this.yBound - 1;
+			if(!(0 <= max3)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.y2 = value3 < 0 ? 0 : value3 > max3 ? max3 : value3;
+			break;
+		case 2:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value4 = this.angle + (-4 + Math.floor(9 * Math.random()));
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.angle = value4 < 0 ? 0 : value4 > 360 ? 360 : value4;
+			break;
+		}
+	}
+	,clone: function() {
+		var rectangle = new geometrize_shape_RotatedRectangle(this.xBound,this.yBound);
+		rectangle.x1 = this.x1;
+		rectangle.y1 = this.y1;
+		rectangle.x2 = this.x2;
+		rectangle.y2 = this.y2;
+		rectangle.angle = this.angle;
+		return rectangle;
+	}
+	,getType: function() {
+		return geometrize_shape_ShapeType.ROTATED_RECTANGLE;
+	}
+	,getRawShapeData: function() {
+		var first = this.x1;
+		var second = this.x2;
+		var first1 = this.y1;
+		var second1 = this.y2;
+		var first2 = this.x1;
+		var second2 = this.x2;
+		var first3 = this.y1;
+		var second3 = this.y2;
+		return [first < second ? first : second,first1 < second1 ? first1 : second1,first2 > second2 ? first2 : second2,first3 > second3 ? first3 : second3,this.angle];
+	}
+	,getSvgShapeData: function() {
+		var first = this.x1;
+		var second = this.x2;
+		var first1 = this.x1;
+		var second1 = this.x2;
+		var width = (first > second ? first : second) - (first1 < second1 ? first1 : second1);
+		var first2 = this.y1;
+		var second2 = this.y2;
+		var first3 = this.y1;
+		var second3 = this.y2;
+		var height = (first2 > second2 ? first2 : second2) - (first3 < second3 ? first3 : second3);
+		var s = "<g transform=\"translate(" + (this.x1 + width / 2) + " " + (this.y1 + height / 2) + ") rotate(" + this.angle + ") scale(" + width + " " + height + ")\">";
+		s += "<rect x=\"" + -0.5 + "\" y=\"" + -0.5 + "\" width=\"" + 1 + "\" height=\"" + 1 + "\" " + geometrize_exporter_SvgExporter.SVG_STYLE_HOOK + " />";
+		s += "</g>";
+		return s;
+	}
+	,__class__: geometrize_shape_RotatedRectangle
+};
+var geometrize_shape_ShapeFactory = function() { };
+geometrize_shape_ShapeFactory.__name__ = true;
+geometrize_shape_ShapeFactory.create = function(type,xBound,yBound) {
+	switch(type[1]) {
+	case 0:
+		return new geometrize_shape_Rectangle(xBound,yBound);
+	case 1:
+		return new geometrize_shape_RotatedRectangle(xBound,yBound);
+	case 2:
+		return new geometrize_shape_Triangle(xBound,yBound);
+	case 3:
+		return new geometrize_shape_Ellipse(xBound,yBound);
+	case 4:
+		return new geometrize_shape_RotatedEllipse(xBound,yBound);
+	case 5:
+		return new geometrize_shape_Circle(xBound,yBound);
+	case 6:
+		return new geometrize_shape_Line(xBound,yBound);
+	}
+};
+geometrize_shape_ShapeFactory.randomShape = function(xBound,yBound) {
+	var a = geometrize_shape_ShapeType.__empty_constructs__;
+	if(!(a != null && a.length > 0)) {
+		throw new js__$Boot_HaxeError("FAIL: a != null && a.length > 0");
+	}
+	var upper = a.length - 1;
+	if(!(0 <= upper)) {
+		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+	}
+	return geometrize_shape_ShapeFactory.create(a[Math.floor((upper + 1) * Math.random())],xBound,yBound);
+};
+geometrize_shape_ShapeFactory.randomShapeOf = function(types,xBound,yBound) {
+	if(!(types != null && types.length > 0)) {
+		throw new js__$Boot_HaxeError("FAIL: a != null && a.length > 0");
+	}
+	var upper = types.length - 1;
+	if(!(0 <= upper)) {
+		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+	}
+	return geometrize_shape_ShapeFactory.create(types[Math.floor((upper + 1) * Math.random())],xBound,yBound);
+};
+var geometrize_shape_ShapeType = { __ename__ : true, __constructs__ : ["RECTANGLE","ROTATED_RECTANGLE","TRIANGLE","ELLIPSE","ROTATED_ELLIPSE","CIRCLE","LINE"] };
+geometrize_shape_ShapeType.RECTANGLE = ["RECTANGLE",0];
+geometrize_shape_ShapeType.RECTANGLE.__enum__ = geometrize_shape_ShapeType;
+geometrize_shape_ShapeType.ROTATED_RECTANGLE = ["ROTATED_RECTANGLE",1];
+geometrize_shape_ShapeType.ROTATED_RECTANGLE.__enum__ = geometrize_shape_ShapeType;
+geometrize_shape_ShapeType.TRIANGLE = ["TRIANGLE",2];
+geometrize_shape_ShapeType.TRIANGLE.__enum__ = geometrize_shape_ShapeType;
+geometrize_shape_ShapeType.ELLIPSE = ["ELLIPSE",3];
+geometrize_shape_ShapeType.ELLIPSE.__enum__ = geometrize_shape_ShapeType;
+geometrize_shape_ShapeType.ROTATED_ELLIPSE = ["ROTATED_ELLIPSE",4];
+geometrize_shape_ShapeType.ROTATED_ELLIPSE.__enum__ = geometrize_shape_ShapeType;
+geometrize_shape_ShapeType.CIRCLE = ["CIRCLE",5];
+geometrize_shape_ShapeType.CIRCLE.__enum__ = geometrize_shape_ShapeType;
+geometrize_shape_ShapeType.LINE = ["LINE",6];
+geometrize_shape_ShapeType.LINE.__enum__ = geometrize_shape_ShapeType;
+geometrize_shape_ShapeType.__empty_constructs__ = [geometrize_shape_ShapeType.RECTANGLE,geometrize_shape_ShapeType.ROTATED_RECTANGLE,geometrize_shape_ShapeType.TRIANGLE,geometrize_shape_ShapeType.ELLIPSE,geometrize_shape_ShapeType.ROTATED_ELLIPSE,geometrize_shape_ShapeType.CIRCLE,geometrize_shape_ShapeType.LINE];
+var geometrize_shape_Triangle = function(xBound,yBound) {
+	this.x1 = Std.random(xBound);
+	this.y1 = Std.random(yBound);
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+	}
+	this.x2 = this.x1 + (-16 + Math.floor(33 * Math.random()));
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+	}
+	this.y2 = this.y1 + (-16 + Math.floor(33 * Math.random()));
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+	}
+	this.x3 = this.x1 + (-16 + Math.floor(33 * Math.random()));
+	if(!true) {
+		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+	}
+	this.y3 = this.y1 + (-16 + Math.floor(33 * Math.random()));
+	this.xBound = xBound;
+	this.yBound = yBound;
+};
+geometrize_shape_Triangle.__name__ = true;
+geometrize_shape_Triangle.__interfaces__ = [geometrize_shape_Shape];
+geometrize_shape_Triangle.prototype = {
+	rasterize: function() {
+		return geometrize_rasterizer_Scanline.trim(geometrize_rasterizer_Rasterizer.scanlinesForPolygon([{ x : this.x1, y : this.y1},{ x : this.x2, y : this.y2},{ x : this.x3, y : this.y3}]),this.xBound,this.yBound);
+	}
+	,mutate: function() {
+		var r = Std.random(3);
+		switch(r) {
+		case 0:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value = this.x1 + (-16 + Math.floor(33 * Math.random()));
+			var max = this.xBound - 1;
+			if(!(0 <= max)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.x1 = value < 0 ? 0 : value > max ? max : value;
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value1 = this.y1 + (-16 + Math.floor(33 * Math.random()));
+			var max1 = this.yBound - 1;
+			if(!(0 <= max1)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.y1 = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
+			break;
+		case 1:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value2 = this.x2 + (-16 + Math.floor(33 * Math.random()));
+			var max2 = this.xBound - 1;
+			if(!(0 <= max2)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.x2 = value2 < 0 ? 0 : value2 > max2 ? max2 : value2;
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value3 = this.y2 + (-16 + Math.floor(33 * Math.random()));
+			var max3 = this.yBound - 1;
+			if(!(0 <= max3)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.y2 = value3 < 0 ? 0 : value3 > max3 ? max3 : value3;
+			break;
+		case 2:
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value4 = this.x3 + (-16 + Math.floor(33 * Math.random()));
+			var max4 = this.xBound - 1;
+			if(!(0 <= max4)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.x3 = value4 < 0 ? 0 : value4 > max4 ? max4 : value4;
+			if(!true) {
+				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
+			}
+			var value5 = this.y3 + (-16 + Math.floor(33 * Math.random()));
+			var max5 = this.yBound - 1;
+			if(!(0 <= max5)) {
+				throw new js__$Boot_HaxeError("FAIL: min <= max");
+			}
+			this.y3 = value5 < 0 ? 0 : value5 > max5 ? max5 : value5;
+			break;
+		}
+	}
+	,clone: function() {
+		var triangle = new geometrize_shape_Triangle(this.xBound,this.yBound);
+		triangle.x1 = this.x1;
+		triangle.y1 = this.y1;
+		triangle.x2 = this.x2;
+		triangle.y2 = this.y2;
+		triangle.x3 = this.x3;
+		triangle.y3 = this.y3;
+		return triangle;
+	}
+	,getType: function() {
+		return geometrize_shape_ShapeType.TRIANGLE;
+	}
+	,getRawShapeData: function() {
+		return [this.x1,this.y1,this.x2,this.y2,this.x3,this.y3];
+	}
+	,getSvgShapeData: function() {
+		return "<polygon points=\"" + this.x1 + "," + this.y1 + " " + this.x2 + "," + this.y2 + " " + this.x3 + "," + this.y3 + "\" " + geometrize_exporter_SvgExporter.SVG_STYLE_HOOK + "/>";
+	}
+	,__class__: geometrize_shape_Triangle
 };
 var haxe_IMap = function() { };
 haxe_IMap.__name__ = true;
@@ -799,1834 +2619,6 @@ js_html_compat_Uint8Array._subarray = function(start,end) {
 	a.byteOffset = start;
 	return a;
 };
-var primitive__$ArraySet_ArraySet_$Impl_$ = {};
-primitive__$ArraySet_ArraySet_$Impl_$.__name__ = true;
-primitive__$ArraySet_ArraySet_$Impl_$.create = function(array) {
-	if(array == null) {
-		var this1 = [];
-		return this1;
-	}
-	return primitive__$ArraySet_ArraySet_$Impl_$.toSet(array);
-};
-primitive__$ArraySet_ArraySet_$Impl_$.intersection = function(this1,set) {
-	var result = [];
-	var _g = 0;
-	while(_g < this1.length) {
-		var element = this1[_g];
-		++_g;
-		if(primitive__$ArraySet_ArraySet_$Impl_$.contains(set,element)) {
-			result.push(element);
-		}
-	}
-	var this2 = result;
-	return this2;
-};
-primitive__$ArraySet_ArraySet_$Impl_$.union = function(this1,set) {
-	return primitive__$ArraySet_ArraySet_$Impl_$.toSet(this1.concat(primitive__$ArraySet_ArraySet_$Impl_$.toArray(set)));
-};
-primitive__$ArraySet_ArraySet_$Impl_$.unionArray = function(this1,array) {
-	return primitive__$ArraySet_ArraySet_$Impl_$.toSet(this1.concat(array));
-};
-primitive__$ArraySet_ArraySet_$Impl_$.difference = function(this1,set) {
-	var this2 = this1.slice();
-	var result = this2;
-	var element = HxOverrides.iter(set);
-	while(element.hasNext()) {
-		var element1 = element.next();
-		HxOverrides.remove(result,element1);
-	}
-	var this3 = primitive__$ArraySet_ArraySet_$Impl_$.toArray(result);
-	return this3;
-};
-primitive__$ArraySet_ArraySet_$Impl_$.add = function(this1,element) {
-	if(!(element != null)) {
-		throw new js__$Boot_HaxeError("FAIL: element != null");
-	}
-	if(primitive__$ArraySet_ArraySet_$Impl_$.contains(this1,element)) {
-		return false;
-	}
-	this1.push(element);
-	return true;
-};
-primitive__$ArraySet_ArraySet_$Impl_$.contains = function(this1,element) {
-	var _g = 0;
-	while(_g < this1.length) {
-		var i = this1[_g];
-		++_g;
-		if(i == element) {
-			return true;
-		}
-	}
-	return false;
-};
-primitive__$ArraySet_ArraySet_$Impl_$.copy = function(this1) {
-	var this2 = this1.slice();
-	return this2;
-};
-primitive__$ArraySet_ArraySet_$Impl_$.slice = function(this1,position,end) {
-	var this2 = this1.slice(position,end);
-	return this2;
-};
-primitive__$ArraySet_ArraySet_$Impl_$.splice = function(this1,position,length) {
-	var this2 = this1.splice(position,length);
-	return this2;
-};
-primitive__$ArraySet_ArraySet_$Impl_$.toArray = function(this1) {
-	return this1.slice();
-};
-primitive__$ArraySet_ArraySet_$Impl_$.toSet = function(array) {
-	var this1 = [];
-	var set = this1;
-	var _g = 0;
-	while(_g < array.length) {
-		var v = array[_g];
-		++_g;
-		primitive__$ArraySet_ArraySet_$Impl_$.add(set,v);
-	}
-	return set;
-};
-primitive__$ArraySet_ArraySet_$Impl_$._new = function(array) {
-	var this1 = array;
-	return this1;
-};
-var primitive_Core = function() { };
-primitive_Core.__name__ = true;
-primitive_Core.energy = function(shape,alpha,target,current,buffer,score) {
-	if(!(shape != null)) {
-		throw new js__$Boot_HaxeError("FAIL: shape != null");
-	}
-	if(!(target != null)) {
-		throw new js__$Boot_HaxeError("FAIL: target != null");
-	}
-	if(!(current != null)) {
-		throw new js__$Boot_HaxeError("FAIL: current != null");
-	}
-	if(!(buffer != null)) {
-		throw new js__$Boot_HaxeError("FAIL: buffer != null");
-	}
-	var lines = shape.rasterize();
-	var color = primitive_Core.computeColor(target,current,lines,alpha);
-	primitive_rasterizer_Rasterizer.copyLines(buffer,current,lines);
-	primitive_rasterizer_Rasterizer.drawLines(buffer,color,lines);
-	return primitive_Core.differencePartial(target,current,buffer,score,lines);
-};
-primitive_Core.computeColor = function(target,current,lines,alpha) {
-	if(!(target != null)) {
-		throw new js__$Boot_HaxeError("FAIL: target != null");
-	}
-	if(!(current != null)) {
-		throw new js__$Boot_HaxeError("FAIL: current != null");
-	}
-	if(!(lines != null)) {
-		throw new js__$Boot_HaxeError("FAIL: lines != null");
-	}
-	if(!(alpha >= 0)) {
-		throw new js__$Boot_HaxeError("FAIL: alpha >= 0");
-	}
-	var totalRed = 0;
-	var totalGreen = 0;
-	var totalBlue = 0;
-	var count = 0;
-	var f = 65535 / alpha;
-	var a = f | 0;
-	var _g = 0;
-	while(_g < lines.length) {
-		var line = lines[_g];
-		++_g;
-		var y = line.y;
-		var _g2 = line.x1;
-		var _g1 = line.x2 + 1;
-		while(_g2 < _g1) {
-			var x = _g2++;
-			var t = target.data[target.width * y + x];
-			var c = current.data[current.width * y + x];
-			totalRed += ((t >>> 24 & 255) - (c >>> 24 & 255)) * a + (c >>> 24 & 255) * 257;
-			totalGreen += ((t >>> 16 & 255) - (c >>> 16 & 255)) * a + (c >>> 16 & 255) * 257;
-			totalBlue += ((t >>> 8 & 255) - (c >>> 8 & 255)) * a + (c >>> 8 & 255) * 257;
-			++count;
-		}
-	}
-	if(count == 0) {
-		return 0;
-	}
-	var value = (totalRed / count | 0) >> 8;
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	var r = value < 0 ? 0 : value > 255 ? 255 : value;
-	var value1 = (totalGreen / count | 0) >> 8;
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	var g = value1 < 0 ? 0 : value1 > 255 ? 255 : value1;
-	var value2 = (totalBlue / count | 0) >> 8;
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	var b = value2 < 0 ? 0 : value2 > 255 ? 255 : value2;
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	return ((r < 0 ? 0 : r > 255 ? 255 : r) << 24) + ((g < 0 ? 0 : g > 255 ? 255 : g) << 16) + ((b < 0 ? 0 : b > 255 ? 255 : b) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
-};
-primitive_Core.differenceFull = function(first,second) {
-	if(!(first != null)) {
-		throw new js__$Boot_HaxeError("FAIL: first != null");
-	}
-	if(!(second != null)) {
-		throw new js__$Boot_HaxeError("FAIL: second != null");
-	}
-	var actual = first.width;
-	var expected = second.width;
-	if(actual != expected) {
-		throw new js__$Boot_HaxeError("FAIL: values are not equal (expected: " + expected + ", actual: " + actual + ")");
-	}
-	var actual1 = first.height;
-	var expected1 = second.height;
-	if(actual1 != expected1) {
-		throw new js__$Boot_HaxeError("FAIL: values are not equal (expected: " + expected1 + ", actual: " + actual1 + ")");
-	}
-	var total = 0;
-	var width = first.width;
-	var height = first.height;
-	var _g1 = 0;
-	var _g = height;
-	while(_g1 < _g) {
-		var y = _g1++;
-		var _g3 = 0;
-		var _g2 = width;
-		while(_g3 < _g2) {
-			var x = _g3++;
-			var f = first.data[first.width * y + x];
-			var s = second.data[second.width * y + x];
-			var dr = (f >>> 24 & 255) - (s >>> 24 & 255);
-			var dg = (f >>> 16 & 255) - (s >>> 16 & 255);
-			var db = (f >>> 8 & 255) - (s >>> 8 & 255);
-			var da = (f & 255) - (s & 255);
-			total = total + (dr * dr + dg * dg + db * db + da * da);
-		}
-	}
-	return Math.sqrt(_$UInt_UInt_$Impl_$.toFloat(total) / (width * height * 4.0)) / 255;
-};
-primitive_Core.differencePartial = function(target,before,after,score,lines) {
-	if(!(target != null)) {
-		throw new js__$Boot_HaxeError("FAIL: target != null");
-	}
-	if(!(before != null)) {
-		throw new js__$Boot_HaxeError("FAIL: before != null");
-	}
-	if(!(after != null)) {
-		throw new js__$Boot_HaxeError("FAIL: after != null");
-	}
-	if(!(lines != null)) {
-		throw new js__$Boot_HaxeError("FAIL: lines != null");
-	}
-	var width = target.width;
-	var height = target.height;
-	var rgbaCount = width * height * 4;
-	var total = Math.pow(score * 255,2) * rgbaCount | 0;
-	var _g = 0;
-	while(_g < lines.length) {
-		var line = lines[_g];
-		++_g;
-		var y = line.y;
-		var _g2 = line.x1;
-		var _g1 = line.x2 + 1;
-		while(_g2 < _g1) {
-			var x = _g2++;
-			var t = target.data[target.width * y + x];
-			var b = before.data[before.width * y + x];
-			var a = after.data[after.width * y + x];
-			var dtbr = (t >>> 24 & 255) - (b >>> 24 & 255);
-			var dtbg = (t >>> 16 & 255) - (b >>> 16 & 255);
-			var dtbb = (t >>> 8 & 255) - (b >>> 8 & 255);
-			var dtba = (t & 255) - (b & 255);
-			var dtar = (t >>> 24 & 255) - (a >>> 24 & 255);
-			var dtag = (t >>> 16 & 255) - (a >>> 16 & 255);
-			var dtab = (t >>> 8 & 255) - (a >>> 8 & 255);
-			var dtaa = (t & 255) - (a & 255);
-			total = total - (dtbr * dtbr + dtbg * dtbg + dtbb * dtbb + dtba * dtba);
-			total = total + (dtar * dtar + dtag * dtag + dtab * dtab + dtaa * dtaa);
-		}
-	}
-	return Math.sqrt(_$UInt_UInt_$Impl_$.toFloat(total) / _$UInt_UInt_$Impl_$.toFloat(rgbaCount)) / 255;
-};
-primitive_Core.bestRandomState = function(shapes,alpha,n,target,current,buffer,lastScore) {
-	var bestEnergy = 0;
-	var bestState = null;
-	var _g1 = 0;
-	var _g = n;
-	while(_g1 < _g) {
-		var i = _g1++;
-		var state = new primitive_State(primitive_shape_ShapeFactory.randomShapeOf(shapes,current.width,current.height),alpha,target,current,buffer);
-		var energy = state.energy(lastScore);
-		if(i == 0 || energy < bestEnergy) {
-			bestEnergy = energy;
-			bestState = state;
-		}
-	}
-	return bestState;
-};
-primitive_Core.bestHillClimbState = function(shapes,alpha,n,age,target,current,buffer,lastScore) {
-	var state = primitive_Core.bestRandomState(shapes,alpha,n,target,current,buffer,lastScore);
-	state = primitive_Core.hillClimb(state,age,lastScore);
-	return state;
-};
-primitive_Core.hillClimb = function(state,maxAge,lastScore) {
-	if(!(state != null)) {
-		throw new js__$Boot_HaxeError("FAIL: state != null");
-	}
-	if(!(maxAge >= 0)) {
-		throw new js__$Boot_HaxeError("FAIL: maxAge >= 0");
-	}
-	var state1 = state.clone();
-	var bestState = state1.clone();
-	var bestEnergy = state1.energy(lastScore);
-	var age = 0;
-	while(age < maxAge) {
-		var undo = state1.mutate();
-		var energy = state1.energy(lastScore);
-		if(energy >= bestEnergy) {
-			state1 = undo;
-		} else {
-			bestEnergy = energy;
-			bestState = state1.clone();
-			age = -1;
-		}
-		++age;
-	}
-	return bestState;
-};
-var primitive_Model = function(target,backgroundColor) {
-	if(!(target != null)) {
-		throw new js__$Boot_HaxeError("FAIL: target != null");
-	}
-	this.width = target.width;
-	this.height = target.height;
-	this.target = target;
-	var w = target.width;
-	var h = target.height;
-	var bitmap = new primitive_bitmap_Bitmap();
-	bitmap.width = w;
-	bitmap.height = h;
-	var this1 = new Array(w * h);
-	bitmap.data = this1;
-	var i = 0;
-	while(i < bitmap.data.length) {
-		bitmap.data[i] = backgroundColor;
-		++i;
-	}
-	this.current = bitmap;
-	var w1 = target.width;
-	var h1 = target.height;
-	var bitmap1 = new primitive_bitmap_Bitmap();
-	bitmap1.width = w1;
-	bitmap1.height = h1;
-	var this2 = new Array(w1 * h1);
-	bitmap1.data = this2;
-	var i1 = 0;
-	while(i1 < bitmap1.data.length) {
-		bitmap1.data[i1] = backgroundColor;
-		++i1;
-	}
-	this.buffer = bitmap1;
-	this.score = primitive_Core.differenceFull(target,this.current);
-};
-primitive_Model.__name__ = true;
-primitive_Model.prototype = {
-	step: function(shapeTypes,alpha,n,age) {
-		var state = primitive_Core.bestHillClimbState(shapeTypes,alpha,n,age,this.target,this.current,this.buffer,this.score);
-		var results = [this.addShape(state.shape,state.alpha)];
-		return results;
-	}
-	,addShape: function(shape,alpha) {
-		if(!(shape != null)) {
-			throw new js__$Boot_HaxeError("FAIL: shape != null");
-		}
-		var _this = this.current;
-		var bitmap = new primitive_bitmap_Bitmap();
-		bitmap.width = _this.width;
-		bitmap.height = _this.height;
-		var length = _this.data.length;
-		var this1 = new Array(length);
-		bitmap.data = this1;
-		var _g1 = 0;
-		var _g = _this.data.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			bitmap.data[i] = _this.data[i];
-		}
-		var before = bitmap;
-		var lines = shape.rasterize();
-		var color = primitive_Core.computeColor(this.target,this.current,lines,alpha);
-		primitive_rasterizer_Rasterizer.drawLines(this.current,color,lines);
-		this.score = primitive_Core.differencePartial(this.target,before,this.current,this.score,lines);
-		var result = { score : this.score, color : color, shape : shape};
-		return result;
-	}
-	,__class__: primitive_Model
-};
-var primitive_State = function(shape,alpha,target,current,buffer) {
-	if(!(shape != null)) {
-		throw new js__$Boot_HaxeError("FAIL: shape != null");
-	}
-	this.shape = shape;
-	this.alpha = alpha;
-	this.score = -1;
-	this.target = target;
-	this.current = current;
-	this.buffer = buffer;
-};
-primitive_State.__name__ = true;
-primitive_State.prototype = {
-	energy: function(lastScore) {
-		if(this.score < 0) {
-			this.score = primitive_Core.energy(this.shape,this.alpha,this.target,this.current,this.buffer,lastScore);
-		}
-		return this.score;
-	}
-	,mutate: function() {
-		var oldState = this.clone();
-		this.shape.mutate();
-		return oldState;
-	}
-	,clone: function() {
-		return new primitive_State(this.shape.clone(),this.alpha,this.target,this.current,this.buffer);
-	}
-	,__class__: primitive_State
-};
-var primitive_Util = function() { };
-primitive_Util.__name__ = true;
-primitive_Util.getAverageImageColor = function(image) {
-	if(!(image != null)) {
-		throw new js__$Boot_HaxeError("FAIL: image != null");
-	}
-	var totalRed = 0;
-	var totalGreen = 0;
-	var totalBlue = 0;
-	var _g1 = 0;
-	var _g = image.width;
-	while(_g1 < _g) {
-		var x = _g1++;
-		var _g3 = 0;
-		var _g2 = image.height;
-		while(_g3 < _g2) {
-			var y = _g3++;
-			var pixel = image.data[image.width * y + x];
-			totalRed += pixel >>> 24 & 255;
-			totalGreen += pixel >>> 16 & 255;
-			totalBlue += pixel >>> 8 & 255;
-		}
-	}
-	var size = image.width * image.height;
-	var red = totalRed / size | 0;
-	var green = totalGreen / size | 0;
-	var blue = totalBlue / size | 0;
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	return ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + 255;
-};
-primitive_Util.clamp = function(value,min,max) {
-	if(!(min <= max)) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	if(value < min) {
-		return min;
-	} else if(value > max) {
-		return max;
-	} else {
-		return value;
-	}
-};
-primitive_Util.min = function(first,second) {
-	if(first < second) {
-		return first;
-	} else {
-		return second;
-	}
-};
-primitive_Util.max = function(first,second) {
-	if(first > second) {
-		return first;
-	} else {
-		return second;
-	}
-};
-primitive_Util.toRadians = function(degrees) {
-	return degrees * Math.PI / 180;
-};
-primitive_Util.toDegrees = function(radians) {
-	return radians * 180 / Math.PI;
-};
-primitive_Util.random = function(lower,upper) {
-	if(!(lower <= upper)) {
-		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-	}
-	return lower + Math.floor((upper - lower + 1) * Math.random());
-};
-primitive_Util.randomArrayItem = function(a) {
-	if(!(a != null && a.length > 0)) {
-		throw new js__$Boot_HaxeError("FAIL: a != null && a.length > 0");
-	}
-	var upper = a.length - 1;
-	if(!(0 <= upper)) {
-		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-	}
-	return a[Math.floor((upper + 1) * Math.random())];
-};
-primitive_Util.minMaxElements = function(a) {
-	if(a == null || a.length == 0) {
-		return { min : 0, max : 0};
-	}
-	var min = a[0];
-	var max = a[0];
-	var _g = 0;
-	while(_g < a.length) {
-		var value = a[_g];
-		++_g;
-		if(min > value) {
-			min = value;
-		}
-		if(max < value) {
-			max = value;
-		}
-	}
-	return { min : min, max : max};
-};
-primitive_Util.abs = function(value) {
-	if(value < 0) {
-		return -value;
-	}
-	return value;
-};
-var primitive_bitmap_Bitmap = function() {
-};
-primitive_bitmap_Bitmap.__name__ = true;
-primitive_bitmap_Bitmap.create = function(w,h,color) {
-	var bitmap = new primitive_bitmap_Bitmap();
-	bitmap.width = w;
-	bitmap.height = h;
-	var this1 = new Array(w * h);
-	bitmap.data = this1;
-	var i = 0;
-	while(i < bitmap.data.length) {
-		bitmap.data[i] = color;
-		++i;
-	}
-	return bitmap;
-};
-primitive_bitmap_Bitmap.createFromBytes = function(w,h,bytes) {
-	var bitmap = new primitive_bitmap_Bitmap();
-	if(!(bytes != null)) {
-		throw new js__$Boot_HaxeError("FAIL: bytes != null");
-	}
-	var actual = bytes.length;
-	var expected = w * h * 4;
-	if(actual != expected) {
-		throw new js__$Boot_HaxeError("FAIL: values are not equal (expected: " + expected + ", actual: " + actual + ")");
-	}
-	bitmap.width = w;
-	bitmap.height = h;
-	var length = bytes.length / 4 | 0;
-	var this1 = new Array(length);
-	bitmap.data = this1;
-	var i = 0;
-	var x = 0;
-	while(i < bytes.length) {
-		var red = bytes.b[i];
-		var green = bytes.b[i + 1];
-		var blue = bytes.b[i + 2];
-		var alpha = bytes.b[i + 3];
-		if(!true) {
-			throw new js__$Boot_HaxeError("FAIL: min <= max");
-		}
-		if(!true) {
-			throw new js__$Boot_HaxeError("FAIL: min <= max");
-		}
-		if(!true) {
-			throw new js__$Boot_HaxeError("FAIL: min <= max");
-		}
-		if(!true) {
-			throw new js__$Boot_HaxeError("FAIL: min <= max");
-		}
-		bitmap.data[x] = ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
-		i += 4;
-		++x;
-	}
-	return bitmap;
-};
-primitive_bitmap_Bitmap.prototype = {
-	getPixel: function(x,y) {
-		return this.data[this.width * y + x];
-	}
-	,setPixel: function(x,y,color) {
-		this.data[this.width * y + x] = color;
-	}
-	,clone: function() {
-		var bitmap = new primitive_bitmap_Bitmap();
-		bitmap.width = this.width;
-		bitmap.height = this.height;
-		var length = this.data.length;
-		var this1 = new Array(length);
-		bitmap.data = this1;
-		var _g1 = 0;
-		var _g = this.data.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			bitmap.data[i] = this.data[i];
-		}
-		return bitmap;
-	}
-	,fill: function(color) {
-		var idx = 0;
-		while(idx < this.data.length) {
-			this.data[idx] = color >>> 24 & 255;
-			this.data[idx + 1] = color >>> 16 & 255;
-			this.data[idx + 2] = color >>> 8 & 255;
-			this.data[idx + 3] = color & 255;
-			idx += 4;
-		}
-	}
-	,getBytes: function() {
-		var bytes = new haxe_io_Bytes(new ArrayBuffer(this.data.length * 4));
-		var i = 0;
-		while(i < this.data.length) {
-			var idx = i * 4;
-			bytes.b[idx] = this.data[i] >>> 24 & 255 & 255;
-			bytes.b[idx + 1] = this.data[i] >>> 16 & 255 & 255;
-			bytes.b[idx + 2] = this.data[i] >>> 8 & 255 & 255;
-			bytes.b[idx + 3] = this.data[i] & 255 & 255;
-			++i;
-		}
-		return bytes;
-	}
-	,__class__: primitive_bitmap_Bitmap
-};
-var primitive_bitmap__$Rgba_Rgba_$Impl_$ = {};
-primitive_bitmap__$Rgba_Rgba_$Impl_$.__name__ = true;
-primitive_bitmap__$Rgba_Rgba_$Impl_$._new = function(rgba) {
-	var this1 = rgba;
-	return this1;
-};
-primitive_bitmap__$Rgba_Rgba_$Impl_$.create = function(red,green,blue,alpha) {
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	return ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
-};
-primitive_bitmap__$Rgba_Rgba_$Impl_$.add = function(lhs,rhs) {
-	var red = (lhs >>> 24 & 255) + (rhs >>> 24 & 255);
-	var green = (lhs >>> 16 & 255) + (rhs >>> 16 & 255);
-	var blue = (lhs >>> 8 & 255) + (rhs >>> 8 & 255);
-	var alpha = (lhs & 255) + (rhs & 255);
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	return ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
-};
-primitive_bitmap__$Rgba_Rgba_$Impl_$.subtract = function(lhs,rhs) {
-	var red = (lhs >>> 24 & 255) - (rhs >>> 24 & 255);
-	var green = (lhs >>> 16 & 255) - (rhs >>> 16 & 255);
-	var blue = (lhs >>> 8 & 255) - (rhs >>> 8 & 255);
-	var alpha = (lhs & 255) - (rhs & 255);
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	return ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
-};
-primitive_bitmap__$Rgba_Rgba_$Impl_$.fromInt = function(rgba) {
-	return rgba;
-};
-primitive_bitmap__$Rgba_Rgba_$Impl_$.get_r = function(this1) {
-	return this1 >>> 24 & 255;
-};
-primitive_bitmap__$Rgba_Rgba_$Impl_$.get_g = function(this1) {
-	return this1 >>> 16 & 255;
-};
-primitive_bitmap__$Rgba_Rgba_$Impl_$.get_b = function(this1) {
-	return this1 >>> 8 & 255;
-};
-primitive_bitmap__$Rgba_Rgba_$Impl_$.get_a = function(this1) {
-	return this1 & 255;
-};
-var primitive_exporter_SvgExporter = function() { };
-primitive_exporter_SvgExporter.__name__ = true;
-primitive_exporter_SvgExporter["export"] = function(shapes,width,height) {
-	var results = primitive_exporter_SvgExporter.getPrelude();
-	results += primitive_exporter_SvgExporter.getSvgNodeOpen(width,height);
-	results += primitive_exporter_SvgExporter.exportShapes(shapes);
-	results += primitive_exporter_SvgExporter.getSvgNodeClose();
-	return results;
-};
-primitive_exporter_SvgExporter.exportShapes = function(shapes) {
-	var results = "";
-	var _g1 = 0;
-	var _g = shapes.length;
-	while(_g1 < _g) {
-		var i = _g1++;
-		results += primitive_exporter_SvgExporter.exportShape(shapes[i]);
-		if(i != shapes.length - 1) {
-			results += "\n";
-		}
-	}
-	return results;
-};
-primitive_exporter_SvgExporter.exportShape = function(shape) {
-	return StringTools.replace(shape.shape.getSvgShapeData(),primitive_exporter_SvgExporter.SVG_STYLE_HOOK,primitive_exporter_SvgExporter.stylesForShape(shape));
-};
-primitive_exporter_SvgExporter.stylesForShape = function(shape) {
-	var _g = shape.shape.getType();
-	if(_g[1] == 6) {
-		return primitive_exporter_SvgExporter.strokeForColor(shape.color) + " stroke-width=\"1\" fill=\"none\" " + primitive_exporter_SvgExporter.strokeOpacityForAlpha(shape.color & 255);
-	} else {
-		return primitive_exporter_SvgExporter.fillForColor(shape.color) + " " + primitive_exporter_SvgExporter.fillOpacityForAlpha(shape.color & 255);
-	}
-};
-primitive_exporter_SvgExporter.rgbForColor = function(color) {
-	return "rgb(" + (color >>> 24 & 255) + "," + (color >>> 16 & 255) + "," + (color >>> 8 & 255) + ")";
-};
-primitive_exporter_SvgExporter.strokeForColor = function(color) {
-	return "stroke=\"" + primitive_exporter_SvgExporter.rgbForColor(color) + "\"";
-};
-primitive_exporter_SvgExporter.fillForColor = function(color) {
-	return "fill=\"" + primitive_exporter_SvgExporter.rgbForColor(color) + "\"";
-};
-primitive_exporter_SvgExporter.fillOpacityForAlpha = function(alpha) {
-	return "fill-opacity=\"" + alpha / 255.0 + "\"";
-};
-primitive_exporter_SvgExporter.strokeOpacityForAlpha = function(alpha) {
-	return "stroke-opacity=\"" + alpha / 255.0 + "\"";
-};
-primitive_exporter_SvgExporter.getPrelude = function() {
-	return "<?xml version=\"1.0\" standalone=\"no\"?>\n";
-};
-primitive_exporter_SvgExporter.getSvgNodeOpen = function(width,height) {
-	return "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.2\" baseProfile=\"tiny\" width=\"" + width + "\" height=\"" + height + "\">\n";
-};
-primitive_exporter_SvgExporter.getSvgNodeClose = function() {
-	return "</svg>";
-};
-var primitive_rasterizer_Rasterizer = function() { };
-primitive_rasterizer_Rasterizer.__name__ = true;
-primitive_rasterizer_Rasterizer.drawLines = function(image,c,lines) {
-	if(!(image != null)) {
-		throw new js__$Boot_HaxeError("FAIL: image != null");
-	}
-	if(!(lines != null)) {
-		throw new js__$Boot_HaxeError("FAIL: lines != null");
-	}
-	var sr = c >>> 24 & 255;
-	sr |= sr << 8;
-	sr *= c & 255;
-	sr = sr / 255 | 0;
-	var sg = c >>> 16 & 255;
-	sg |= sg << 8;
-	sg *= c & 255;
-	sg = sg / 255 | 0;
-	var sb = c >>> 8 & 255;
-	sb |= sb << 8;
-	sb *= c & 255;
-	sb = sb / 255 | 0;
-	var sa = c & 255;
-	sa |= sa << 8;
-	var _g = 0;
-	while(_g < lines.length) {
-		var line = lines[_g];
-		++_g;
-		var y = line.y;
-		var ma = 65535;
-		var m = 65535;
-		var $as = (m - sa * (ma / m)) * 257;
-		var a = $as | 0;
-		var _g2 = line.x1;
-		var _g1 = line.x2 + 1;
-		while(_g2 < _g1) {
-			var x = _g2++;
-			var d = image.data[image.width * y + x];
-			var dr = d >>> 24 & 255;
-			var dg = d >>> 16 & 255;
-			var db = d >>> 8 & 255;
-			var da = d & 255;
-			var r = (_$UInt_UInt_$Impl_$.toFloat(dr * a + sr * ma) / _$UInt_UInt_$Impl_$.toFloat(m) | 0) >> 8;
-			var g = (_$UInt_UInt_$Impl_$.toFloat(dg * a + sg * ma) / _$UInt_UInt_$Impl_$.toFloat(m) | 0) >> 8;
-			var b = (_$UInt_UInt_$Impl_$.toFloat(db * a + sb * ma) / _$UInt_UInt_$Impl_$.toFloat(m) | 0) >> 8;
-			var a1 = (_$UInt_UInt_$Impl_$.toFloat(da * a + sa * ma) / _$UInt_UInt_$Impl_$.toFloat(m) | 0) >> 8;
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			image.data[image.width * y + x] = ((r < 0 ? 0 : r > 255 ? 255 : r) << 24) + ((g < 0 ? 0 : g > 255 ? 255 : g) << 16) + ((b < 0 ? 0 : b > 255 ? 255 : b) << 8) + (a1 < 0 ? 0 : a1 > 255 ? 255 : a1);
-		}
-	}
-};
-primitive_rasterizer_Rasterizer.copyLines = function(destination,source,lines) {
-	if(!(destination != null)) {
-		throw new js__$Boot_HaxeError("FAIL: destination != null");
-	}
-	if(!(source != null)) {
-		throw new js__$Boot_HaxeError("FAIL: source != null");
-	}
-	if(!(lines != null)) {
-		throw new js__$Boot_HaxeError("FAIL: lines != null");
-	}
-	var _g = 0;
-	while(_g < lines.length) {
-		var line = lines[_g];
-		++_g;
-		var y = line.y;
-		var _g2 = line.x1;
-		var _g1 = line.x2 + 1;
-		while(_g2 < _g1) {
-			var x = _g2++;
-			destination.data[destination.width * y + x] = source.data[source.width * y + x];
-		}
-	}
-};
-primitive_rasterizer_Rasterizer.bresenham = function(x1,y1,x2,y2) {
-	var dx = x2 - x1;
-	var ix = (dx > 0 ? 1 : 0) - (dx < 0 ? 1 : 0);
-	dx = (dx < 0 ? -dx : dx) << 1;
-	var dy = y2 - y1;
-	var iy = (dy > 0 ? 1 : 0) - (dy < 0 ? 1 : 0);
-	dy = (dy < 0 ? -dy : dy) << 1;
-	var points = [];
-	points.push({ x : x1, y : y1});
-	if(dx >= dy) {
-		var error = dy - (dx >> 1);
-		while(x1 != x2) {
-			if(error >= 0 && (error != 0 || ix > 0)) {
-				error -= dx;
-				y1 += iy;
-			}
-			error += dy;
-			x1 += ix;
-			points.push({ x : x1, y : y1});
-		}
-	} else {
-		var error1 = dx - (dy >> 1);
-		while(y1 != y2) {
-			if(error1 >= 0 && (error1 != 0 || iy > 0)) {
-				error1 -= dy;
-				x1 += ix;
-			}
-			error1 += dx;
-			y1 += iy;
-			points.push({ x : x1, y : y1});
-		}
-	}
-	return points;
-};
-primitive_rasterizer_Rasterizer.scanlinesForPolygon = function(points) {
-	var lines = [];
-	var edges = [];
-	var _g1 = 0;
-	var _g = points.length;
-	while(_g1 < _g) {
-		var i = _g1++;
-		var p1 = points[i];
-		var p2 = i == points.length - 1 ? points[0] : points[i + 1];
-		var p1p2 = primitive_rasterizer_Rasterizer.bresenham(p1.x,p1.y,p2.x,p2.y);
-		edges = edges.concat(p1p2);
-	}
-	var yToXs = new haxe_ds_IntMap();
-	var _g2 = 0;
-	while(_g2 < edges.length) {
-		var point = edges[_g2];
-		++_g2;
-		var s = yToXs.h[point.y];
-		if(s != null) {
-			primitive__$ArraySet_ArraySet_$Impl_$.add(s,point.x);
-		} else {
-			s = primitive__$ArraySet_ArraySet_$Impl_$.create();
-			primitive__$ArraySet_ArraySet_$Impl_$.add(s,point.x);
-			yToXs.h[point.y] = s;
-		}
-	}
-	var key = yToXs.keys();
-	while(key.hasNext()) {
-		var key1 = key.next();
-		var a = primitive__$ArraySet_ArraySet_$Impl_$.toArray(yToXs.h[key1]);
-		var minMaxElements;
-		if(a == null || a.length == 0) {
-			minMaxElements = { min : 0, max : 0};
-		} else {
-			var min = a[0];
-			var max = a[0];
-			var _g3 = 0;
-			while(_g3 < a.length) {
-				var value = a[_g3];
-				++_g3;
-				if(min > value) {
-					min = value;
-				}
-				if(max < value) {
-					max = value;
-				}
-			}
-			minMaxElements = { min : min, max : max};
-		}
-		lines.push(new primitive_rasterizer_Scanline(key1,minMaxElements.min,minMaxElements.max));
-	}
-	return lines;
-};
-var primitive_rasterizer_Scanline = function(y,x1,x2) {
-	this.y = y;
-	this.x1 = x1;
-	this.x2 = x2;
-};
-primitive_rasterizer_Scanline.__name__ = true;
-primitive_rasterizer_Scanline.trim = function(scanlines,w,h) {
-	if(!(scanlines != null)) {
-		throw new js__$Boot_HaxeError("FAIL: scanlines != null");
-	}
-	var w1 = w;
-	var h1 = h;
-	return scanlines.filter(function(a1) {
-		return primitive_rasterizer_Scanline.trimHelper(a1,w1,h1);
-	});
-};
-primitive_rasterizer_Scanline.trimHelper = function(line,w,h) {
-	if(line.y < 0 || line.y >= h || line.x1 >= w || line.x2 < 0) {
-		return false;
-	}
-	var value = line.x1;
-	var max = w - 1;
-	if(!(0 <= max)) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	line.x1 = value < 0 ? 0 : value > max ? max : value;
-	var value1 = line.x2;
-	var max1 = w - 1;
-	if(!(0 <= max1)) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	line.x2 = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
-	if(line.x1 > line.x2) {
-		return false;
-	}
-	return true;
-};
-primitive_rasterizer_Scanline.prototype = {
-	__class__: primitive_rasterizer_Scanline
-};
-var primitive_runner_ImageRunner = function(inputImage,backgroundColor) {
-	this.model = null;
-	this.model = new primitive_Model(inputImage,backgroundColor);
-};
-primitive_runner_ImageRunner.__name__ = true;
-primitive_runner_ImageRunner.prototype = {
-	step: function(options) {
-		return this.model.step(options.shapeTypes,options.alpha,options.candidateShapesPerStep,options.shapeMutationsPerStep);
-	}
-	,getImageData: function() {
-		if(!(this.model != null)) {
-			throw new js__$Boot_HaxeError("FAIL: model != null");
-		}
-		return this.model.current;
-	}
-	,__class__: primitive_runner_ImageRunner
-};
-var primitive_runner_ImageRunnerOptions = function(shapeTypes,alpha,candidateShapesPerStep,shapeMutationsPerStep) {
-	if(shapeMutationsPerStep == null) {
-		shapeMutationsPerStep = 50;
-	}
-	if(candidateShapesPerStep == null) {
-		candidateShapesPerStep = 100;
-	}
-	if(alpha == null) {
-		alpha = 128;
-	}
-	if(shapeTypes == null) {
-		shapeTypes = [primitive_shape_ShapeType.RECTANGLE];
-	}
-	this.shapeTypes = shapeTypes;
-	this.alpha = alpha;
-	this.candidateShapesPerStep = candidateShapesPerStep;
-	this.shapeMutationsPerStep = shapeMutationsPerStep;
-};
-primitive_runner_ImageRunnerOptions.__name__ = true;
-primitive_runner_ImageRunnerOptions.prototype = {
-	__class__: primitive_runner_ImageRunnerOptions
-};
-var primitive_shape_Shape = function() { };
-primitive_shape_Shape.__name__ = true;
-primitive_shape_Shape.prototype = {
-	__class__: primitive_shape_Shape
-};
-var primitive_shape_Ellipse = function(xBound,yBound) {
-	this.x = Std.random(xBound);
-	this.y = Std.random(yBound);
-	this.rx = Std.random(32) + 1;
-	this.ry = Std.random(32) + 1;
-	this.xBound = xBound;
-	this.yBound = yBound;
-};
-primitive_shape_Ellipse.__name__ = true;
-primitive_shape_Ellipse.__interfaces__ = [primitive_shape_Shape];
-primitive_shape_Ellipse.prototype = {
-	rasterize: function() {
-		var lines = [];
-		var aspect = this.rx / this.ry;
-		var w = this.xBound;
-		var h = this.yBound;
-		var _g1 = 0;
-		var _g = this.ry;
-		while(_g1 < _g) {
-			var dy = _g1++;
-			var y1 = this.y - dy;
-			var y2 = this.y + dy;
-			if((y1 < 0 || y1 >= h) && (y2 < 0 || y2 >= h)) {
-				continue;
-			}
-			var s = Math.sqrt(this.ry * this.ry - dy * dy) * aspect | 0;
-			var x1 = this.x - s;
-			var x2 = this.x + s;
-			if(x1 < 0) {
-				x1 = 0;
-			}
-			if(x2 >= w) {
-				x2 = w - 1;
-			}
-			if(y1 >= 0 && y1 < h) {
-				lines.push(new primitive_rasterizer_Scanline(y1,x1,x2));
-			}
-			if(y2 >= 0 && y2 < h && dy > 0) {
-				lines.push(new primitive_rasterizer_Scanline(y2,x1,x2));
-			}
-		}
-		return lines;
-	}
-	,mutate: function() {
-		var r = Std.random(3);
-		switch(r) {
-		case 0:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value = this.x + (-16 + Math.floor(33 * Math.random()));
-			var max = this.xBound - 1;
-			if(!(0 <= max)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.x = value < 0 ? 0 : value > max ? max : value;
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value1 = this.y + (-16 + Math.floor(33 * Math.random()));
-			var max1 = this.yBound - 1;
-			if(!(0 <= max1)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.y = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
-			break;
-		case 1:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value2 = this.rx + (-16 + Math.floor(33 * Math.random()));
-			var max2 = this.xBound - 1;
-			if(!(1 <= max2)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.rx = value2 < 1 ? 1 : value2 > max2 ? max2 : value2;
-			break;
-		case 2:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value3 = this.ry + (-16 + Math.floor(33 * Math.random()));
-			var max3 = this.xBound - 1;
-			if(!(1 <= max3)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.ry = value3 < 1 ? 1 : value3 > max3 ? max3 : value3;
-			break;
-		}
-	}
-	,clone: function() {
-		var ellipse = new primitive_shape_Ellipse(this.xBound,this.yBound);
-		ellipse.x = this.x;
-		ellipse.y = this.y;
-		ellipse.rx = this.rx;
-		ellipse.ry = this.ry;
-		return ellipse;
-	}
-	,getType: function() {
-		return primitive_shape_ShapeType.ELLIPSE;
-	}
-	,getRawShapeData: function() {
-		return [this.x,this.y,this.rx,this.ry];
-	}
-	,getSvgShapeData: function() {
-		return "<ellipse cx=\"" + this.x + "\" cy=\"" + this.y + "\" rx=\"" + this.rx + "\" ry=\"" + this.ry + "\" " + primitive_exporter_SvgExporter.SVG_STYLE_HOOK + " />";
-	}
-	,__class__: primitive_shape_Ellipse
-};
-var primitive_shape_Circle = function(xBound,yBound) {
-	primitive_shape_Ellipse.call(this,xBound,yBound);
-	this.rx = Std.random(32) + 1;
-	this.ry = this.rx;
-};
-primitive_shape_Circle.__name__ = true;
-primitive_shape_Circle.__super__ = primitive_shape_Ellipse;
-primitive_shape_Circle.prototype = $extend(primitive_shape_Ellipse.prototype,{
-	mutate: function() {
-		var r = Std.random(2);
-		switch(r) {
-		case 0:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value = this.x + (-16 + Math.floor(33 * Math.random()));
-			var max = this.xBound - 1;
-			if(!(0 <= max)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.x = value < 0 ? 0 : value > max ? max : value;
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value1 = this.y + (-16 + Math.floor(33 * Math.random()));
-			var max1 = this.yBound - 1;
-			if(!(0 <= max1)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.y = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
-			break;
-		case 1:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value2 = this.rx + (-16 + Math.floor(33 * Math.random()));
-			var max2 = this.xBound - 1;
-			if(!(1 <= max2)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			var r1 = value2 < 1 ? 1 : value2 > max2 ? max2 : value2;
-			this.rx = r1;
-			this.ry = r1;
-			break;
-		}
-	}
-	,clone: function() {
-		var circle = new primitive_shape_Circle(this.xBound,this.yBound);
-		circle.x = this.x;
-		circle.y = this.y;
-		circle.rx = this.rx;
-		circle.ry = this.ry;
-		return circle;
-	}
-	,getType: function() {
-		return primitive_shape_ShapeType.CIRCLE;
-	}
-	,getRawShapeData: function() {
-		return [this.x,this.y,this.rx];
-	}
-	,getSvgShapeData: function() {
-		return "<circle cx=\"" + this.x + "\" cy=\"" + this.y + "\" r=\"" + this.rx + "\" " + primitive_exporter_SvgExporter.SVG_STYLE_HOOK + " />";
-	}
-	,__class__: primitive_shape_Circle
-});
-var primitive_shape_Line = function(xBound,yBound) {
-	this.x1 = Std.random(xBound);
-	this.y1 = Std.random(yBound);
-	var value = this.x1 + Std.random(32) + 1;
-	if(!(0 <= xBound)) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	this.x2 = value < 0 ? 0 : value > xBound ? xBound : value;
-	var value1 = this.y1 + Std.random(32) + 1;
-	if(!(0 <= yBound)) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	this.y2 = value1 < 0 ? 0 : value1 > yBound ? yBound : value1;
-	this.xBound = xBound;
-	this.yBound = yBound;
-};
-primitive_shape_Line.__name__ = true;
-primitive_shape_Line.__interfaces__ = [primitive_shape_Shape];
-primitive_shape_Line.prototype = {
-	rasterize: function() {
-		var lines = [];
-		var points = primitive_rasterizer_Rasterizer.bresenham(this.x1,this.y1,this.x2,this.y2);
-		var _g = 0;
-		while(_g < points.length) {
-			var point = points[_g];
-			++_g;
-			lines.push(new primitive_rasterizer_Scanline(point.y,point.x,point.x));
-		}
-		return primitive_rasterizer_Scanline.trim(lines,this.xBound,this.yBound);
-	}
-	,mutate: function() {
-		var r = Std.random(4);
-		switch(r) {
-		case 0:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value = this.x1 + (-16 + Math.floor(33 * Math.random()));
-			var max = this.xBound - 1;
-			if(!(0 <= max)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.x1 = value < 0 ? 0 : value > max ? max : value;
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value1 = this.y1 + (-16 + Math.floor(33 * Math.random()));
-			var max1 = this.yBound - 1;
-			if(!(0 <= max1)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.y1 = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
-			break;
-		case 1:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value2 = this.x2 + (-16 + Math.floor(33 * Math.random()));
-			var max2 = this.xBound - 1;
-			if(!(0 <= max2)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.x2 = value2 < 0 ? 0 : value2 > max2 ? max2 : value2;
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value3 = this.y2 + (-16 + Math.floor(33 * Math.random()));
-			var max3 = this.yBound - 1;
-			if(!(0 <= max3)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.y2 = value3 < 0 ? 0 : value3 > max3 ? max3 : value3;
-			break;
-		}
-	}
-	,clone: function() {
-		var line = new primitive_shape_Line(this.xBound,this.yBound);
-		line.x1 = this.x1;
-		line.y1 = this.y1;
-		line.x2 = this.x2;
-		line.y2 = this.y2;
-		return line;
-	}
-	,getType: function() {
-		return primitive_shape_ShapeType.LINE;
-	}
-	,getRawShapeData: function() {
-		return [this.x1,this.y1,this.x2,this.y2];
-	}
-	,getSvgShapeData: function() {
-		return "<line x1=\"" + this.x1 + "\" y1=\"" + this.y1 + "\" x2=\"" + this.x2 + "\" y2=\"" + this.y2 + "\" " + primitive_exporter_SvgExporter.SVG_STYLE_HOOK + " />";
-	}
-	,__class__: primitive_shape_Line
-};
-var primitive_shape_Rectangle = function(xBound,yBound) {
-	this.x1 = Std.random(xBound);
-	this.y1 = Std.random(yBound);
-	var value = this.x1 + Std.random(32) + 1;
-	if(!(0 <= xBound)) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	this.x2 = value < 0 ? 0 : value > xBound ? xBound : value;
-	var value1 = this.y1 + Std.random(32) + 1;
-	if(!(0 <= yBound)) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	this.y2 = value1 < 0 ? 0 : value1 > yBound ? yBound : value1;
-	this.xBound = xBound;
-	this.yBound = yBound;
-};
-primitive_shape_Rectangle.__name__ = true;
-primitive_shape_Rectangle.__interfaces__ = [primitive_shape_Shape];
-primitive_shape_Rectangle.prototype = {
-	rasterize: function() {
-		var lines = [];
-		var _g1 = this.y1;
-		var _g = this.y2;
-		while(_g1 < _g) {
-			var y = _g1++;
-			if(this.x1 != this.x2) {
-				var first = this.x1;
-				var second = this.x2;
-				var first1 = this.x1;
-				var second1 = this.x2;
-				lines.push(new primitive_rasterizer_Scanline(y,first < second ? first : second,first1 > second1 ? first1 : second1));
-			}
-		}
-		return lines;
-	}
-	,mutate: function() {
-		var r = Std.random(2);
-		switch(r) {
-		case 0:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value = this.x1 + (-16 + Math.floor(33 * Math.random()));
-			var max = this.xBound - 1;
-			if(!(0 <= max)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.x1 = value < 0 ? 0 : value > max ? max : value;
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value1 = this.y1 + (-16 + Math.floor(33 * Math.random()));
-			var max1 = this.yBound - 1;
-			if(!(0 <= max1)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.y1 = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
-			break;
-		case 1:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value2 = this.x2 + (-16 + Math.floor(33 * Math.random()));
-			var max2 = this.xBound - 1;
-			if(!(0 <= max2)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.x2 = value2 < 0 ? 0 : value2 > max2 ? max2 : value2;
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value3 = this.y2 + (-16 + Math.floor(33 * Math.random()));
-			var max3 = this.yBound - 1;
-			if(!(0 <= max3)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.y2 = value3 < 0 ? 0 : value3 > max3 ? max3 : value3;
-			break;
-		}
-	}
-	,clone: function() {
-		var rectangle = new primitive_shape_Rectangle(this.xBound,this.yBound);
-		rectangle.x1 = this.x1;
-		rectangle.y1 = this.y1;
-		rectangle.x2 = this.x2;
-		rectangle.y2 = this.y2;
-		return rectangle;
-	}
-	,getType: function() {
-		return primitive_shape_ShapeType.RECTANGLE;
-	}
-	,getRawShapeData: function() {
-		var first = this.x1;
-		var second = this.x2;
-		var first1 = this.y1;
-		var second1 = this.y2;
-		var first2 = this.x1;
-		var second2 = this.x2;
-		var first3 = this.y1;
-		var second3 = this.y2;
-		return [first < second ? first : second,first1 < second1 ? first1 : second1,first2 > second2 ? first2 : second2,first3 > second3 ? first3 : second3];
-	}
-	,getSvgShapeData: function() {
-		var first = this.x1;
-		var second = this.x2;
-		var first1 = this.y1;
-		var second1 = this.y2;
-		var first2 = this.x1;
-		var second2 = this.x2;
-		var first3 = this.x1;
-		var second3 = this.x2;
-		var first4 = this.y1;
-		var second4 = this.y2;
-		var first5 = this.y1;
-		var second5 = this.y2;
-		return "<rect x=\"" + (first < second ? first : second) + "\" y=\"" + (first1 < second1 ? first1 : second1) + "\" width=\"" + ((first2 > second2 ? first2 : second2) - (first3 < second3 ? first3 : second3)) + "\" height=\"" + ((first4 > second4 ? first4 : second4) - (first5 < second5 ? first5 : second5)) + "\" " + primitive_exporter_SvgExporter.SVG_STYLE_HOOK + " />";
-	}
-	,__class__: primitive_shape_Rectangle
-};
-var primitive_shape_RotatedEllipse = function(xBound,yBound) {
-	this.x = Std.random(xBound);
-	this.y = Std.random(yBound);
-	this.rx = Std.random(32) + 1;
-	this.ry = Std.random(32) + 1;
-	this.angle = Std.random(360);
-	this.xBound = xBound;
-	this.yBound = yBound;
-};
-primitive_shape_RotatedEllipse.__name__ = true;
-primitive_shape_RotatedEllipse.__interfaces__ = [primitive_shape_Shape];
-primitive_shape_RotatedEllipse.prototype = {
-	rasterize: function() {
-		var pointCount = 20;
-		var points = [];
-		var rads = this.angle * (Math.PI / 180.0);
-		var c = Math.cos(rads);
-		var s = Math.sin(rads);
-		var _g1 = 0;
-		var _g = pointCount;
-		while(_g1 < _g) {
-			var i = _g1++;
-			var rot = 360.0 / pointCount * i * (Math.PI / 180.0);
-			var crx = this.rx * Math.cos(rot);
-			var cry = this.ry * Math.sin(rot);
-			var tx = crx * c - cry * s + this.x | 0;
-			var ty = crx * s + cry * c + this.y | 0;
-			points.push({ x : tx, y : ty});
-		}
-		return primitive_rasterizer_Scanline.trim(primitive_rasterizer_Rasterizer.scanlinesForPolygon(points),this.xBound,this.yBound);
-	}
-	,mutate: function() {
-		var r = Std.random(4);
-		switch(r) {
-		case 0:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value = this.x + (-16 + Math.floor(33 * Math.random()));
-			var max = this.xBound - 1;
-			if(!(0 <= max)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.x = value < 0 ? 0 : value > max ? max : value;
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value1 = this.y + (-16 + Math.floor(33 * Math.random()));
-			var max1 = this.yBound - 1;
-			if(!(0 <= max1)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.y = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
-			break;
-		case 1:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value2 = this.rx + (-16 + Math.floor(33 * Math.random()));
-			var max2 = this.xBound - 1;
-			if(!(1 <= max2)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.rx = value2 < 1 ? 1 : value2 > max2 ? max2 : value2;
-			break;
-		case 2:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value3 = this.ry + (-16 + Math.floor(33 * Math.random()));
-			var max3 = this.xBound - 1;
-			if(!(1 <= max3)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.ry = value3 < 1 ? 1 : value3 > max3 ? max3 : value3;
-			break;
-		case 3:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value4 = this.angle + (-4 + Math.floor(9 * Math.random()));
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.angle = value4 < 0 ? 0 : value4 > 360 ? 360 : value4;
-			break;
-		}
-	}
-	,clone: function() {
-		var ellipse = new primitive_shape_RotatedEllipse(this.xBound,this.yBound);
-		ellipse.x = this.x;
-		ellipse.y = this.y;
-		ellipse.rx = this.rx;
-		ellipse.ry = this.ry;
-		ellipse.angle = this.angle;
-		return ellipse;
-	}
-	,getType: function() {
-		return primitive_shape_ShapeType.ROTATED_ELLIPSE;
-	}
-	,getRawShapeData: function() {
-		return [this.x,this.y,this.rx,this.ry,this.angle];
-	}
-	,getSvgShapeData: function() {
-		var s = "<g transform=\"translate(" + this.x + " " + this.y + ") rotate(" + this.angle + ") scale(" + this.rx + " " + this.ry + ")\">";
-		s += "<ellipse cx=\"" + 0 + "\" cy=\"" + 0 + "\" rx=\"" + 1 + "\" ry=\"" + 1 + "\" " + primitive_exporter_SvgExporter.SVG_STYLE_HOOK + " />";
-		s += "</g>";
-		return s;
-	}
-	,__class__: primitive_shape_RotatedEllipse
-};
-var primitive_shape_RotatedRectangle = function(xBound,yBound) {
-	this.x1 = Std.random(xBound);
-	this.y1 = Std.random(yBound);
-	var value = this.x1 + Std.random(32) + 1;
-	if(!(0 <= xBound)) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	this.x2 = value < 0 ? 0 : value > xBound ? xBound : value;
-	var value1 = this.y1 + Std.random(32) + 1;
-	if(!(0 <= yBound)) {
-		throw new js__$Boot_HaxeError("FAIL: min <= max");
-	}
-	this.y2 = value1 < 0 ? 0 : value1 > yBound ? yBound : value1;
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-	}
-	this.angle = Math.floor(361 * Math.random());
-	this.xBound = xBound;
-	this.yBound = yBound;
-};
-primitive_shape_RotatedRectangle.__name__ = true;
-primitive_shape_RotatedRectangle.__interfaces__ = [primitive_shape_Shape];
-primitive_shape_RotatedRectangle.prototype = {
-	rasterize: function() {
-		var first = this.x1;
-		var second = this.x2;
-		var xm1 = first < second ? first : second;
-		var first1 = this.x1;
-		var second1 = this.x2;
-		var xm2 = first1 > second1 ? first1 : second1;
-		var first2 = this.y1;
-		var second2 = this.y2;
-		var ym1 = first2 < second2 ? first2 : second2;
-		var first3 = this.y1;
-		var second3 = this.y2;
-		var ym2 = first3 > second3 ? first3 : second3;
-		var cx = (xm1 + xm2) / 2 | 0;
-		var cy = (ym1 + ym2) / 2 | 0;
-		var ox1 = xm1 - cx;
-		var ox2 = xm2 - cx;
-		var oy1 = ym1 - cy;
-		var oy2 = ym2 - cy;
-		var rads = this.angle * Math.PI / 180.0;
-		var c = Math.cos(rads);
-		var s = Math.sin(rads);
-		var ulx = ox1 * c - oy1 * s + cx | 0;
-		var uly = ox1 * s + oy1 * c + cy | 0;
-		var blx = ox1 * c - oy2 * s + cx | 0;
-		var bly = ox1 * s + oy2 * c + cy | 0;
-		var urx = ox2 * c - oy1 * s + cx | 0;
-		var ury = ox2 * s + oy1 * c + cy | 0;
-		var brx = ox2 * c - oy2 * s + cx | 0;
-		var bry = ox2 * s + oy2 * c + cy | 0;
-		return primitive_rasterizer_Scanline.trim(primitive_rasterizer_Rasterizer.scanlinesForPolygon([{ x : ulx, y : uly},{ x : urx, y : ury},{ x : brx, y : bry},{ x : blx, y : bly}]),this.xBound,this.yBound);
-	}
-	,mutate: function() {
-		var r = Std.random(3);
-		switch(r) {
-		case 0:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value = this.x1 + (-16 + Math.floor(33 * Math.random()));
-			var max = this.xBound - 1;
-			if(!(0 <= max)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.x1 = value < 0 ? 0 : value > max ? max : value;
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value1 = this.y1 + (-16 + Math.floor(33 * Math.random()));
-			var max1 = this.yBound - 1;
-			if(!(0 <= max1)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.y1 = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
-			break;
-		case 1:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value2 = this.x2 + (-16 + Math.floor(33 * Math.random()));
-			var max2 = this.xBound - 1;
-			if(!(0 <= max2)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.x2 = value2 < 0 ? 0 : value2 > max2 ? max2 : value2;
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value3 = this.y2 + (-16 + Math.floor(33 * Math.random()));
-			var max3 = this.yBound - 1;
-			if(!(0 <= max3)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.y2 = value3 < 0 ? 0 : value3 > max3 ? max3 : value3;
-			break;
-		case 2:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value4 = this.angle + (-4 + Math.floor(9 * Math.random()));
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.angle = value4 < 0 ? 0 : value4 > 360 ? 360 : value4;
-			break;
-		}
-	}
-	,clone: function() {
-		var rectangle = new primitive_shape_RotatedRectangle(this.xBound,this.yBound);
-		rectangle.x1 = this.x1;
-		rectangle.y1 = this.y1;
-		rectangle.x2 = this.x2;
-		rectangle.y2 = this.y2;
-		rectangle.angle = this.angle;
-		return rectangle;
-	}
-	,getType: function() {
-		return primitive_shape_ShapeType.ROTATED_RECTANGLE;
-	}
-	,getRawShapeData: function() {
-		var first = this.x1;
-		var second = this.x2;
-		var first1 = this.y1;
-		var second1 = this.y2;
-		var first2 = this.x1;
-		var second2 = this.x2;
-		var first3 = this.y1;
-		var second3 = this.y2;
-		return [first < second ? first : second,first1 < second1 ? first1 : second1,first2 > second2 ? first2 : second2,first3 > second3 ? first3 : second3,this.angle];
-	}
-	,getSvgShapeData: function() {
-		var first = this.x1;
-		var second = this.x2;
-		var first1 = this.x1;
-		var second1 = this.x2;
-		var width = (first > second ? first : second) - (first1 < second1 ? first1 : second1);
-		var first2 = this.y1;
-		var second2 = this.y2;
-		var first3 = this.y1;
-		var second3 = this.y2;
-		var height = (first2 > second2 ? first2 : second2) - (first3 < second3 ? first3 : second3);
-		var s = "<g transform=\"translate(" + (this.x1 + width / 2) + " " + (this.y1 + height / 2) + ") rotate(" + this.angle + ") scale(" + width + " " + height + ")\">";
-		s += "<rect x=\"" + -0.5 + "\" y=\"" + -0.5 + "\" width=\"" + 1 + "\" height=\"" + 1 + "\" " + primitive_exporter_SvgExporter.SVG_STYLE_HOOK + " />";
-		s += "</g>";
-		return s;
-	}
-	,__class__: primitive_shape_RotatedRectangle
-};
-var primitive_shape_ShapeFactory = function() { };
-primitive_shape_ShapeFactory.__name__ = true;
-primitive_shape_ShapeFactory.create = function(type,xBound,yBound) {
-	switch(type[1]) {
-	case 0:
-		return new primitive_shape_Rectangle(xBound,yBound);
-	case 1:
-		return new primitive_shape_RotatedRectangle(xBound,yBound);
-	case 2:
-		return new primitive_shape_Triangle(xBound,yBound);
-	case 3:
-		return new primitive_shape_Ellipse(xBound,yBound);
-	case 4:
-		return new primitive_shape_RotatedEllipse(xBound,yBound);
-	case 5:
-		return new primitive_shape_Circle(xBound,yBound);
-	case 6:
-		return new primitive_shape_Line(xBound,yBound);
-	}
-};
-primitive_shape_ShapeFactory.randomShape = function(xBound,yBound) {
-	var a = primitive_shape_ShapeType.__empty_constructs__;
-	if(!(a != null && a.length > 0)) {
-		throw new js__$Boot_HaxeError("FAIL: a != null && a.length > 0");
-	}
-	var upper = a.length - 1;
-	if(!(0 <= upper)) {
-		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-	}
-	return primitive_shape_ShapeFactory.create(a[Math.floor((upper + 1) * Math.random())],xBound,yBound);
-};
-primitive_shape_ShapeFactory.randomShapeOf = function(types,xBound,yBound) {
-	if(!(types != null && types.length > 0)) {
-		throw new js__$Boot_HaxeError("FAIL: a != null && a.length > 0");
-	}
-	var upper = types.length - 1;
-	if(!(0 <= upper)) {
-		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-	}
-	return primitive_shape_ShapeFactory.create(types[Math.floor((upper + 1) * Math.random())],xBound,yBound);
-};
-var primitive_shape_ShapeType = { __ename__ : true, __constructs__ : ["RECTANGLE","ROTATED_RECTANGLE","TRIANGLE","ELLIPSE","ROTATED_ELLIPSE","CIRCLE","LINE"] };
-primitive_shape_ShapeType.RECTANGLE = ["RECTANGLE",0];
-primitive_shape_ShapeType.RECTANGLE.__enum__ = primitive_shape_ShapeType;
-primitive_shape_ShapeType.ROTATED_RECTANGLE = ["ROTATED_RECTANGLE",1];
-primitive_shape_ShapeType.ROTATED_RECTANGLE.__enum__ = primitive_shape_ShapeType;
-primitive_shape_ShapeType.TRIANGLE = ["TRIANGLE",2];
-primitive_shape_ShapeType.TRIANGLE.__enum__ = primitive_shape_ShapeType;
-primitive_shape_ShapeType.ELLIPSE = ["ELLIPSE",3];
-primitive_shape_ShapeType.ELLIPSE.__enum__ = primitive_shape_ShapeType;
-primitive_shape_ShapeType.ROTATED_ELLIPSE = ["ROTATED_ELLIPSE",4];
-primitive_shape_ShapeType.ROTATED_ELLIPSE.__enum__ = primitive_shape_ShapeType;
-primitive_shape_ShapeType.CIRCLE = ["CIRCLE",5];
-primitive_shape_ShapeType.CIRCLE.__enum__ = primitive_shape_ShapeType;
-primitive_shape_ShapeType.LINE = ["LINE",6];
-primitive_shape_ShapeType.LINE.__enum__ = primitive_shape_ShapeType;
-primitive_shape_ShapeType.__empty_constructs__ = [primitive_shape_ShapeType.RECTANGLE,primitive_shape_ShapeType.ROTATED_RECTANGLE,primitive_shape_ShapeType.TRIANGLE,primitive_shape_ShapeType.ELLIPSE,primitive_shape_ShapeType.ROTATED_ELLIPSE,primitive_shape_ShapeType.CIRCLE,primitive_shape_ShapeType.LINE];
-var primitive_shape_Triangle = function(xBound,yBound) {
-	this.x1 = Std.random(xBound);
-	this.y1 = Std.random(yBound);
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-	}
-	this.x2 = this.x1 + (-16 + Math.floor(33 * Math.random()));
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-	}
-	this.y2 = this.y1 + (-16 + Math.floor(33 * Math.random()));
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-	}
-	this.x3 = this.x1 + (-16 + Math.floor(33 * Math.random()));
-	if(!true) {
-		throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-	}
-	this.y3 = this.y1 + (-16 + Math.floor(33 * Math.random()));
-	this.xBound = xBound;
-	this.yBound = yBound;
-};
-primitive_shape_Triangle.__name__ = true;
-primitive_shape_Triangle.__interfaces__ = [primitive_shape_Shape];
-primitive_shape_Triangle.prototype = {
-	rasterize: function() {
-		return primitive_rasterizer_Scanline.trim(primitive_rasterizer_Rasterizer.scanlinesForPolygon([{ x : this.x1, y : this.y1},{ x : this.x2, y : this.y2},{ x : this.x3, y : this.y3}]),this.xBound,this.yBound);
-	}
-	,mutate: function() {
-		var r = Std.random(3);
-		switch(r) {
-		case 0:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value = this.x1 + (-16 + Math.floor(33 * Math.random()));
-			var max = this.xBound - 1;
-			if(!(0 <= max)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.x1 = value < 0 ? 0 : value > max ? max : value;
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value1 = this.y1 + (-16 + Math.floor(33 * Math.random()));
-			var max1 = this.yBound - 1;
-			if(!(0 <= max1)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.y1 = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
-			break;
-		case 1:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value2 = this.x2 + (-16 + Math.floor(33 * Math.random()));
-			var max2 = this.xBound - 1;
-			if(!(0 <= max2)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.x2 = value2 < 0 ? 0 : value2 > max2 ? max2 : value2;
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value3 = this.y2 + (-16 + Math.floor(33 * Math.random()));
-			var max3 = this.yBound - 1;
-			if(!(0 <= max3)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.y2 = value3 < 0 ? 0 : value3 > max3 ? max3 : value3;
-			break;
-		case 2:
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value4 = this.x3 + (-16 + Math.floor(33 * Math.random()));
-			var max4 = this.xBound - 1;
-			if(!(0 <= max4)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.x3 = value4 < 0 ? 0 : value4 > max4 ? max4 : value4;
-			if(!true) {
-				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
-			}
-			var value5 = this.y3 + (-16 + Math.floor(33 * Math.random()));
-			var max5 = this.yBound - 1;
-			if(!(0 <= max5)) {
-				throw new js__$Boot_HaxeError("FAIL: min <= max");
-			}
-			this.y3 = value5 < 0 ? 0 : value5 > max5 ? max5 : value5;
-			break;
-		}
-	}
-	,clone: function() {
-		var triangle = new primitive_shape_Triangle(this.xBound,this.yBound);
-		triangle.x1 = this.x1;
-		triangle.y1 = this.y1;
-		triangle.x2 = this.x2;
-		triangle.y2 = this.y2;
-		triangle.x3 = this.x3;
-		triangle.y3 = this.y3;
-		return triangle;
-	}
-	,getType: function() {
-		return primitive_shape_ShapeType.TRIANGLE;
-	}
-	,getRawShapeData: function() {
-		return [this.x1,this.y1,this.x2,this.y2,this.x3,this.y3];
-	}
-	,getSvgShapeData: function() {
-		return "<polygon points=\"" + this.x1 + "," + this.y1 + " " + this.x2 + "," + this.y2 + " " + this.x3 + "," + this.y3 + "\" " + primitive_exporter_SvgExporter.SVG_STYLE_HOOK + "/>";
-	}
-	,__class__: primitive_shape_Triangle
-};
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
 String.prototype.__class__ = String;
@@ -2646,7 +2638,7 @@ if(ArrayBuffer.prototype.slice == null) {
 }
 var Uint8Array = $global.Uint8Array || js_html_compat_Uint8Array._new;
 ID.header = "header";
-ID.primitivehaxelogo = "primitivehaxelogo";
+ID.geometrizehaxelogo = "geometrizehaxelogo";
 ID.accordion = "accordion";
 ID.shapeopacity = "shapeopacity";
 ID.randomshapesperstep = "randomshapesperstep";
@@ -2671,7 +2663,7 @@ ID.resetbutton = "resetbutton";
 ID.saveoptions = "saveoptions";
 ID.saveimagebutton = "saveimagebutton";
 ID.savesvgbutton = "savesvgbutton";
-Main.WEBSITE_URL = "http://www.samcodes.co.uk/project/primitive-haxe/";
+Main.WEBSITE_URL = "http://www.samcodes.co.uk/project/geometrize-haxe-web/";
 Main.runPauseButton = window.document.getElementById("runpausebutton");
 Main.stepButton = window.document.getElementById("stepbutton");
 Main.openImageButton = window.document.getElementById("openimagebutton");
@@ -2690,14 +2682,10 @@ Main.shapeOpacitySlider = window.document.getElementById("shapeopacity");
 Main.randomShapesPerStepSlider = window.document.getElementById("randomshapesperstep");
 Main.shapeMutationsPerStepSlider = window.document.getElementById("shapemutationsperstep");
 Main.currentImageCanvas = window.document.getElementById("currentimagecanvas");
-Main.logoImageElement = window.document.getElementById("primitivehaxelogo");
+Main.logoImageElement = window.document.getElementById("geometrizehaxelogo");
 Main.currentSvgContainer = window.document.getElementById("currentsvgcontainer");
-Main.eventLogElement = window.document.getElementById("eventlog");
-Main.svgTextElement = window.document.getElementById("svgoutput");
+geometrize_exporter_SvgExporter.SVG_STYLE_HOOK = "::svg_style_hook::";
 js_Boot.__toStr = ({ }).toString;
 js_html_compat_Uint8Array.BYTES_PER_ELEMENT = 1;
-primitive_exporter_SvgExporter.SVG_STYLE_HOOK = "::svg_style_hook::";
 Main.main();
 })(typeof window != "undefined" ? window : typeof global != "undefined" ? global : typeof self != "undefined" ? self : this);
-
-//# sourceMappingURL=primitive.js.map

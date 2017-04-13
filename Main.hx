@@ -14,17 +14,17 @@ import js.html.InputElement;
 import js.html.TextAreaElement;
 import js.html.URL;
 import js.nouislider.NoUiSlider;
-import primitive.ArraySet;
-import primitive.Model.ShapeResult;
-import primitive.Util;
-import primitive.bitmap.Bitmap;
-import primitive.bitmap.Rgba;
-import primitive.exporter.SvgExporter;
-import primitive.runner.ImageRunner;
-import primitive.runner.ImageRunnerOptions;
-import primitive.shape.Rectangle;
-import primitive.shape.Shape;
-import primitive.shape.ShapeType;
+import geometrize.ArraySet;
+import geometrize.Model.ShapeResult;
+import geometrize.Util;
+import geometrize.bitmap.Bitmap;
+import geometrize.bitmap.Rgba;
+import geometrize.exporter.SvgExporter;
+import geometrize.runner.ImageRunner;
+import geometrize.runner.ImageRunnerOptions;
+import geometrize.shape.Rectangle;
+import geometrize.shape.Shape;
+import geometrize.shape.ShapeType;
 
 // Automatic HTML code completion, you need to point these to your debug/release HTML
 #if debug
@@ -32,15 +32,15 @@ import primitive.shape.ShapeType;
 #else
 @:build(CodeCompletion.buildLocalFile("bin/release/index.html"))
 #end
-//@:build(CodeCompletion.buildUrl("http://www.samcodes.co.uk/project/primitive-haxe/"))
+//@:build(CodeCompletion.buildUrl("http://www.samcodes.co.uk/project/geometrize-haxe-web/"))
 class ID {}
 
 /**
- * A one-page website that demonstrates the Primitive Haxe library
+ * A one-page website that demonstrates the Geometrize Haxe library
  * @author Sam Twidale (http://www.samcodes.co.uk/)
  */
 class Main {
-	private static inline var WEBSITE_URL:String = "http://www.samcodes.co.uk/project/primitive-haxe/"; // Hosted demo URL
+	private static inline var WEBSITE_URL:String = "http://www.samcodes.co.uk/project/geometrize-haxe-web/"; // Hosted demo URL
 
 	// All the required references to the HTML page elements
 	private static inline function getElement(id:String):Dynamic {
@@ -64,14 +64,14 @@ class Main {
 	private static var randomShapesPerStepSlider:Element = getElement(ID.randomshapesperstep);
 	private static var shapeMutationsPerStepSlider:Element = getElement(ID.shapemutationsperstep);
 	private static var currentImageCanvas:CanvasElement = getElement(ID.currentimagecanvas);
-	private static var logoImageElement:Image = getElement(ID.primitivehaxelogo);
+	private static var logoImageElement:Image = getElement(ID.geometrizehaxelogo);
 	private static var currentSvgContainer:DivElement = getElement(ID.currentsvgcontainer);
 	#if debug
 	private static var eventLogElement:TextAreaElement = getElement(ID.eventlog);
 	private static var svgTextElement:TextAreaElement = getElement(ID.svgoutput);
 	#end
 	
-	private var runner:ImageRunner; // The image runner reproduces an image as geometric primitives
+	private var runner:ImageRunner; // The image runner reproduces an image as geometric shapes
 	private var targetImage(default, set):Bitmap; // A bitmap representation of the image to geometrize
 
 	private var maxShapeAdditionRate:Float; // The number of times to step the model per second when running
@@ -437,11 +437,11 @@ class Main {
 		
 		shapeResults = [];
 		
-		var backgroundRect = new Rectangle(0, 0);
+		var backgroundRect = new Rectangle(bitmap.width, bitmap.height);
 		backgroundRect.x1 = 0;
 		backgroundRect.y1 = 0;
-		backgroundRect.x2 = bitmap.width;
-		backgroundRect.y2 = bitmap.height;
+		backgroundRect.x2 = bitmap.width - 1;
+		backgroundRect.y2 = bitmap.height - 1;
 		appendShapeResults([ { score : 0.0, color: backgroundColor, shape: backgroundRect } ]);
 		
 		return this.targetImage;
