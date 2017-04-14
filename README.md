@@ -6,7 +6,7 @@ Demonstrates the [geometrize-haxe](https://github.com/Tw1ddle/geometrize-haxe) H
 
 Geometrize Haxe is based on [primitive](https://github.com/fogleman/primitive).
 
-[![Monarch Butterfly](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/monarch_butterfly.jpg?raw=true "Monarch Butterfly")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
+[![Geometrized Swan - 400 Triangles](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/swan.jpg?raw=true "Swan")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 
 ## Features
 * Recreate images as shapes - rectangles, triangles, circles, ellipses, lines and more.
@@ -45,13 +45,13 @@ Note that the first steps can be slow, because larger shapes are drawn earlier i
 
 Examples from geometrizing public domain [artwork](https://commons.wikimedia.org/wiki/Category:Paintings_by_painter) and [photos](https://www.pexels.com/public-domain-images/):
 
-[![Geometrized Swan](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/swan.jpg?raw=true "Swan")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Leafy Railroad](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/leafy_railroad.jpg?raw=true "Leafy Railroad")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Road](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/road.jpg?raw=true "Road")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Sunflower](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/sunflower.jpg?raw=true "Sunflower")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Woodland Cemetery](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/woodland_cemetery.jpg?raw=true "Woodland Cemetery")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
-[![Geometrized Gustave Courbet](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/gustave_courbet.jpg?raw=true "Gustave Courbet")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Pomegranate](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/pomegranate.jpg?raw=true "Pomegranate")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
+[![Monarch Butterfly](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/monarch_butterfly.jpg?raw=true "Monarch Butterfly")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
+[![Geometrized Gustave Courbet](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/gustave_courbet.jpg?raw=true "Gustave Courbet")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Fairies](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/fairies.jpg?raw=true "Fairies")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Pyramid](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/pyramid.jpg?raw=true "Pyramid")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Chomsky](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/chomsky.jpg?raw=true "Noam Chomsky")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
