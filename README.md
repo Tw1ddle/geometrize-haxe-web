@@ -2,9 +2,9 @@
 
 **Geometrize Haxe** is a tool for recreating images as geometric primitives. Run the demo [in your browser](http://www.samcodes.co.uk/project/geometrize-haxe-web/).
 
-Demonstrates the [geometrize-haxe library](https://github.com/Tw1ddle/geometrize-haxe). Read the [documentation here](http://tw1ddle.github.io/geometrize-haxe/).
+Demonstrates the [geometrize-haxe](https://github.com/Tw1ddle/geometrize-haxe) Haxe library. Read the [documentation here](http://tw1ddle.github.io/geometrize-haxe/).
 
-Geometrize Haxe is based on the [primitive](https://github.com/fogleman/primitive) library.
+Geometrize Haxe is based on [primitive](https://github.com/fogleman/primitive).
 
 [![Monarch Butterfly](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/monarch_butterfly.jpg?raw=true "Monarch Butterfly")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 
@@ -16,7 +16,7 @@ Geometrize Haxe is based on the [primitive](https://github.com/fogleman/primitiv
 
 ## Usage
 
-Try the demo and geometrize your own images. An example:
+Use the [demo](http://www.samcodes.co.uk/project/geometrize-haxe-web/) to geometrize your own images. For example:
 
 ```
 Image: seagull.png
@@ -26,13 +26,13 @@ Shape Mutations Per Step: 100
 Shape Types: Triangles
 ```
 
-Hit "Run" and the geometrized image will gradually form. Here are the results after a few hundred shapes are added:
+Hit "Run" and the geometrized image will gradually take form. Here are the results for a dozen, a hundred and one thousand triangles:
 
 [![Geometrized Seagull](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/seagull.jpg?raw=true "A seagull geometrized into triangles")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 
-Hit one of the save buttons to save copies of your geometrized image.
+Hit one of the save buttons to save copies of the geometrized image.
 
-Note that the first steps can be slow, because large shapes are often drawn early. Large images also slow things down - small target images are recommended, you do not need the detail anyway.
+Note that the first steps can be slow, because larger shapes are drawn earlier in the process. Large images will also slow things down - small target images are recommended, you do not need the detail anyway.
 
 ## Resources
 
