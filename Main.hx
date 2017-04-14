@@ -1,5 +1,16 @@
 package;
 
+import geometrize.ArraySet;
+import geometrize.Model.ShapeResult;
+import geometrize.Util;
+import geometrize.bitmap.Bitmap;
+import geometrize.bitmap.Rgba;
+import geometrize.exporter.SvgExporter;
+import geometrize.runner.ImageRunner;
+import geometrize.runner.ImageRunnerOptions;
+import geometrize.shape.Rectangle;
+import geometrize.shape.Shape;
+import geometrize.shape.ShapeType;
 import haxe.io.Bytes;
 import js.Browser;
 import js.html.AnchorElement;
@@ -14,17 +25,6 @@ import js.html.InputElement;
 import js.html.TextAreaElement;
 import js.html.URL;
 import js.nouislider.NoUiSlider;
-import geometrize.ArraySet;
-import geometrize.Model.ShapeResult;
-import geometrize.Util;
-import geometrize.bitmap.Bitmap;
-import geometrize.bitmap.Rgba;
-import geometrize.exporter.SvgExporter;
-import geometrize.runner.ImageRunner;
-import geometrize.runner.ImageRunnerOptions;
-import geometrize.shape.Rectangle;
-import geometrize.shape.Shape;
-import geometrize.shape.ShapeType;
 
 // Automatic HTML code completion, you need to point these to your debug/release HTML
 #if debug
