@@ -1,8 +1,8 @@
 [![Project logo](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/logo.png?raw=true "Geometrize Haxe Web Demo Project logo")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 
-**Geometrize Haxe** is a tool for recreating images as geometric primitives. Run the demo [in your browser](http://www.samcodes.co.uk/project/geometrize-haxe-web/).
+Interactive demo for **Geometrize Haxe**, a tool for recreating images as geometric primitives. Run the demo [in your browser](http://www.samcodes.co.uk/project/geometrize-haxe-web/).
 
-Demonstrates the [geometrize-haxe](https://github.com/Tw1ddle/geometrize-haxe) Haxe library. Read the [documentation here](http://tw1ddle.github.io/geometrize-haxe/).
+Demonstrates the [geometrize-haxe](https://github.com/Tw1ddle/geometrize-haxe) library. Read the [documentation here](http://tw1ddle.github.io/geometrize-haxe/).
 
 Geometrize Haxe is based on [primitive](https://github.com/fogleman/primitive).
 
@@ -11,8 +11,8 @@ Geometrize Haxe is based on [primitive](https://github.com/fogleman/primitive).
 ## Features
 * Recreate images as shapes - rectangles, triangles, circles, ellipses, lines and more.
 * Change interactive options for shape types, shape opacity and performance.
-* Save geometrized images as PNG images, SVGs, or JSON data.
-* View to see the geometrized image build up in realtime.
+* Save geometrized images as PNGs or vector-based SVGs.
+* Watch geometrized images build up in realtime.
 
 ## Usage
 
@@ -23,7 +23,7 @@ Image: seagull.png
 Shape Opacity: 128/255
 Random Shapes Per Step: 100
 Shape Mutations Per Step: 100
-Shape Types: Triangles
+Shape Types: Ellipses, Triangles
 ```
 
 Hit "Run" and the geometrized image will gradually take form. Here are the results for 220 shapes (100 ellipses and 120 triangles):
@@ -43,9 +43,9 @@ Note that the first steps can be slow, because larger shapes are drawn earlier i
 
 ## Examples And Screenshots
 
-Examples from geometrizing public domain [artwork](https://commons.wikimedia.org/wiki/Category:Paintings_by_painter) and [photos](https://www.pexels.com/public-domain-images/):
+There is no jagginess when saving images as vector-based SVG e.g. [pyramid](https://gist.github.com/Tw1ddle/31f211f0ae13af49302dc283a74522c3) or [pomegranate](https://gist.github.com/Tw1ddle/817fcef96c81ad5d2ece3a21b2aea124).
 
-There is no jagginess with SVGs e.g. vector-based [pyramid](https://gist.github.com/Tw1ddle/31f211f0ae13af49302dc283a74522c3) and [pomegranate](https://gist.github.com/Tw1ddle/817fcef96c81ad5d2ece3a21b2aea124).
+Examples from geometrizing public domain [artwork](https://commons.wikimedia.org/wiki/Category:Paintings_by_painter) and [photos](https://www.pexels.com/public-domain-images/):
 
 [![Geometrized Leafy Railroad](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/leafy_railroad.jpg?raw=true "Leafy Railroad")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Road](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/road.jpg?raw=true "Road")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
@@ -60,10 +60,6 @@ There is no jagginess with SVGs e.g. vector-based [pyramid](https://gist.github.
 [![Geometrized Mixed Peppers](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/mixed_peppers.jpg?raw=true "Mixed Peppers")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 
 ---
-
-Here is the demo webpage itself:
-
-[![Geometrize Web Demo Screenshot](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/mixed_fruit_demo.jpg?raw=true "Geometrized Mixed Fruit")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 
 ## Notes
 * Got an idea or suggestion? Open an issue on GitHub, or send Sam a message on [Twitter](https://twitter.com/Sam_Twidale).
