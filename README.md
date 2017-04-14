@@ -6,7 +6,7 @@ Demonstrates the [geometrize-haxe](https://github.com/Tw1ddle/geometrize-haxe) H
 
 Geometrize Haxe is based on [primitive](https://github.com/fogleman/primitive).
 
-[![Geometrized Swan - 400 Triangles](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/swan.jpg?raw=true "Swan")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
+[![Geometrized Swan - 400 Triangles](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/swan.jpg?raw=true "Geometrized Swan - 400 Triangles")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 
 ## Features
 * Recreate images as shapes - rectangles, triangles, circles, ellipses, lines and more.
@@ -26,9 +26,9 @@ Shape Mutations Per Step: 100
 Shape Types: Triangles
 ```
 
-Hit "Run" and the geometrized image will gradually take form. Here are the results for a dozen, a hundred and one thousand triangles:
+Hit "Run" and the geometrized image will gradually take form. Here are the results for 220 shapes (100 ellipses and 120 triangles):
 
-[![Geometrized Seagull](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/seagull.jpg?raw=true "A seagull geometrized into triangles")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
+[![Geometrized Seagull](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/seagull.jpg?raw=true "Geometrized Seagull - 100 Ellipses, 120 Triangles")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 
 Hit one of the save buttons to save copies of the geometrized image.
 
@@ -57,13 +57,14 @@ Examples from geometrizing public domain [artwork](https://commons.wikimedia.org
 [![Geometrized Chomsky](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/chomsky.jpg?raw=true "Noam Chomsky")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Mixed Peppers](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/mixed_peppers.jpg?raw=true "Mixed Peppers")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 
-Here is the demo in action:
+---
+
+Here is the demo page itself:
 
 [![Geometrize Web Demo Screenshot](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/mixed_fruit_demo.jpg?raw=true "Geometrized Mixed Fruit")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 
 ## Notes
 * Got an idea or suggestion? Open an issue on GitHub, or send Sam a message on [Twitter](https://twitter.com/Sam_Twidale).
-* Search sites like [Wikimedia](https://en.wikipedia.org/wiki/List_of_Pre-Raphaelite_paintings) or [Pexels](https://www.pexels.com/) for inspiration.
 * Geometrize Haxe is based on [primitive](https://github.com/fogleman/primitive), a Go library created by [Michael Fogleman](https://github.com/fogleman).
-* Geometrize Haxe is available as a [haxelib](https://lib.haxe.org/p/geometrize-haxe).
 * This demo works with the Haxe JavaScript target.
+* Geometrize Haxe is available as a [haxelib](https://lib.haxe.org/p/geometrize-haxe).
