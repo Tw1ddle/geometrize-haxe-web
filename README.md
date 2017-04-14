@@ -34,7 +34,25 @@ Hit one of the save buttons to save copies of your geometrized image.
 
 Note that the first steps can be slow, because large shapes are often drawn early. Large images also slow things down - small target images are recommended, you do not need the detail anyway.
 
+## Resources
+
+* See the Geometrize [resources](https://github.com/Tw1ddle/geometrize-resources) and [template](https://github.com/Tw1ddle/geometrize-templates) repositories.
+* See the Geometrize [haxelib code](https://github.com/Tw1ddle/geometrize-haxe) and library [documentation](http://tw1ddle.github.io/geometrize-haxe/).
+* See the HaxeFlixel Geometrize [demo](http://tw1ddle.github.io/geometrize-haxe-demo/) and the [demo code](https://github.com/Tw1ddle/geometrize-haxe-demo/).
+* See the Primitive Go [repository](https://github.com/fogleman/primitive).
+
+## Notes
+* Got an idea or suggestion? Open an issue on GitHub, or send Sam a message on [Twitter](https://twitter.com/Sam_Twidale).
+* Search sites like [Wikimedia](https://en.wikipedia.org/wiki/List_of_Pre-Raphaelite_paintings) or [Pexels](https://www.pexels.com/) for inspiration.
+* Geometrize Haxe is based on [primitive](https://github.com/fogleman/primitive), a Go library created by [Michael Fogleman](https://github.com/fogleman).
+* Geometrize Haxe is available as a [haxelib](https://lib.haxe.org/p/geometrize-haxe).
+* This demo works with the Haxe JavaScript target.
+
 ## Screenshots
+
+Here is the demo in action:
+
+[!Geometrize Web Demo Screenshot](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/mixed_fruit_demo.jpg?raw=true "Geometrized Mixed Fruit")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 
 Examples from geometrizing public domain [artwork](https://commons.wikimedia.org/wiki/Category:Paintings_by_painter) and [photos](https://www.pexels.com/public-domain-images/):
 
@@ -50,19 +68,3 @@ Examples from geometrizing public domain [artwork](https://commons.wikimedia.org
 [![Geometrized Sunflower](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/sunflower.jpg?raw=true "Sunflower")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Swan](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/swan.jpg?raw=true "Swan")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Woodland Cemetery](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/woodland_cemetery.jpg?raw=true "Woodland Cemetery")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
-
-Here is the demo in action:
-
-## Resources
-
-* See the Geometrize [resources](https://github.com/Tw1ddle/geometrize-resources) and [template](https://github.com/Tw1ddle/geometrize-templates) repositories.
-* See the Geometrize [haxelib code](https://github.com/Tw1ddle/geometrize-haxe) and library [documentation](http://tw1ddle.github.io/geometrize-haxe/).
-* See the HaxeFlixel Geometrize [demo](http://tw1ddle.github.io/geometrize-haxe-demo/) and the [demo code](https://github.com/Tw1ddle/geometrize-haxe-demo/).
-* See the Primitive Go [repository](https://github.com/fogleman/primitive).
-
-## Notes
-* Got an idea or suggestion? Open an issue on GitHub, or send Sam a message on [Twitter](https://twitter.com/Sam_Twidale).
-* Search sites like [Wikimedia](https://en.wikipedia.org/wiki/List_of_Pre-Raphaelite_paintings) or [Pexels](https://www.pexels.com/) for inspiration.
-* Geometrize Haxe is based on [primitive](https://github.com/fogleman/primitive), a Go library created by [Michael Fogleman](https://github.com/fogleman).
-* Geometrize Haxe is available as a [haxelib](https://lib.haxe.org/p/geometrize-haxe).
-* This demo works with the Haxe JavaScript target.
