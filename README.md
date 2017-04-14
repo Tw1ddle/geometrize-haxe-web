@@ -41,9 +41,11 @@ Note that the first steps can be slow, because larger shapes are drawn earlier i
 * See the HaxeFlixel Geometrize [demo](http://tw1ddle.github.io/geometrize-haxe-demo/) and the [demo code](https://github.com/Tw1ddle/geometrize-haxe-demo/).
 * See the Primitive Go [repository](https://github.com/fogleman/primitive).
 
-## Screenshots
+## Examples And Screenshots
 
 Examples from geometrizing public domain [artwork](https://commons.wikimedia.org/wiki/Category:Paintings_by_painter) and [photos](https://www.pexels.com/public-domain-images/):
+
+There is no jagginess with SVGs e.g. vector-based [pyramid](https://gist.github.com/Tw1ddle/31f211f0ae13af49302dc283a74522c3) and [pomegranate](https://gist.github.com/Tw1ddle/817fcef96c81ad5d2ece3a21b2aea124).
 
 [![Geometrized Leafy Railroad](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/leafy_railroad.jpg?raw=true "Leafy Railroad")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Road](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/road.jpg?raw=true "Road")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
@@ -59,7 +61,7 @@ Examples from geometrizing public domain [artwork](https://commons.wikimedia.org
 
 ---
 
-Here is the demo page itself:
+Here is the demo webpage itself:
 
 [![Geometrize Web Demo Screenshot](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/mixed_fruit_demo.jpg?raw=true "Geometrized Mixed Fruit")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 
