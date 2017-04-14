@@ -67,7 +67,7 @@ canvas {
 }
 
 svg {
-	width: auto;
+    overflow: visible;
 }
 
 .red, .green, .blue, .black, .orange {
@@ -275,4 +275,8 @@ a:hover {
 
 .logo {
     margin: 15px;
+}
+
+#currentcanvascontainer {
+    display: none;
 }

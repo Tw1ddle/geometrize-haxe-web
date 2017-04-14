@@ -72,7 +72,7 @@ class Main {
 	#end
 	
 	private var runner:ImageRunner; // The image runner reproduces an image as geometric shapes
-	private var targetImage(default, set):Bitmap; // A bitmap representation of the image to geometrize
+	private var targetImage:Bitmap; // A bitmap representation of the image to geometrize
 
 	private var maxShapeAdditionRate:Float; // The number of times to step the model per second when running
 	private var shapeTypes:ArraySet<ShapeType>;
@@ -137,6 +137,7 @@ class Main {
 		
 		// Set the target image, which also sets up the image runner etc
 		targetImage = createDefaultBitmap();
+		onTargetImageChanged();
 		
 		circlesCheckbox.checked = true;
 	}
@@ -223,12 +224,15 @@ class Main {
 			var fileReader = new FileReader();
 			fileReader.onload = function(e) {
 				var image = new Image();
-				image.src = fileReader.result;
 				image.onload = function(e) {
 					targetImage = canvasToBitmap(imageToCanvas(image));
+					onTargetImageChanged();
 				}
+				image.src = fileReader.result;
 			};
 			fileReader.readAsDataURL(file);
+			
+			openImageFileInput.files[0] = null;
 		}, false);
 		
 		stepButton.addEventListener("click", function() {
@@ -237,6 +241,7 @@ class Main {
 		
 		resetButton.addEventListener("click", function() {
 			targetImage = targetImage;
+			onTargetImageChanged();
 		}, false);
 		
 		saveImageButton.addEventListener("click", function(e:Dynamic):Void {
@@ -435,15 +440,14 @@ class Main {
 		return canvasToBitmap(imageToCanvas(logoImageElement));
 	}
 	
-	private function set_targetImage(bitmap:Bitmap):Bitmap {
+	private function onTargetImageChanged():Void {
 		if (runner == null) {
 			appendEventText("Initializing image runner and setting default bitmap...");
 		} else {
 			appendEventText("Resetting current image and removing shapes...");
 		}
 		
-		this.targetImage = bitmap;
-		var backgroundColor:Rgba = Util.getAverageImageColor(bitmap);
+		var backgroundColor:Rgba = Util.getAverageImageColor(targetImage);
 		runner = new ImageRunner(targetImage, backgroundColor);
 		drawBitmapToCanvas(runner.getImageData(), currentImageCanvas);
 		
@@ -452,14 +456,12 @@ class Main {
 		
 		shapeResults = [];
 		
-		var backgroundRect = new Rectangle(bitmap.width, bitmap.height);
+		var backgroundRect = new Rectangle(targetImage.width, targetImage.height);
 		backgroundRect.x1 = 0;
 		backgroundRect.y1 = 0;
-		backgroundRect.x2 = bitmap.width - 1;
-		backgroundRect.y2 = bitmap.height - 1;
+		backgroundRect.x2 = targetImage.width - 1;
+		backgroundRect.y2 = targetImage.height - 1;
 		appendShapeResults([ { score : 0.0, color: backgroundColor, shape: backgroundRect } ]);
-		
-		return this.targetImage;
 	}
 	
 	private function set_running(running:Bool):Bool {

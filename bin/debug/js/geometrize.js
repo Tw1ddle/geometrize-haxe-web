@@ -44,7 +44,8 @@ Main.prototype = {
 		this.candidateShapesPerStep = 50;
 		this.shapeMutationsPerStep = 100;
 		this.shapeResults = [];
-		this.set_targetImage(this.createDefaultBitmap());
+		this.targetImage = this.createDefaultBitmap();
+		this.onTargetImageChanged();
 		Main.circlesCheckbox.checked = true;
 		var _gthis = this;
 		noUiSlider.create(Main.shapeOpacitySlider,{ start : [this.shapeOpacity], connect : "lower", range : { "min" : [1,1], "max" : [255]}, pips : { mode : "range", density : 10}});
@@ -83,25 +84,27 @@ Main.prototype = {
 			var fileReader = new FileReader();
 			fileReader.onload = function(e1) {
 				var image = new Image();
-				image.src = fileReader.result;
 				image.onload = function(e2) {
 					var tmp = _gthis1.imageToCanvas(image);
-					var tmp1 = _gthis1.canvasToBitmap(tmp);
-					_gthis1.set_targetImage(tmp1);
+					_gthis1.targetImage = _gthis1.canvasToBitmap(tmp);
+					_gthis1.onTargetImageChanged();
 				};
+				image.src = fileReader.result;
 			};
 			fileReader.readAsDataURL(file);
+			Main.openImageFileInput.files[0] = null;
 		},false);
 		Main.stepButton.addEventListener("click",function() {
 			_gthis1.stepRunner();
 		},false);
 		Main.resetButton.addEventListener("click",function() {
-			_gthis1.set_targetImage(_gthis1.targetImage);
+			_gthis1.targetImage = _gthis1.targetImage;
+			_gthis1.onTargetImageChanged();
 		},false);
 		Main.saveImageButton.addEventListener("click",function(e3) {
 			var canvas = window.document.createElement("canvas");
-			var tmp2 = _gthis1.runner.getImageData();
-			_gthis1.drawBitmapToCanvas(tmp2,canvas);
+			var tmp1 = _gthis1.runner.getImageData();
+			_gthis1.drawBitmapToCanvas(tmp1,canvas);
 			if(canvas.msToBlob != null) {
 				var blob = canvas.msToBlob();
 				var navigator = window.navigator;
@@ -179,7 +182,8 @@ Main.prototype = {
 		this.candidateShapesPerStep = 50;
 		this.shapeMutationsPerStep = 100;
 		this.shapeResults = [];
-		this.set_targetImage(this.createDefaultBitmap());
+		this.targetImage = this.createDefaultBitmap();
+		this.onTargetImageChanged();
 		Main.circlesCheckbox.checked = true;
 	}
 	,createSliders: function() {
@@ -222,25 +226,27 @@ Main.prototype = {
 			var fileReader = new FileReader();
 			fileReader.onload = function(e1) {
 				var image = new Image();
-				image.src = fileReader.result;
 				image.onload = function(e2) {
 					var tmp = _gthis.imageToCanvas(image);
-					var tmp1 = _gthis.canvasToBitmap(tmp);
-					_gthis.set_targetImage(tmp1);
+					_gthis.targetImage = _gthis.canvasToBitmap(tmp);
+					_gthis.onTargetImageChanged();
 				};
+				image.src = fileReader.result;
 			};
 			fileReader.readAsDataURL(file);
+			Main.openImageFileInput.files[0] = null;
 		},false);
 		Main.stepButton.addEventListener("click",function() {
 			_gthis.stepRunner();
 		},false);
 		Main.resetButton.addEventListener("click",function() {
-			_gthis.set_targetImage(_gthis.targetImage);
+			_gthis.targetImage = _gthis.targetImage;
+			_gthis.onTargetImageChanged();
 		},false);
 		Main.saveImageButton.addEventListener("click",function(e3) {
 			var canvas = window.document.createElement("canvas");
-			var tmp2 = _gthis.runner.getImageData();
-			_gthis.drawBitmapToCanvas(tmp2,canvas);
+			var tmp1 = _gthis.runner.getImageData();
+			_gthis.drawBitmapToCanvas(tmp1,canvas);
 			if(canvas.msToBlob != null) {
 				var blob = canvas.msToBlob();
 				var navigator = window.navigator;
@@ -429,26 +435,24 @@ Main.prototype = {
 	,createDefaultBitmap: function() {
 		return this.canvasToBitmap(this.imageToCanvas(Main.logoImageElement));
 	}
-	,set_targetImage: function(bitmap) {
+	,onTargetImageChanged: function() {
 		if(this.runner == null) {
 			this.appendEventText("Initializing image runner and setting default bitmap...");
 		} else {
 			this.appendEventText("Resetting current image and removing shapes...");
 		}
-		this.targetImage = bitmap;
-		var backgroundColor = geometrize_Util.getAverageImageColor(bitmap);
+		var backgroundColor = geometrize_Util.getAverageImageColor(this.targetImage);
 		this.runner = new geometrize_runner_ImageRunner(this.targetImage,backgroundColor);
 		this.drawBitmapToCanvas(this.runner.getImageData(),Main.currentImageCanvas);
 		this.clearEventText();
 		this.clearSvgText();
 		this.shapeResults = [];
-		var backgroundRect = new geometrize_shape_Rectangle(bitmap.width,bitmap.height);
+		var backgroundRect = new geometrize_shape_Rectangle(this.targetImage.width,this.targetImage.height);
 		backgroundRect.x1 = 0;
 		backgroundRect.y1 = 0;
-		backgroundRect.x2 = bitmap.width - 1;
-		backgroundRect.y2 = bitmap.height - 1;
+		backgroundRect.x2 = this.targetImage.width - 1;
+		backgroundRect.y2 = this.targetImage.height - 1;
 		this.appendShapeResults([{ score : 0.0, color : backgroundColor, shape : backgroundRect}]);
-		return this.targetImage;
 	}
 	,set_running: function(running) {
 		Main.runPauseButton.innerHTML = running ? "<h2>Pause</h2>" : "<h2>Run</h2>";
@@ -576,25 +580,6 @@ geometrize__$ArraySet_ArraySet_$Impl_$._new = function(array) {
 };
 var geometrize_Core = function() { };
 geometrize_Core.__name__ = true;
-geometrize_Core.energy = function(shape,alpha,target,current,buffer,score) {
-	if(!(shape != null)) {
-		throw new js__$Boot_HaxeError("FAIL: shape != null");
-	}
-	if(!(target != null)) {
-		throw new js__$Boot_HaxeError("FAIL: target != null");
-	}
-	if(!(current != null)) {
-		throw new js__$Boot_HaxeError("FAIL: current != null");
-	}
-	if(!(buffer != null)) {
-		throw new js__$Boot_HaxeError("FAIL: buffer != null");
-	}
-	var lines = shape.rasterize();
-	var color = geometrize_Core.computeColor(target,current,lines,alpha);
-	geometrize_rasterizer_Rasterizer.copyLines(buffer,current,lines);
-	geometrize_rasterizer_Rasterizer.drawLines(buffer,color,lines);
-	return geometrize_Core.differencePartial(target,current,buffer,score,lines);
-};
 geometrize_Core.computeColor = function(target,current,lines,alpha) {
 	if(!(target != null)) {
 		throw new js__$Boot_HaxeError("FAIL: target != null");
@@ -697,10 +682,10 @@ geometrize_Core.differenceFull = function(first,second) {
 			var dg = (f >>> 16 & 255) - (s >>> 16 & 255);
 			var db = (f >>> 8 & 255) - (s >>> 8 & 255);
 			var da = (f & 255) - (s & 255);
-			total = total + (dr * dr + dg * dg + db * db + da * da);
+			total += dr * dr + dg * dg + db * db + da * da;
 		}
 	}
-	return Math.sqrt(_$UInt_UInt_$Impl_$.toFloat(total) / (width * height * 4.0)) / 255;
+	return Math.sqrt(total / (width * height * 4.0)) / 255;
 };
 geometrize_Core.differencePartial = function(target,before,after,score,lines) {
 	if(!(target != null)) {
@@ -718,7 +703,7 @@ geometrize_Core.differencePartial = function(target,before,after,score,lines) {
 	var width = target.width;
 	var height = target.height;
 	var rgbaCount = width * height * 4;
-	var total = Math.pow(score * 255,2) * rgbaCount | 0;
+	var total = Math.pow(score * 255,2) * rgbaCount;
 	var _g = 0;
 	while(_g < lines.length) {
 		var line = lines[_g];
@@ -739,11 +724,11 @@ geometrize_Core.differencePartial = function(target,before,after,score,lines) {
 			var dtag = (t >>> 16 & 255) - (a >>> 16 & 255);
 			var dtab = (t >>> 8 & 255) - (a >>> 8 & 255);
 			var dtaa = (t & 255) - (a & 255);
-			total = total - (dtbr * dtbr + dtbg * dtbg + dtbb * dtbb + dtba * dtba);
-			total = total + (dtar * dtar + dtag * dtag + dtab * dtab + dtaa * dtaa);
+			total -= dtbr * dtbr + dtbg * dtbg + dtbb * dtbb + dtba * dtba;
+			total += dtar * dtar + dtag * dtag + dtab * dtab + dtaa * dtaa;
 		}
 	}
-	return Math.sqrt(_$UInt_UInt_$Impl_$.toFloat(total) / _$UInt_UInt_$Impl_$.toFloat(rgbaCount)) / 255;
+	return Math.sqrt(total / rgbaCount) / 255;
 };
 geometrize_Core.bestRandomState = function(shapes,alpha,n,target,current,buffer,lastScore) {
 	var bestEnergy = 0;
@@ -790,6 +775,25 @@ geometrize_Core.hillClimb = function(state,maxAge,lastScore) {
 		++age;
 	}
 	return bestState;
+};
+geometrize_Core.energy = function(shape,alpha,target,current,buffer,score) {
+	if(!(shape != null)) {
+		throw new js__$Boot_HaxeError("FAIL: shape != null");
+	}
+	if(!(target != null)) {
+		throw new js__$Boot_HaxeError("FAIL: target != null");
+	}
+	if(!(current != null)) {
+		throw new js__$Boot_HaxeError("FAIL: current != null");
+	}
+	if(!(buffer != null)) {
+		throw new js__$Boot_HaxeError("FAIL: buffer != null");
+	}
+	var lines = shape.rasterize();
+	var color = geometrize_Core.computeColor(target,current,lines,alpha);
+	geometrize_rasterizer_Rasterizer.copyLines(buffer,current,lines);
+	geometrize_rasterizer_Rasterizer.drawLines(buffer,color,lines);
+	return geometrize_Core.differencePartial(target,current,buffer,score,lines);
 };
 var geometrize_Model = function(target,backgroundColor) {
 	if(!(target != null)) {
@@ -2688,6 +2692,7 @@ ID.circles = "circles";
 ID.lines = "lines";
 ID.svgoutput = "svgoutput";
 ID.eventlog = "eventlog";
+ID.currentcanvascontainer = "currentcanvascontainer";
 ID.currentimagecanvas = "currentimagecanvas";
 ID.currentsvgcontainer = "currentsvgcontainer";
 ID.controls = "controls";
