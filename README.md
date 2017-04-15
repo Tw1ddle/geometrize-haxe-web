@@ -59,8 +59,6 @@ Examples from geometrizing public domain [artwork](https://commons.wikimedia.org
 [![Geometrized Chomsky](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/chomsky.jpg?raw=true "Noam Chomsky")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Mixed Peppers](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/mixed_peppers.jpg?raw=true "Mixed Peppers")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 
----
-
 ## Notes
 * Got an idea or suggestion? Open an issue on GitHub, or send Sam a message on [Twitter](https://twitter.com/Sam_Twidale).
 * Geometrize Haxe is based on [primitive](https://github.com/fogleman/primitive), a Go library created by [Michael Fogleman](https://github.com/fogleman).
