@@ -7,3 +7,6 @@
 
 # Uncomment to use geometrize-haxe as a git submodule
 -cp lib/geometrize
+
+# Enable full dead code elimination
+-dce full
