@@ -38,7 +38,7 @@ Note that the first steps can be slow, because larger shapes are drawn earlier i
 
 * See the Geometrize [resources](https://github.com/Tw1ddle/geometrize-resources) and [template](https://github.com/Tw1ddle/geometrize-templates) repositories.
 * See the Geometrize [haxelib code](https://github.com/Tw1ddle/geometrize-haxe) and library [documentation](http://tw1ddle.github.io/geometrize-haxe/).
-* See the HaxeFlixel Geometrize [demo](http://tw1ddle.github.io/geometrize-haxe-demo/) and the [demo code](https://github.com/Tw1ddle/geometrize-haxe-demo/).
+* See the HaxeFlixel Geometrize [demo](http://samcodes.co.uk/project/geometrize-haxe-flixel/) and the [demo code](https://github.com/Tw1ddle/geometrize-haxe-demo/).
 * See the Primitive Go [repository](https://github.com/fogleman/primitive).
 
 ## Examples And Screenshots

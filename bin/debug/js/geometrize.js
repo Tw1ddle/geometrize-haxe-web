@@ -26,6 +26,7 @@ HxOverrides.iter = function(a) {
 var ID = function() { };
 ID.__name__ = true;
 var Main = function() {
+	this.maxImageSize = 1024;
 	window.onload = $bind(this,this.onWindowLoaded);
 };
 Main.__name__ = true;
@@ -34,6 +35,180 @@ Main.getElement = function(id) {
 };
 Main.main = function() {
 	var main = new Main();
+};
+Main.downScaleCanvas = function(cv,scale) {
+	if(scale <= 0.0 || scale >= 1.0) {
+		throw new js__$Boot_HaxeError("Scale must be a positive number < 1");
+	}
+	var sqScale = scale * scale;
+	var sw = cv.width;
+	var sh = cv.height;
+	var tw = sw * scale | 0;
+	var th = sh * scale | 0;
+	var sx = 0;
+	var sy = 0;
+	var sIndex = 0;
+	var tx = 0;
+	var ty = 0;
+	var yIndex = 0;
+	var tIndex = 0;
+	var tX = 0;
+	var tY = 0;
+	var w = 0.0;
+	var nw = 0.0;
+	var wx = 0.0;
+	var nwx = 0.0;
+	var wy = 0.0;
+	var nwy = 0.0;
+	var crossX = false;
+	var crossY = false;
+	var sBuffer = cv.getContext("2d").getImageData(0,0,sw,sh).data;
+	var this1 = new Float32Array(3 * tw * th);
+	var tBuffer = this1;
+	var sR = 0.0;
+	var sG = 0.0;
+	var sB = 0.0;
+	while(sy < sh) {
+		ty = sy * scale | 0;
+		tY = ty | 0;
+		yIndex = 3 * tY * tw | 0;
+		crossY = tY != (ty + scale | 0);
+		if(crossY) {
+			wy = tY + 1 - ty;
+			nwy = ty + scale - tY - 1;
+		}
+		sx = 0;
+		while(sx < sw) {
+			tx = sx * scale | 0;
+			tX = tx | 0;
+			tIndex = yIndex + tX * 3 | 0;
+			crossX = tX != Math.floor(tx + scale);
+			if(crossX) {
+				wx = tX + 1 - tx;
+				nwx = tx + scale - tX - 1 | 0;
+			}
+			sR = sBuffer[sIndex];
+			sG = sBuffer[sIndex + 1];
+			sB = sBuffer[sIndex + 2];
+			if(!crossX && !crossY) {
+				var _g = tIndex;
+				var _g1 = tBuffer;
+				_g1[_g] += sR * sqScale;
+				var _g2 = tIndex + 1;
+				var _g11 = tBuffer;
+				_g11[_g2] += sG * sqScale;
+				var _g3 = tIndex + 2;
+				var _g12 = tBuffer;
+				_g12[_g3] += sB * sqScale;
+			} else if(crossX && !crossY) {
+				w = wx * scale;
+				var _g4 = tIndex;
+				var _g13 = tBuffer;
+				_g13[_g4] += sR * w;
+				var _g5 = tIndex + 1;
+				var _g14 = tBuffer;
+				_g14[_g5] += sG * w;
+				var _g6 = tIndex + 2;
+				var _g15 = tBuffer;
+				_g15[_g6] += sB * w;
+				nw = nwx * scale;
+				var _g7 = tIndex + 3;
+				var _g16 = tBuffer;
+				_g16[_g7] += sR * nw;
+				var _g8 = tIndex + 4;
+				var _g17 = tBuffer;
+				_g17[_g8] += sG * nw;
+				var _g9 = tIndex + 5;
+				var _g18 = tBuffer;
+				_g18[_g9] += sB * nw;
+			} else if(crossY && !crossX) {
+				w = wy * scale;
+				var _g10 = tIndex;
+				var _g19 = tBuffer;
+				_g19[_g10] += sR * w;
+				var _g20 = tIndex + 1;
+				var _g110 = tBuffer;
+				_g110[_g20] += sG * w;
+				var _g21 = tIndex + 2;
+				var _g111 = tBuffer;
+				_g111[_g21] += sB * w;
+				nw = nwy * scale;
+				var _g22 = tIndex + 3 * tw;
+				var _g112 = tBuffer;
+				_g112[_g22] += sR * nw;
+				var _g23 = tIndex + 3 * tw + 1;
+				var _g113 = tBuffer;
+				_g113[_g23] += sG * nw;
+				var _g24 = tIndex + 3 * tw + 2;
+				var _g114 = tBuffer;
+				_g114[_g24] += sB * nw;
+			} else {
+				w = wx * wy;
+				var _g25 = tIndex;
+				var _g115 = tBuffer;
+				_g115[_g25] += sR * w;
+				var _g26 = tIndex + 1;
+				var _g116 = tBuffer;
+				_g116[_g26] += sG * w;
+				var _g27 = tIndex + 2;
+				var _g117 = tBuffer;
+				_g117[_g27] += sB * w;
+				nw = nwx * wy;
+				var _g28 = tIndex + 3;
+				var _g118 = tBuffer;
+				_g118[_g28] += sR * nw;
+				var _g29 = tIndex + 4;
+				var _g119 = tBuffer;
+				_g119[_g29] += sG * nw;
+				var _g30 = tIndex + 5;
+				var _g120 = tBuffer;
+				_g120[_g30] += sB * nw;
+				nw = wx * nwy;
+				var _g31 = tIndex + 3 * tw;
+				var _g121 = tBuffer;
+				_g121[_g31] += sR * nw;
+				var _g32 = tIndex + 3 * tw + 1;
+				var _g122 = tBuffer;
+				_g122[_g32] += sG * nw;
+				var _g33 = tIndex + 3 * tw + 2;
+				var _g123 = tBuffer;
+				_g123[_g33] += sB * nw;
+				nw = nwx * nwy;
+				var _g34 = tIndex + 3 * tw + 3;
+				var _g124 = tBuffer;
+				_g124[_g34] += sR * nw;
+				var _g35 = tIndex + 3 * tw + 4;
+				var _g125 = tBuffer;
+				_g125[_g35] += sG * nw;
+				var _g36 = tIndex + 3 * tw + 5;
+				var _g126 = tBuffer;
+				_g126[_g36] += sB * nw;
+			}
+			sIndex += 4;
+			++sx;
+		}
+		++sy;
+	}
+	var result = window.document.createElement("canvas");
+	result.width = tw;
+	result.height = th;
+	var resultContext = result.getContext("2d");
+	var resultImage = resultContext.getImageData(0,0,tw,th);
+	var tByteBuffer = resultImage.data;
+	var pxIndex = 0;
+	sIndex = 0;
+	tIndex = 0;
+	while(pxIndex < tw * th) {
+		tByteBuffer[tIndex] = Math.ceil(tBuffer[sIndex]);
+		tByteBuffer[tIndex + 1] = Math.ceil(tBuffer[sIndex + 1]);
+		tByteBuffer[tIndex + 2] = Math.ceil(tBuffer[sIndex + 2]);
+		tByteBuffer[tIndex + 3] = 255;
+		sIndex += 3;
+		tIndex += 4;
+		++pxIndex;
+	}
+	resultContext.putImageData(resultImage,0,0);
+	return result;
 };
 Main.prototype = {
 	onWindowLoaded: function() {
@@ -85,8 +260,9 @@ Main.prototype = {
 			fileReader.onload = function(e1) {
 				var image = new Image();
 				image.onload = function(e2) {
-					var tmp = _gthis1.imageToCanvas(image);
-					_gthis1.targetImage = _gthis1.canvasToBitmap(tmp);
+					var canvas = _gthis1.imageToCanvas(image);
+					while(canvas.width > _gthis1.maxImageSize || canvas.height > _gthis1.maxImageSize) canvas = Main.downScaleCanvas(canvas,0.5);
+					_gthis1.targetImage = _gthis1.canvasToBitmap(canvas);
 					_gthis1.onTargetImageChanged();
 				};
 				image.src = fileReader.result;
@@ -102,15 +278,15 @@ Main.prototype = {
 			_gthis1.onTargetImageChanged();
 		},false);
 		Main.saveImageButton.addEventListener("click",function(e3) {
-			var canvas = window.document.createElement("canvas");
-			var tmp1 = _gthis1.runner.getImageData();
-			_gthis1.drawBitmapToCanvas(tmp1,canvas);
-			if(canvas.msToBlob != null) {
-				var blob = canvas.msToBlob();
+			var canvas1 = window.document.createElement("canvas");
+			var tmp = _gthis1.runner.getImageData();
+			_gthis1.drawBitmapToCanvas(tmp,canvas1);
+			if(canvas1.msToBlob != null) {
+				var blob = canvas1.msToBlob();
 				var navigator = window.navigator;
 				navigator.msSaveBlob(blob,"geometrized_image.png");
 			} else {
-				var data = canvas.toDataURL("image/png");
+				var data = canvas1.toDataURL("image/png");
 				Main.saveImageButton.download = "geometrized_image.png";
 				Main.saveImageButton.href = data;
 			}
@@ -156,6 +332,7 @@ Main.prototype = {
 			setShapeOption(geometrize_shape_ShapeType.LINE,Main.linesCheckbox.checked);
 		},false);
 		this.animate();
+		this.set_running(true);
 	}
 	,animate: function() {
 		var _gthis = this;
@@ -227,8 +404,9 @@ Main.prototype = {
 			fileReader.onload = function(e1) {
 				var image = new Image();
 				image.onload = function(e2) {
-					var tmp = _gthis.imageToCanvas(image);
-					_gthis.targetImage = _gthis.canvasToBitmap(tmp);
+					var canvas = _gthis.imageToCanvas(image);
+					while(canvas.width > _gthis.maxImageSize || canvas.height > _gthis.maxImageSize) canvas = Main.downScaleCanvas(canvas,0.5);
+					_gthis.targetImage = _gthis.canvasToBitmap(canvas);
 					_gthis.onTargetImageChanged();
 				};
 				image.src = fileReader.result;
@@ -244,15 +422,15 @@ Main.prototype = {
 			_gthis.onTargetImageChanged();
 		},false);
 		Main.saveImageButton.addEventListener("click",function(e3) {
-			var canvas = window.document.createElement("canvas");
-			var tmp1 = _gthis.runner.getImageData();
-			_gthis.drawBitmapToCanvas(tmp1,canvas);
-			if(canvas.msToBlob != null) {
-				var blob = canvas.msToBlob();
+			var canvas1 = window.document.createElement("canvas");
+			var tmp = _gthis.runner.getImageData();
+			_gthis.drawBitmapToCanvas(tmp,canvas1);
+			if(canvas1.msToBlob != null) {
+				var blob = canvas1.msToBlob();
 				var navigator = window.navigator;
 				navigator.msSaveBlob(blob,"geometrized_image.png");
 			} else {
-				var data = canvas.toDataURL("image/png");
+				var data = canvas1.toDataURL("image/png");
 				Main.saveImageButton.download = "geometrized_image.png";
 				Main.saveImageButton.href = data;
 			}
@@ -2346,6 +2524,35 @@ haxe_io_Bytes.__name__ = true;
 haxe_io_Bytes.prototype = {
 	__class__: haxe_io_Bytes
 };
+var haxe_io_FPHelper = function() { };
+haxe_io_FPHelper.__name__ = true;
+haxe_io_FPHelper.i32ToFloat = function(i) {
+	var sign = 1 - (i >>> 31 << 1);
+	var exp = i >>> 23 & 255;
+	var sig = i & 8388607;
+	if(sig == 0 && exp == 0) {
+		return 0.0;
+	}
+	return sign * (1 + Math.pow(2,-23) * sig) * Math.pow(2,exp - 127);
+};
+haxe_io_FPHelper.floatToI32 = function(f) {
+	if(f == 0) {
+		return 0;
+	}
+	var af = f < 0 ? -f : f;
+	var exp = Math.floor(Math.log(af) / 0.6931471805599453);
+	if(exp < -127) {
+		exp = -127;
+	} else if(exp > 128) {
+		exp = 128;
+	}
+	var sig = Math.round((af / Math.pow(2,exp) - 1) * 8388608);
+	if(sig == 8388608 && exp < 128) {
+		sig = 0;
+		++exp;
+	}
+	return (f < 0 ? -2147483648 : 0) | exp + 127 << 23 | sig;
+};
 var js__$Boot_HaxeError = function(val) {
 	Error.call(this);
 	this.val = val;
@@ -2584,6 +2791,102 @@ js_html_compat_ArrayBuffer.prototype = {
 	}
 	,__class__: js_html_compat_ArrayBuffer
 };
+var js_html_compat_Float32Array = function() { };
+js_html_compat_Float32Array.__name__ = true;
+js_html_compat_Float32Array._new = function(arg1,offset,length) {
+	var arr;
+	if(typeof(arg1) == "number") {
+		arr = [];
+		var _g1 = 0;
+		var _g = arg1;
+		while(_g1 < _g) {
+			var i = _g1++;
+			arr[i] = 0;
+		}
+		arr.byteLength = arr.length << 2;
+		arr.byteOffset = 0;
+		var _g2 = [];
+		var _g21 = 0;
+		var _g11 = arr.length << 2;
+		while(_g21 < _g11) {
+			var i1 = _g21++;
+			_g2.push(0);
+		}
+		arr.buffer = new js_html_compat_ArrayBuffer(_g2);
+	} else if(js_Boot.__instanceof(arg1,js_html_compat_ArrayBuffer)) {
+		var buffer = arg1;
+		if(offset == null) {
+			offset = 0;
+		}
+		if(length == null) {
+			length = buffer.byteLength - offset >> 2;
+		}
+		arr = [];
+		var _g12 = 0;
+		var _g3 = length;
+		while(_g12 < _g3) {
+			var i2 = _g12++;
+			var val = buffer.a[offset++] | buffer.a[offset++] << 8 | buffer.a[offset++] << 16 | buffer.a[offset++] << 24;
+			arr.push(haxe_io_FPHelper.i32ToFloat(val));
+		}
+		arr.byteLength = arr.length << 2;
+		arr.byteOffset = offset;
+		arr.buffer = buffer;
+	} else if((arg1 instanceof Array) && arg1.__enum__ == null) {
+		arr = arg1.slice();
+		var buffer1 = [];
+		var _g4 = 0;
+		while(_g4 < arr.length) {
+			var f = arr[_g4];
+			++_g4;
+			var i3 = haxe_io_FPHelper.floatToI32(f);
+			buffer1.push(i3 & 255);
+			buffer1.push(i3 >> 8 & 255);
+			buffer1.push(i3 >> 16 & 255);
+			buffer1.push(i3 >>> 24);
+		}
+		arr.byteLength = arr.length << 2;
+		arr.byteOffset = 0;
+		arr.buffer = new js_html_compat_ArrayBuffer(buffer1);
+	} else {
+		throw new js__$Boot_HaxeError("TODO " + Std.string(arg1));
+	}
+	arr.subarray = js_html_compat_Float32Array._subarray;
+	arr.set = js_html_compat_Float32Array._set;
+	return arr;
+};
+js_html_compat_Float32Array._set = function(arg,offset) {
+	if(js_Boot.__instanceof(arg.buffer,js_html_compat_ArrayBuffer)) {
+		var a = arg;
+		if(arg.byteLength + offset > this.byteLength) {
+			throw new js__$Boot_HaxeError("set() outside of range");
+		}
+		var _g1 = 0;
+		var _g = arg.byteLength;
+		while(_g1 < _g) {
+			var i = _g1++;
+			this[i + offset] = a[i];
+		}
+	} else if((arg instanceof Array) && arg.__enum__ == null) {
+		var a1 = arg;
+		if(a1.length + offset > this.byteLength) {
+			throw new js__$Boot_HaxeError("set() outside of range");
+		}
+		var _g11 = 0;
+		var _g2 = a1.length;
+		while(_g11 < _g2) {
+			var i1 = _g11++;
+			this[i1 + offset] = a1[i1];
+		}
+	} else {
+		throw new js__$Boot_HaxeError("TODO");
+	}
+};
+js_html_compat_Float32Array._subarray = function(start,end) {
+	var a = js_html_compat_Float32Array._new(this.slice(start,end));
+	a.byteOffset = start * 4;
+	return a;
+};
 var js_html_compat_Uint8Array = function() { };
 js_html_compat_Uint8Array.__name__ = true;
 js_html_compat_Uint8Array._new = function(arg1,offset,length) {
@@ -2676,6 +2979,7 @@ var ArrayBuffer = $global.ArrayBuffer || js_html_compat_ArrayBuffer;
 if(ArrayBuffer.prototype.slice == null) {
 	ArrayBuffer.prototype.slice = js_html_compat_ArrayBuffer.sliceImpl;
 }
+var Float32Array = $global.Float32Array || js_html_compat_Float32Array._new;
 var Uint8Array = $global.Uint8Array || js_html_compat_Uint8Array._new;
 ID.header = "header";
 ID.geometrizehaxelogo = "geometrizehaxelogo";
@@ -2731,6 +3035,7 @@ Main.eventLogElement = window.document.getElementById("eventlog");
 Main.svgTextElement = window.document.getElementById("svgoutput");
 geometrize_exporter_SvgExporter.SVG_STYLE_HOOK = "::svg_style_hook::";
 js_Boot.__toStr = ({ }).toString;
+js_html_compat_Float32Array.BYTES_PER_ELEMENT = 4;
 js_html_compat_Uint8Array.BYTES_PER_ELEMENT = 1;
 Main.main();
 })(typeof window != "undefined" ? window : typeof global != "undefined" ? global : typeof self != "undefined" ? self : this);
