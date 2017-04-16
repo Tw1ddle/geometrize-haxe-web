@@ -122,7 +122,7 @@ class Main {
 	}
 
 	private inline function constructRunnerOptions():ImageRunnerOptions {
-		return new ImageRunnerOptions(shapeTypes.length == 0 ? [ ShapeType.CIRCLE ] : shapeTypes, shapeOpacity, candidateShapesPerStep, shapeMutationsPerStep);
+		return new ImageRunnerOptions(shapeTypes.length == 0 ? [ ShapeType.TRIANGLE ] : shapeTypes, shapeOpacity, candidateShapesPerStep, shapeMutationsPerStep);
 	}
 
 	private inline function init():Void {
@@ -130,7 +130,7 @@ class Main {
 		running = false;
 		
 		// Reset the runner options
-		shapeTypes = ArraySet.create([ShapeType.CIRCLE]);
+		shapeTypes = ArraySet.create([ShapeType.TRIANGLE]);
 		shapeOpacity = 128;
 		candidateShapesPerStep = 50;
 		shapeMutationsPerStep = 100;

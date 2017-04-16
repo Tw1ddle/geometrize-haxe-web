@@ -39,7 +39,7 @@ Main.prototype = {
 	onWindowLoaded: function() {
 		this.maxShapeAdditionRate = 15.0;
 		this.set_running(false);
-		this.shapeTypes = geometrize__$ArraySet_ArraySet_$Impl_$.create([geometrize_shape_ShapeType.CIRCLE]);
+		this.shapeTypes = geometrize__$ArraySet_ArraySet_$Impl_$.create([geometrize_shape_ShapeType.TRIANGLE]);
 		this.shapeOpacity = 128;
 		this.candidateShapesPerStep = 50;
 		this.shapeMutationsPerStep = 100;
@@ -168,16 +168,16 @@ Main.prototype = {
 		},nextFrameDelay);
 	}
 	,stepRunner: function() {
-		this.appendShapeResults(this.runner.step(new geometrize_runner_ImageRunnerOptions(this.shapeTypes.length == 0 ? [geometrize_shape_ShapeType.CIRCLE] : geometrize__$ArraySet_ArraySet_$Impl_$.toArray(this.shapeTypes),this.shapeOpacity,this.candidateShapesPerStep,this.shapeMutationsPerStep)));
+		this.appendShapeResults(this.runner.step(new geometrize_runner_ImageRunnerOptions(this.shapeTypes.length == 0 ? [geometrize_shape_ShapeType.TRIANGLE] : geometrize__$ArraySet_ArraySet_$Impl_$.toArray(this.shapeTypes),this.shapeOpacity,this.candidateShapesPerStep,this.shapeMutationsPerStep)));
 		this.drawBitmapToCanvas(this.runner.getImageData(),Main.currentImageCanvas);
 	}
 	,constructRunnerOptions: function() {
-		return new geometrize_runner_ImageRunnerOptions(this.shapeTypes.length == 0 ? [geometrize_shape_ShapeType.CIRCLE] : geometrize__$ArraySet_ArraySet_$Impl_$.toArray(this.shapeTypes),this.shapeOpacity,this.candidateShapesPerStep,this.shapeMutationsPerStep);
+		return new geometrize_runner_ImageRunnerOptions(this.shapeTypes.length == 0 ? [geometrize_shape_ShapeType.TRIANGLE] : geometrize__$ArraySet_ArraySet_$Impl_$.toArray(this.shapeTypes),this.shapeOpacity,this.candidateShapesPerStep,this.shapeMutationsPerStep);
 	}
 	,init: function() {
 		this.maxShapeAdditionRate = 15.0;
 		this.set_running(false);
-		this.shapeTypes = geometrize__$ArraySet_ArraySet_$Impl_$.create([geometrize_shape_ShapeType.CIRCLE]);
+		this.shapeTypes = geometrize__$ArraySet_ArraySet_$Impl_$.create([geometrize_shape_ShapeType.TRIANGLE]);
 		this.shapeOpacity = 128;
 		this.candidateShapesPerStep = 50;
 		this.shapeMutationsPerStep = 100;
