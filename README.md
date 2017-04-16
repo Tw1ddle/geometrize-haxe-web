@@ -52,7 +52,7 @@ Examples from geometrizing public domain [artwork](https://commons.wikimedia.org
 [![Geometrized Sunflower](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/sunflower.jpg?raw=true "Sunflower")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Woodland Cemetery](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/woodland_cemetery.jpg?raw=true "Woodland Cemetery")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Pomegranate](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/pomegranate.jpg?raw=true "Pomegranate")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
-[![Monarch Butterfly](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/monarch_butterfly.jpg?raw=true "Monarch Butterfly")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
+[![Geometrized Monarch Butterfly](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/monarch_butterfly.jpg?raw=true "Monarch Butterfly")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Gustave Courbet](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/gustave_courbet.jpg?raw=true "Gustave Courbet")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Fairies](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/fairies.jpg?raw=true "Fairies")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
 [![Geometrized Pyramid](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/pyramid.jpg?raw=true "Pyramid")](http://www.samcodes.co.uk/project/geometrize-haxe-web/)
