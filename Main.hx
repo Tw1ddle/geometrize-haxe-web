@@ -65,6 +65,7 @@ class Main {
 	private static var shapeMutationsPerStepSlider:Element = getElement(ID.shapemutationsperstep);
 	private static var currentImageCanvas:CanvasElement = getElement(ID.currentimagecanvas);
 	private static var logoImageElement:Image = getElement(ID.geometrizehaxelogo);
+	private static var seagullImageElement:Image = getElement(ID.defaultimage);
 	private static var currentSvgContainer:DivElement = getElement(ID.currentsvgcontainer);
 	#if debug
 	private static var eventLogElement:TextAreaElement = getElement(ID.eventlog);
@@ -437,7 +438,7 @@ class Main {
 	 * @return	The default bitmap image.
 	 */
 	private function createDefaultBitmap():Bitmap {
-		return canvasToBitmap(imageToCanvas(logoImageElement));
+		return canvasToBitmap(imageToCanvas(seagullImageElement));
 	}
 	
 	private function onTargetImageChanged():Void {

@@ -277,6 +277,10 @@ a:hover {
     margin: 15px;
 }
 
+#defaultimage {
+    display: none;
+}
+
 #currentcanvascontainer {
     display: none;
 }

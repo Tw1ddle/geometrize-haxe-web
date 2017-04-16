@@ -423,7 +423,7 @@ Main.prototype = {
 		Main.currentSvgContainer.innerHTML = svgCode;
 	}
 	,createDefaultBitmap: function() {
-		return this.canvasToBitmap(this.imageToCanvas(Main.logoImageElement));
+		return this.canvasToBitmap(this.imageToCanvas(Main.seagullImageElement));
 	}
 	,onTargetImageChanged: function() {
 		if(this.runner == null) {
@@ -2692,6 +2692,7 @@ ID.resetbutton = "resetbutton";
 ID.saveoptions = "saveoptions";
 ID.saveimagebutton = "saveimagebutton";
 ID.savesvgbutton = "savesvgbutton";
+ID.defaultimage = "defaultimage";
 Main.WEBSITE_URL = "http://www.samcodes.co.uk/project/geometrize-haxe-web/";
 Main.runPauseButton = window.document.getElementById("runpausebutton");
 Main.stepButton = window.document.getElementById("stepbutton");
@@ -2712,6 +2713,7 @@ Main.randomShapesPerStepSlider = window.document.getElementById("randomshapesper
 Main.shapeMutationsPerStepSlider = window.document.getElementById("shapemutationsperstep");
 Main.currentImageCanvas = window.document.getElementById("currentimagecanvas");
 Main.logoImageElement = window.document.getElementById("geometrizehaxelogo");
+Main.seagullImageElement = window.document.getElementById("defaultimage");
 Main.currentSvgContainer = window.document.getElementById("currentsvgcontainer");
 geometrize_exporter_SvgExporter.SVG_STYLE_HOOK = "::svg_style_hook::";
 js_Boot.__toStr = ({ }).toString;
