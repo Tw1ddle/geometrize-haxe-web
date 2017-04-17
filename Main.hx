@@ -135,16 +135,16 @@ class Main {
 		
 		// Reset the runner options
 		shapeTypes = ArraySet.create([ShapeType.TRIANGLE]);
+		trianglesCheckbox.checked = true;
+		
 		shapeOpacity = 128;
 		candidateShapesPerStep = 50;
 		shapeMutationsPerStep = 100;
 		shapeResults = [];
 		
-		// Set the target image, which also sets up the image runner etc
+		// Set the target image
 		targetImage = createDefaultBitmap();
 		onTargetImageChanged();
-		
-		trianglesCheckbox.checked = true;
 	}
 
 	/**
@@ -449,6 +449,9 @@ class Main {
 		return canvasToBitmap(imageToCanvas(seagullImageElement));
 	}
 	
+	/**
+	 * Call this when the target image is changed to reset things.
+	 */
 	private function onTargetImageChanged():Void {
 		if (runner == null) {
 			appendEventText("Initializing image runner and setting default bitmap...");

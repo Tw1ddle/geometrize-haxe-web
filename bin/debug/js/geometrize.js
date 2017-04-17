@@ -211,13 +211,13 @@ Main.prototype = {
 		this.maxShapeAdditionRate = 15.0;
 		this.set_running(false);
 		this.shapeTypes = geometrize__$ArraySet_ArraySet_$Impl_$.create([geometrize_shape_ShapeType.TRIANGLE]);
+		Main.trianglesCheckbox.checked = true;
 		this.shapeOpacity = 128;
 		this.candidateShapesPerStep = 50;
 		this.shapeMutationsPerStep = 100;
 		this.shapeResults = [];
 		this.targetImage = this.createDefaultBitmap();
 		this.onTargetImageChanged();
-		Main.circlesCheckbox.checked = true;
 		var _gthis = this;
 		noUiSlider.create(Main.shapeOpacitySlider,{ start : [this.shapeOpacity], connect : "lower", range : { "min" : [1,1], "max" : [255]}, pips : { mode : "range", density : 10}});
 		this.createTooltips(Main.shapeOpacitySlider);
