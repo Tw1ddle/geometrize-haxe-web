@@ -144,7 +144,7 @@ class Main {
 		targetImage = createDefaultBitmap();
 		onTargetImageChanged();
 		
-		circlesCheckbox.checked = true;
+		trianglesCheckbox.checked = true;
 	}
 
 	/**
