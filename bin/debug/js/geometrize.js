@@ -1711,7 +1711,7 @@ geometrize_shape_RotatedEllipse.prototype = {
 				throw new js__$Boot_HaxeError("FAIL: lower <= upper");
 			}
 			var value3 = this.ry + (-16 + Math.floor(33 * Math.random()));
-			var max3 = this.xBound - 1;
+			var max3 = this.yBound - 1;
 			if(!(1 <= max3)) {
 				throw new js__$Boot_HaxeError("FAIL: min <= max");
 			}
@@ -1776,6 +1776,9 @@ geometrize_shape_RotatedRectangle.__name__ = true;
 geometrize_shape_RotatedRectangle.__interfaces__ = [geometrize_shape_Shape];
 geometrize_shape_RotatedRectangle.prototype = {
 	rasterize: function() {
+		return geometrize_rasterizer_Scanline.trim(geometrize_rasterizer_Rasterizer.scanlinesForPolygon(this.getCornerPoints()),this.xBound,this.yBound);
+	}
+	,getCornerPoints: function() {
 		var first = this.x1;
 		var second = this.x2;
 		var xm1 = first < second ? first : second;
@@ -1805,7 +1808,7 @@ geometrize_shape_RotatedRectangle.prototype = {
 		var ury = ox2 * s + oy1 * c + cy | 0;
 		var brx = ox2 * c - oy2 * s + cx | 0;
 		var bry = ox2 * s + oy2 * c + cy | 0;
-		return geometrize_rasterizer_Scanline.trim(geometrize_rasterizer_Rasterizer.scanlinesForPolygon([{ x : ulx, y : uly},{ x : urx, y : ury},{ x : brx, y : bry},{ x : blx, y : bly}]),this.xBound,this.yBound);
+		return [{ x : ulx, y : uly},{ x : urx, y : ury},{ x : brx, y : bry},{ x : blx, y : bly}];
 	}
 	,mutate: function() {
 		var r = Std.random(3);
@@ -1896,9 +1899,18 @@ geometrize_shape_RotatedRectangle.prototype = {
 		var first3 = this.y1;
 		var second3 = this.y2;
 		var height = (first2 > second2 ? first2 : second2) - (first3 < second3 ? first3 : second3);
-		var s = "<g transform=\"translate(" + (this.x1 + width / 2) + " " + (this.y1 + height / 2) + ") rotate(" + this.angle + ") scale(" + width + " " + height + ")\">";
-		s += "<rect x=\"" + -0.5 + "\" y=\"" + -0.5 + "\" width=\"" + 1 + "\" height=\"" + 1 + "\" " + geometrize_exporter_SvgExporter.SVG_STYLE_HOOK + " />";
-		s += "</g>";
+		var points = this.getCornerPoints();
+		var s = "<polygon points=\"";
+		var _g1 = 0;
+		var _g = points.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			s += points[i].x + " " + points[i].y;
+			if(i != points.length - 1) {
+				s += " ";
+			}
+		}
+		s += "\" " + geometrize_exporter_SvgExporter.SVG_STYLE_HOOK + "/>";
 		return s;
 	}
 	,__class__: geometrize_shape_RotatedRectangle
