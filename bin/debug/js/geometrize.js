@@ -399,9 +399,9 @@ Main.prototype = {
 		var i = 0;
 		while(i < bitmap.data.length) {
 			var idx = i * 4;
-			bytes.b[idx] = bitmap.data[i] >>> 24 & 255 & 255;
-			bytes.b[idx + 1] = bitmap.data[i] >>> 16 & 255 & 255;
-			bytes.b[idx + 2] = bitmap.data[i] >>> 8 & 255 & 255;
+			bytes.b[idx] = bitmap.data[i] >> 24 & 255 & 255;
+			bytes.b[idx + 1] = bitmap.data[i] >> 16 & 255 & 255;
+			bytes.b[idx + 2] = bitmap.data[i] >> 8 & 255 & 255;
 			bytes.b[idx + 3] = bitmap.data[i] & 255 & 255;
 			++i;
 		}
@@ -524,16 +524,6 @@ StringTools.__name__ = true;
 StringTools.replace = function(s,sub,by) {
 	return s.split(sub).join(by);
 };
-var _$UInt_UInt_$Impl_$ = {};
-_$UInt_UInt_$Impl_$.__name__ = true;
-_$UInt_UInt_$Impl_$.toFloat = function(this1) {
-	var $int = this1;
-	if($int < 0) {
-		return 4294967296.0 + $int;
-	} else {
-		return $int + 0.0;
-	}
-};
 var geometrize__$ArraySet_ArraySet_$Impl_$ = {};
 geometrize__$ArraySet_ArraySet_$Impl_$.__name__ = true;
 geometrize__$ArraySet_ArraySet_$Impl_$.create = function(array) {
@@ -610,9 +600,9 @@ geometrize_Core.computeColor = function(target,current,lines,alpha) {
 			var x = _g2++;
 			var t = target.data[target.width * y + x];
 			var c = current.data[current.width * y + x];
-			totalRed += ((t >>> 24 & 255) - (c >>> 24 & 255)) * a + (c >>> 24 & 255) * 257;
-			totalGreen += ((t >>> 16 & 255) - (c >>> 16 & 255)) * a + (c >>> 16 & 255) * 257;
-			totalBlue += ((t >>> 8 & 255) - (c >>> 8 & 255)) * a + (c >>> 8 & 255) * 257;
+			totalRed += ((t >> 24 & 255) - (c >> 24 & 255)) * a + (c >> 24 & 255) * 257;
+			totalGreen += ((t >> 16 & 255) - (c >> 16 & 255)) * a + (c >> 16 & 255) * 257;
+			totalBlue += ((t >> 8 & 255) - (c >> 8 & 255)) * a + (c >> 8 & 255) * 257;
 			++count;
 		}
 	}
@@ -678,9 +668,9 @@ geometrize_Core.differenceFull = function(first,second) {
 			var x = _g3++;
 			var f = first.data[first.width * y + x];
 			var s = second.data[second.width * y + x];
-			var dr = (f >>> 24 & 255) - (s >>> 24 & 255);
-			var dg = (f >>> 16 & 255) - (s >>> 16 & 255);
-			var db = (f >>> 8 & 255) - (s >>> 8 & 255);
+			var dr = (f >> 24 & 255) - (s >> 24 & 255);
+			var dg = (f >> 16 & 255) - (s >> 16 & 255);
+			var db = (f >> 8 & 255) - (s >> 8 & 255);
 			var da = (f & 255) - (s & 255);
 			total += dr * dr + dg * dg + db * db + da * da;
 		}
@@ -716,13 +706,13 @@ geometrize_Core.differencePartial = function(target,before,after,score,lines) {
 			var t = target.data[target.width * y + x];
 			var b = before.data[before.width * y + x];
 			var a = after.data[after.width * y + x];
-			var dtbr = (t >>> 24 & 255) - (b >>> 24 & 255);
-			var dtbg = (t >>> 16 & 255) - (b >>> 16 & 255);
-			var dtbb = (t >>> 8 & 255) - (b >>> 8 & 255);
+			var dtbr = (t >> 24 & 255) - (b >> 24 & 255);
+			var dtbg = (t >> 16 & 255) - (b >> 16 & 255);
+			var dtbb = (t >> 8 & 255) - (b >> 8 & 255);
 			var dtba = (t & 255) - (b & 255);
-			var dtar = (t >>> 24 & 255) - (a >>> 24 & 255);
-			var dtag = (t >>> 16 & 255) - (a >>> 16 & 255);
-			var dtab = (t >>> 8 & 255) - (a >>> 8 & 255);
+			var dtar = (t >> 24 & 255) - (a >> 24 & 255);
+			var dtag = (t >> 16 & 255) - (a >> 16 & 255);
+			var dtab = (t >> 8 & 255) - (a >> 8 & 255);
 			var dtaa = (t & 255) - (a & 255);
 			total -= dtbr * dtbr + dtbg * dtbg + dtbb * dtbb + dtba * dtba;
 			total += dtar * dtar + dtag * dtag + dtab * dtab + dtaa * dtaa;
@@ -911,9 +901,9 @@ geometrize_Util.getAverageImageColor = function(image) {
 		while(_g3 < _g2) {
 			var y = _g3++;
 			var pixel = image.data[image.width * y + x];
-			totalRed += pixel >>> 24 & 255;
-			totalGreen += pixel >>> 16 & 255;
-			totalBlue += pixel >>> 8 & 255;
+			totalRed += pixel >> 24 & 255;
+			totalGreen += pixel >> 16 & 255;
+			totalBlue += pixel >> 8 & 255;
 		}
 	}
 	var size = image.width * image.height;
@@ -974,7 +964,7 @@ geometrize_exporter_SvgExporter.stylesForShape = function(shape) {
 	}
 };
 geometrize_exporter_SvgExporter.rgbForColor = function(color) {
-	return "rgb(" + (color >>> 24 & 255) + "," + (color >>> 16 & 255) + "," + (color >>> 8 & 255) + ")";
+	return "rgb(" + (color >> 24 & 255) + "," + (color >> 16 & 255) + "," + (color >> 8 & 255) + ")";
 };
 geometrize_exporter_SvgExporter.strokeForColor = function(color) {
 	return "stroke=\"" + geometrize_exporter_SvgExporter.rgbForColor(color) + "\"";
@@ -1006,15 +996,15 @@ geometrize_rasterizer_Rasterizer.drawLines = function(image,c,lines) {
 	if(!(lines != null)) {
 		throw new js__$Boot_HaxeError("FAIL: lines != null");
 	}
-	var sr = c >>> 24 & 255;
+	var sr = c >> 24 & 255;
 	sr |= sr << 8;
 	sr *= c & 255;
 	sr = sr / 255 | 0;
-	var sg = c >>> 16 & 255;
+	var sg = c >> 16 & 255;
 	sg |= sg << 8;
 	sg *= c & 255;
 	sg = sg / 255 | 0;
-	var sb = c >>> 8 & 255;
+	var sb = c >> 8 & 255;
 	sb |= sb << 8;
 	sb *= c & 255;
 	sb = sb / 255 | 0;
@@ -1034,14 +1024,14 @@ geometrize_rasterizer_Rasterizer.drawLines = function(image,c,lines) {
 		while(_g2 < _g1) {
 			var x = _g2++;
 			var d = image.data[image.width * y + x];
-			var dr = d >>> 24 & 255;
-			var dg = d >>> 16 & 255;
-			var db = d >>> 8 & 255;
+			var dr = d >> 24 & 255;
+			var dg = d >> 16 & 255;
+			var db = d >> 8 & 255;
 			var da = d & 255;
-			var r = (_$UInt_UInt_$Impl_$.toFloat(dr * a + sr * ma) / _$UInt_UInt_$Impl_$.toFloat(m) | 0) >> 8;
-			var g = (_$UInt_UInt_$Impl_$.toFloat(dg * a + sg * ma) / _$UInt_UInt_$Impl_$.toFloat(m) | 0) >> 8;
-			var b = (_$UInt_UInt_$Impl_$.toFloat(db * a + sb * ma) / _$UInt_UInt_$Impl_$.toFloat(m) | 0) >> 8;
-			var a1 = (_$UInt_UInt_$Impl_$.toFloat(da * a + sa * ma) / _$UInt_UInt_$Impl_$.toFloat(m) | 0) >> 8;
+			var r = ((dr * a + sr * ma) / m | 0) >> 8;
+			var g = ((dg * a + sg * ma) / m | 0) >> 8;
+			var b = ((db * a + sb * ma) / m | 0) >> 8;
+			var a1 = ((da * a + sa * ma) / m | 0) >> 8;
 			if(!true) {
 				throw new js__$Boot_HaxeError("FAIL: min <= max");
 			}
@@ -1147,7 +1137,7 @@ geometrize_rasterizer_Rasterizer.scanlinesForPolygon = function(points) {
 		var a = geometrize__$ArraySet_ArraySet_$Impl_$.toArray(yToXs.h[key1]);
 		var minMaxElements;
 		if(a == null || a.length == 0) {
-			minMaxElements = { min : 0, max : 0};
+			minMaxElements = { x : 0, y : 0};
 		} else {
 			var min = a[0];
 			var max = a[0];
@@ -1162,9 +1152,9 @@ geometrize_rasterizer_Rasterizer.scanlinesForPolygon = function(points) {
 					max = value;
 				}
 			}
-			minMaxElements = { min : min, max : max};
+			minMaxElements = { x : min, y : max};
 		}
-		lines.push(new geometrize_rasterizer_Scanline(key1,minMaxElements.min,minMaxElements.max));
+		lines.push(new geometrize_rasterizer_Scanline(key1,minMaxElements.x,minMaxElements.y));
 	}
 	return lines;
 };
@@ -1200,10 +1190,7 @@ geometrize_rasterizer_Scanline.trimHelper = function(line,w,h) {
 		throw new js__$Boot_HaxeError("FAIL: min <= max");
 	}
 	line.x2 = value1 < 0 ? 0 : value1 > max1 ? max1 : value1;
-	if(line.x1 > line.x2) {
-		return false;
-	}
-	return true;
+	return line.x1 <= line.x2;
 };
 geometrize_rasterizer_Scanline.prototype = {
 	__class__: geometrize_rasterizer_Scanline
@@ -1776,9 +1763,6 @@ geometrize_shape_RotatedRectangle.__name__ = true;
 geometrize_shape_RotatedRectangle.__interfaces__ = [geometrize_shape_Shape];
 geometrize_shape_RotatedRectangle.prototype = {
 	rasterize: function() {
-		return geometrize_rasterizer_Scanline.trim(geometrize_rasterizer_Rasterizer.scanlinesForPolygon(this.getCornerPoints()),this.xBound,this.yBound);
-	}
-	,getCornerPoints: function() {
 		var first = this.x1;
 		var second = this.x2;
 		var xm1 = first < second ? first : second;
@@ -1808,7 +1792,7 @@ geometrize_shape_RotatedRectangle.prototype = {
 		var ury = ox2 * s + oy1 * c + cy | 0;
 		var brx = ox2 * c - oy2 * s + cx | 0;
 		var bry = ox2 * s + oy2 * c + cy | 0;
-		return [{ x : ulx, y : uly},{ x : urx, y : ury},{ x : brx, y : bry},{ x : blx, y : bly}];
+		return geometrize_rasterizer_Scanline.trim(geometrize_rasterizer_Rasterizer.scanlinesForPolygon([{ x : ulx, y : uly},{ x : urx, y : ury},{ x : brx, y : bry},{ x : blx, y : bly}]),this.xBound,this.yBound);
 	}
 	,mutate: function() {
 		var r = Std.random(3);
@@ -1891,27 +1875,46 @@ geometrize_shape_RotatedRectangle.prototype = {
 	,getSvgShapeData: function() {
 		var first = this.x1;
 		var second = this.x2;
+		var xm1 = first < second ? first : second;
 		var first1 = this.x1;
 		var second1 = this.x2;
-		var width = (first > second ? first : second) - (first1 < second1 ? first1 : second1);
+		var xm2 = first1 > second1 ? first1 : second1;
 		var first2 = this.y1;
 		var second2 = this.y2;
+		var ym1 = first2 < second2 ? first2 : second2;
 		var first3 = this.y1;
 		var second3 = this.y2;
-		var height = (first2 > second2 ? first2 : second2) - (first3 < second3 ? first3 : second3);
-		var points = this.getCornerPoints();
-		var s = "<polygon points=\"";
+		var ym2 = first3 > second3 ? first3 : second3;
+		var cx = (xm1 + xm2) / 2 | 0;
+		var cy = (ym1 + ym2) / 2 | 0;
+		var ox1 = xm1 - cx;
+		var ox2 = xm2 - cx;
+		var oy1 = ym1 - cy;
+		var oy2 = ym2 - cy;
+		var rads = this.angle * Math.PI / 180.0;
+		var c = Math.cos(rads);
+		var s = Math.sin(rads);
+		var ulx = ox1 * c - oy1 * s + cx | 0;
+		var uly = ox1 * s + oy1 * c + cy | 0;
+		var blx = ox1 * c - oy2 * s + cx | 0;
+		var bly = ox1 * s + oy2 * c + cy | 0;
+		var urx = ox2 * c - oy1 * s + cx | 0;
+		var ury = ox2 * s + oy1 * c + cy | 0;
+		var brx = ox2 * c - oy2 * s + cx | 0;
+		var bry = ox2 * s + oy2 * c + cy | 0;
+		var points = [{ x : ulx, y : uly},{ x : urx, y : ury},{ x : brx, y : bry},{ x : blx, y : bly}];
+		var s1 = "<polygon points=\"";
 		var _g1 = 0;
 		var _g = points.length;
 		while(_g1 < _g) {
 			var i = _g1++;
-			s += points[i].x + " " + points[i].y;
+			s1 += points[i].x + " " + points[i].y;
 			if(i != points.length - 1) {
-				s += " ";
+				s1 += " ";
 			}
 		}
-		s += "\" " + geometrize_exporter_SvgExporter.SVG_STYLE_HOOK + "/>";
-		return s;
+		s1 += "\" " + geometrize_exporter_SvgExporter.SVG_STYLE_HOOK + "/>";
+		return s1;
 	}
 	,__class__: geometrize_shape_RotatedRectangle
 };
