@@ -1,5 +1,3 @@
--main Main
-
 -lib sure
 
 # Uncomment to use the geometrize-haxe haxelib
@@ -10,3 +8,19 @@
 
 # Enable full dead code elimination
 -dce full
+
+#--no-traces
+
+--each
+
+# Build the web worker geometrizer script
+-D geometrize_worker
+-js bin/js/geometrize_worker.js
+GeometrizeWorker
+
+--next
+
+# Build the frontend/one-page app
+-D geometrize_frontend
+-js bin/js/geometrize.js
+-main Main

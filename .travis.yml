@@ -14,5 +14,4 @@ install:
   - haxelib install Sure
 
 script:
-  - haxe GeometrizeHaxeWeb.hxml debug.hxml
-  - haxe GeometrizeHaxeWeb.hxml release.hxml
+  - haxe GeometrizeHaxeWeb.hxml
