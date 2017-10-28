@@ -74,7 +74,7 @@ class Main {
 	private static var seagullImageElement:Image = getElement(ID.defaultimage);
 	private static var currentSvgContainer:DivElement = getElement(ID.currentsvgcontainer);
 	
-	private var worker:GeometrizeWorkerInterface = new GeometrizeWorkerInterface(); // For communicating with the Geometrize web worker
+	private var worker:GeometrizeWorkerInterface;
 
 	private var maxInputImageSize:Int = 1024; // Max image width or height, if this is exceeded then the input image is scaled down 0.5x
 	private var shapeTypes:ArraySet<ShapeType> = ArraySet.create([ShapeType.ROTATED_ELLIPSE]);
@@ -127,7 +127,7 @@ class Main {
 		setupStopConditions();
 		
 		// Start listening for web worker messages
-		worker.onMessage = onWorkerMessageReceived;
+		setupWorker();
 		
 		// Set the target image
 		targetImage = createDefaultBitmap();
@@ -341,6 +341,17 @@ class Main {
 	}
 	
 	/**
+	 * Sets up a new Geometrize web worker, first terminating the existing one if present.
+	 */
+	private inline function setupWorker():Void {
+		if (worker != null) {
+			worker.terminate();
+		}
+		worker = new GeometrizeWorkerInterface(); // For communicating with the Geometrize web worker
+		worker.onMessage = onWorkerMessageReceived;
+	}
+	
+	/**
 	 * Checks the stopping conditions e.g. has the shapes added limit been exceeded.
 	 * Stops the geometrization if the stop conditions are met.
 	 */
@@ -456,8 +467,12 @@ class Main {
 		
 		appendShapeData([ SvgExporter.exportShape({ score : 0.0, color: backgroundColor, shape: backgroundRect }) ]);
 		
-		// TODO recreate the worker entirely
+		setupWorker();
 		worker.postMessage({ id : FrontendToWorkerMessageId.SET_TARGET_IMAGE, data: targetImage });
+		// Kick the runner off
+		if(running) {
+			stepRunner();
+		}
 	}
 	
 	/**

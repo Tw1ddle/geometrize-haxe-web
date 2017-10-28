@@ -194,6 +194,9 @@ GeometrizeWorkerInterface.prototype = {
 	postMessage: function(message) {
 		this.worker.postMessage(message);
 	}
+	,terminate: function() {
+		this.worker.terminate();
+	}
 	,onMessage: function(message) {
 	}
 	,__class__: GeometrizeWorkerInterface
@@ -223,7 +226,6 @@ var Main = function() {
 	this.shapeOpacity = 128;
 	this.shapeTypes = geometrize__$ArraySet_ArraySet_$Impl_$.create([4]);
 	this.maxInputImageSize = 1024;
-	this.worker = new GeometrizeWorkerInterface();
 	window.onload = $bind(this,this.onWindowLoaded);
 };
 Main.__name__ = true;
@@ -365,6 +367,10 @@ Main.prototype = {
 			setShapeOption(6,Main.linesCheckbox.checked);
 		},false);
 		this.set_maxShapeCountLimit(7000);
+		if(this.worker != null) {
+			this.worker.terminate();
+		}
+		this.worker = new GeometrizeWorkerInterface();
 		this.worker.onMessage = $bind(this,this.onWorkerMessageReceived);
 		this.targetImage = this.createDefaultBitmap();
 		this.onTargetImageChanged();
@@ -492,7 +498,15 @@ Main.prototype = {
 		backgroundRect.x2 = this.targetImage.width - 1;
 		backgroundRect.y2 = this.targetImage.height - 1;
 		this.appendShapeData([geometrize_exporter_SvgExporter.exportShape({ score : 0.0, color : backgroundColor, shape : backgroundRect})]);
+		if(this.worker != null) {
+			this.worker.terminate();
+		}
+		this.worker = new GeometrizeWorkerInterface();
+		this.worker.onMessage = $bind(this,this.onWorkerMessageReceived);
 		this.worker.postMessage({ id : "should_set_target_image", data : this.targetImage});
+		if(this.running) {
+			this.stepRunner();
+		}
 	}
 	,makeSvgData: function() {
 		return geometrize_exporter_SvgExporter.getSvgPrelude() + geometrize_exporter_SvgExporter.getSvgNodeOpen(this.targetImage.width,this.targetImage.height) + Std.string(this.shapeData) + geometrize_exporter_SvgExporter.getSvgNodeClose();
