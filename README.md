@@ -15,12 +15,6 @@ Made using the [Geometrize Haxe](https://github.com/Tw1ddle/geometrize-haxe) lib
 * Watch the geometrized images being generated in realtime.
 * Save geometrized images as raster PNGs or vector SVGs.
 
-## Usage
-
-* Open up the [demo](http://www.samcodes.co.uk/project/geometrize-haxe-web/) and watch the default geometrized seagull gradually take form.
-* Pick your own image via "Open Image", and click on the "Settings" button to reveal various different shape and iteration settings.
-* Once you are happy with the results, hit one of the "Save" buttons to save a copy of the geometrized image.
-
 ## Shape Comparison
 
 The matrix shows results for circles, triangles, rotated rectangles, rotated ellipses and all supported shapes at 50, 200 and 500 total shapes:
@@ -32,6 +26,12 @@ The matrix shows results for circles, triangles, rotated rectangles, rotated ell
 | Rotated Rectangles | [![50 Rotated Rectangles](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/seagull_50_rotated_rectangles.png?raw=true)](http://www.geometrize.co.uk/) | [![200 Rotated Rectangles](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/seagull_200_rotated_rectangles.png?raw=true)](http://www.geometrize.co.uk/) | [![500 Rotated Rectangles](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/seagull_500_rotated_rectangles.png?raw=true)](http://www.geometrize.co.uk/) |
 | Rotated Ellipses   | [![50 Rotated Ellipses](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/seagull_50_rotated_ellipses.png?raw=true)](http://www.geometrize.co.uk/) | [![200 Rotated Ellipses](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/seagull_200_rotated_ellipses.png?raw=true)](http://www.geometrize.co.uk/) | [![500 Rotated Ellipses](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/seagull_500_rotated_ellipses.png?raw=true)](http://www.geometrize.co.uk/) |
 | All Shapes         | [![50 All Shapes](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/seagull_50_all_shapes.png?raw=true)](http://www.geometrize.co.uk/) | [![200 All Shapes](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/seagull_200_all_shapes.png?raw=true)](http://www.geometrize.co.uk/) | [![500 All Shapes](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/seagull_500_all_shapes.png?raw=true)](http://www.geometrize.co.uk/) |
+
+## Usage
+
+* Open up the [demo](http://www.samcodes.co.uk/project/geometrize-haxe-web/) and watch the default geometrized seagull gradually take form.
+* Pick your own image via "Open Image", and click on the "Settings" button to reveal various different shape and iteration settings.
+* Once you are happy with the results, hit one of the "Save" buttons to save a copy of the geometrized image.
 
 ## Examples And Screenshots
 
