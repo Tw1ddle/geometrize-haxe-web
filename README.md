@@ -25,12 +25,20 @@ Made using the [Geometrize Haxe](https://github.com/Tw1ddle/geometrize-haxe) lib
 
 The matrix shows results for circles, triangles, rotated rectangles, rotated ellipses and all supported shapes at 50, 200 and 500 total shapes:
 
+| -                  | 50 Shapes     | 150 Shapes    | 500 Shapes   |
+| ------------------ | ------------- | ------------- | ------------ |
+| Circles            | Content Cell  | Content Cell  | Content Cell |
+| Triangles          | Content Cell  | Content Cell  | Content Cell |
+| Rotated Rectangles | Content Cell  | Content Cell  | Content Cell |
+| Rotated Ellipses   | Content Cell  | Content Cell  | Content Cell |
+| All Shapes         | Content Cell  | Content Cell  | Content Cell |
+
 | Circles            | - | - | - |
 | Triangles          | - | - | - |
 | Rotated Rectangles | - | - | - |
 | Rotated Ellipses   | - | - | - |
 | All Shapes         | - | - | - |
-|:---:|:---:|:---:|:---:|:---:
+| :---: | :---: | :---: | :---: |:---:
 | - | 50 Shapes | 150 Shapes | 500 Shapes |
 
 ## Examples And Screenshots
@@ -42,9 +50,8 @@ Geometrized public domain [artwork](https://commons.wikimedia.org/wiki/Category:
 [![Geometrized Pomegranate - 300 Rotated Ellipses](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/pomegranate.png?raw=true "Pomegranate - 300 Rotated Ellipses")](http://www.geometrize.co.uk/)
 [![Geometrized Tree Under Clouds 210 Ellipses](https://github.com/Tw1ddle/geometrize-haxe/blob/master/screenshots/tree_under_clouds.png?raw=true "Tree Under Clouds - 210 Ellipses")](http://www.geometrize.co.uk/)
 [![Geometrized Monarch Butterfly - 800 Various Shapes](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/monarch_butterfly.png?raw=true "Monarch Butterfly - 800 Various Shapes")](http://www.geometrize.co.uk/)
-[![Geometrized Leafy Railroad - 800 Rotated Rectangles](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/leafy_railroad.png?raw=true "Leafy Railroad - 800 Rotated Rectangles")](http://www.geometrize.co.uk/)
-[![Geometrized Trees 250 Rotated Ellipses](https://github.com/Tw1ddle/geometrize-haxe/blob/master/screenshots/trees.png?raw=true "Trees - 250 Rotated Ellipses")](http://www.geometrize.co.uk/)
 [![Geometrized Chomsky - 300 Triangles](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/chomsky.png?raw=true "Noam Chomsky - 300 Triangles")](http://www.geometrize.co.uk/)
+[![Geometrized Trees 250 Rotated Ellipses](https://github.com/Tw1ddle/geometrize-haxe/blob/master/screenshots/trees.png?raw=true "Trees - 250 Rotated Ellipses")](http://www.geometrize.co.uk/)
 
 For more examples, see the Geometrize [gallery](http://gallery.geometrize.co.uk/).
 
