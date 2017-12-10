@@ -301,6 +301,18 @@ Main.prototype = {
 		Main.stepButton.addEventListener("click",function() {
 			_gthis1.stepRunner();
 		},false);
+		Main.randomImageButton.addEventListener("click",function() {
+			var image1 = new Image();
+			image1.onload = function() {
+				Main.sampleImagesContainer.appendChild(image1);
+				var tmp = _gthis1.imageToCanvas(image1);
+				_gthis1.targetImage = _gthis1.canvasToBitmap(tmp);
+				_gthis1.onTargetImageChanged();
+			};
+			var tmp1 = Main.imagesToGeometrize;
+			var tmp2 = Math.floor(Math.random() * Main.imagesToGeometrize.length);
+			image1.src = tmp1[tmp2];
+		},false);
 		Main.resetButton.addEventListener("click",function() {
 			_gthis1.targetImage = _gthis1.targetImage;
 			_gthis1.onTargetImageChanged();
@@ -487,7 +499,7 @@ Main.prototype = {
 		return canvas;
 	}
 	,createDefaultBitmap: function() {
-		return this.canvasToBitmap(this.imageToCanvas(Main.seagullImageElement));
+		return this.canvasToBitmap(this.imageToCanvas(Main.defaultImageElement));
 	}
 	,onTargetImageChanged: function() {
 		var backgroundColor = geometrize_Util.getAverageImageColor(this.targetImage);
@@ -1195,6 +1207,7 @@ var Uint8Array = $global.Uint8Array || js_html_compat_Uint8Array._new;
 Main.runPauseButton = window.document.getElementById("runpausebutton");
 Main.stepButton = window.document.getElementById("stepbutton");
 Main.openImageFileInput = window.document.getElementById("openimageinput");
+Main.randomImageButton = window.document.getElementById("randomimagebutton");
 Main.resetButton = window.document.getElementById("resetbutton");
 Main.saveImageButton = window.document.getElementById("saveimagebutton");
 Main.saveSvgButton = window.document.getElementById("savesvgbutton");
@@ -1210,8 +1223,10 @@ Main.randomShapesPerStepSlider = window.document.getElementById("randomshapesper
 Main.shapeMutationsPerStepSlider = window.document.getElementById("shapemutationsperstep");
 Main.shapesAddedText = window.document.getElementById("shapesaddedtext");
 Main.maxShapesCapTextEdit = window.document.getElementById("maxshapescaptextedit");
-Main.seagullImageElement = window.document.getElementById("defaultimage");
 Main.currentSvgContainer = window.document.getElementById("currentsvgcontainer");
+Main.sampleImagesContainer = window.document.getElementById("sampleimages");
+Main.defaultImageElement = window.document.getElementById("defaultimage");
+Main.imagesToGeometrize = ["assets/images/demo_images/beach_sunset.jpg","assets/images/demo_images/boat.jpg","assets/images/demo_images/borrowdale_valley.jpg","assets/images/demo_images/building.jpg","assets/images/demo_images/borrowdale_valley.jpg","assets/images/demo_images/building.jpg","assets/images/demo_images/candle_yet_another.jpg","assets/images/demo_images/cat_staring.jpg","assets/images/demo_images/chomsky.jpg","assets/images/demo_images/grapefruit.jpg","assets/images/demo_images/london.jpg","assets/images/demo_images/lynx_staring.jpg","assets/images/demo_images/mindblown.jpg","assets/images/demo_images/mountain.jpg","assets/images/demo_images/papillon_dog.jpg","assets/images/demo_images/pier.jpg","assets/images/demo_images/pylon_and_sun.jpg","assets/images/demo_images/seagull.jpg","assets/images/demo_images/sun_and_tree.jpg","assets/images/demo_images/sun_over_hills.jpg","assets/images/demo_images/the_great_pyramid_at_giza.jpg","assets/images/demo_images/the_lady_of_shalott.jpg","assets/images/demo_images/tree_and_clouds.jpg","assets/images/demo_images/windswept.jpg","assets/images/demo_images/wolf.jpg","assets/images/demo_images/woodland_cemetery.jpg"];
 geometrize_exporter_SvgExporter.SVG_STYLE_HOOK = "::svg_style_hook::";
 js_Boot.__toStr = ({ }).toString;
 js_html_compat_Float32Array.BYTES_PER_ELEMENT = 4;

@@ -52,6 +52,7 @@ class Main {
 	private static var stepButton:ButtonElement = getElement(ID.stepbutton);
 	private static var openImageButton:ButtonElement = getElement(ID.openimagebutton);
 	private static var openImageFileInput:InputElement = getElement(ID.openimageinput);
+	private static var randomImageButton:ButtonElement = getElement(ID.randomimagebutton);
 	private static var resetButton:ButtonElement = getElement(ID.resetbutton);
 	private static var saveImageButton:AnchorElement = getElement(ID.saveimagebutton);
 	private static var saveSvgButton:AnchorElement = getElement(ID.savesvgbutton);
@@ -71,8 +72,38 @@ class Main {
 	private static var shapesAddedText:Element = getElement(ID.shapesaddedtext);
 	private static var maxShapesCapTextEdit:TextAreaElement = getElement(ID.maxshapescaptextedit);
 	
-	private static var seagullImageElement:Image = getElement(ID.defaultimage);
 	private static var currentSvgContainer:DivElement = getElement(ID.currentsvgcontainer);
+	
+	private static var sampleImagesContainer:DivElement = getElement(ID.sampleimages);
+	private static var defaultImageElement:Image = getElement(ID.defaultimage);
+	private static var imagesToGeometrize:Array<String> = [
+		"assets/images/demo_images/beach_sunset.jpg",
+		"assets/images/demo_images/boat.jpg",
+		"assets/images/demo_images/borrowdale_valley.jpg",
+		"assets/images/demo_images/building.jpg",
+		"assets/images/demo_images/borrowdale_valley.jpg",
+		"assets/images/demo_images/building.jpg",
+		"assets/images/demo_images/candle_yet_another.jpg",
+		"assets/images/demo_images/cat_staring.jpg",
+		"assets/images/demo_images/chomsky.jpg",
+		"assets/images/demo_images/grapefruit.jpg",
+		"assets/images/demo_images/london.jpg",
+		"assets/images/demo_images/lynx_staring.jpg",
+		"assets/images/demo_images/mindblown.jpg",
+		"assets/images/demo_images/mountain.jpg",
+		"assets/images/demo_images/papillon_dog.jpg",
+		"assets/images/demo_images/pier.jpg",
+		"assets/images/demo_images/pylon_and_sun.jpg",
+		"assets/images/demo_images/seagull.jpg",
+		"assets/images/demo_images/sun_and_tree.jpg",
+		"assets/images/demo_images/sun_over_hills.jpg",
+		"assets/images/demo_images/the_great_pyramid_at_giza.jpg",
+		"assets/images/demo_images/the_lady_of_shalott.jpg",
+		"assets/images/demo_images/tree_and_clouds.jpg",
+		"assets/images/demo_images/windswept.jpg",
+		"assets/images/demo_images/wolf.jpg",
+		"assets/images/demo_images/woodland_cemetery.jpg"
+	];
 	
 	private var worker:GeometrizeWorkerInterface;
 
@@ -235,6 +266,16 @@ class Main {
 		
 		stepButton.addEventListener("click", function() {
 			stepRunner();
+		}, false);
+		
+		randomImageButton.addEventListener("click", function() {
+			var image = new Image();
+			image.onload = function() {
+				sampleImagesContainer.appendChild(image);
+				targetImage = canvasToBitmap(imageToCanvas(image));
+				onTargetImageChanged();
+			};
+			image.src = imagesToGeometrize[Math.floor(Math.random() * imagesToGeometrize.length)];
 		}, false);
 		
 		resetButton.addEventListener("click", function() {
@@ -448,7 +489,7 @@ class Main {
 	 * @return	The default bitmap image.
 	 */
 	private function createDefaultBitmap():Bitmap {
-		return canvasToBitmap(imageToCanvas(seagullImageElement));
+		return canvasToBitmap(imageToCanvas(defaultImageElement));
 	}
 	
 	/**

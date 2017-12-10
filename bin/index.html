@@ -106,6 +106,10 @@
 				<input id="openimageinput" type="file" style="display:none;" accept="image/*"/>
 				<input type="button" class="button" id="openimagebutton" value="Open Image" onclick="document.getElementById('openimageinput').click();">
 				
+				<a class="button" id="randomimagebutton">
+					<h2>Random Image</h2>
+				</a>
+				
 				<a class="button" id="resetbutton">
 					<h2>Reset</h2>
 				</a>
@@ -128,13 +132,15 @@
 		<div class="container stitched">
 			<h2>How It Works</h2>
 			<p>This page uses the <a href="https://github.com/Tw1ddle/geometrize-haxe/" target="_blank">Geometrize Haxe</a> library to recreate images with geometric primitives. Given a target image to recreate, the library generates hundreds of random shapes, and repeatedly mutates them as part of a hillclimbing optimization approach. Internally, the code uses a web worker to keep the webpage responsive while the geometrization algorithm ranks thousands of these shapes behind the scenes - only picking the best-fitting shapes for use in the final image.</p>
-			<p>The "run/pause" button starts or stops the geometrization process, the "step" button adds one primitive to the image when pressed, the "open image" button lets you select your own images, and the "reset" button clears all of the current shapes, starting again from scratch. The "save image" button saves a raster PNG of the geometrized image, while the "save SVG" button saves an infinitely scalable vector-based image.</p>
+			<p>The "run/pause" button starts or stops the geometrization process, the "step" button adds one primitive to the image when pressed, the "open image" button lets you select your own images, the "random image" button selects a random preset image, and the "reset" button clears all of the current shapes, starting again from scratch. The "save image" button saves a raster PNG of the geometrized image, while the "save SVG" button saves an infinitely scalable vector-based image.</p>
 			<p>Options can be changed through the "settings" section. The shape opacity slider controls the transparency of added shapes, while the random mutations and shapes per step parameters can be changed to strike a balance between speed and quality. The shape type checkboxes allow you to select the shape types used in the final image. If you want to leave an image geometrizing in the background, you can set a cap on the number of shapes to add.</p>
 			<p>For more information and tutorials, see this <a href="http://resources.geometrize.co.uk/" target="_blank">list of resources</a>. Also check out Geometrizer, the <a href="https://github.com/Tw1ddle/geometrize-twitter-bot" target="_blank">Twitter bot</a> built on top of my cross-platform desktop app, <a href="http://www.geometrize.co.uk/" target="_blank">Geometrize</a>.</p>
 			<p>If you have suggestions, requests or comments, please <a href="https://github.com/Tw1ddle/geometrize-haxe" target="_blank">open an issue</a> or <a href="https://twitter.com/Sam_Twidale" target="_blank">contact me</a>.</p>
 		</div>
 		
-		<img id="defaultimage" src="assets/images/seagull.jpg" alt="default image - this is the default image that will be geometrized into geometric primitives when the page loads">
+		<div id="sampleimages">
+			<img id="defaultimage" src="assets/images/demo_images/seagull.jpg" alt="default image - this is the default image that will be geometrized into geometric primitives when the page loads">
+		</div>
 		
 		<script type="text/javascript" src="js/wNumb.min.js"></script>
 		<script type="text/javascript" src="js/nouislider.min.js"></script>
