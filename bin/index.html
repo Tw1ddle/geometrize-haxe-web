@@ -31,13 +31,11 @@
 				<h1><strong>Geometrize</strong> Web Demo</h1>
 				<h2>Geometrizing images into geometric primitives</h2>
 				
-				<a href="http://www.geometrize.co.uk/" target="_blank">
+				<a href="https://www.geometrize.co.uk/" target="_blank">
 					<img id="geometrizehaxelogo" class="logo" src="assets/images/geometrize_logo.png" alt="geometrize haxe image geometrizer logo">
 				</a>
 				
-				<p><a href="https://github.com/Tw1ddle/geometrize-haxe" target="_blank">Geometrize Haxe</a> is an open source tool for geometrizing images into geometric primitives. Take a look at the <a href="http://gallery.geometrize.co.uk/" target="_blank">gallery</a> for inspiration.</p>
-				
-				<p>Written in <a href="http://haxe.org/" target="_blank">Haxe</a> by <a href="https://twitter.com/Sam_Twidale" target="_blank">Sam Twidale</a>. Based on <a href="https://github.com/fogleman/primitive" target="_blank">primitive</a> by <a href="https://github.com/fogleman" target="_blank">Michael Fogleman</a>.</p>
+				<p>An <a href="https://github.com/Tw1ddle/geometrize" target="_blank">open source</a> web demo of <a href="https://www.geometrize.co.uk/" target="_blank">Geometrize</a> by <a href="https://twitter.com/Sam_Twidale" target="_blank">Sam Twidale</a>. Based on <a href="https://github.com/fogleman/primitive" target="_blank">primitive</a> by <a href="https://github.com/fogleman" target="_blank">Michael Fogleman</a>.</p>
 			</div>
 		</section>
 		
@@ -131,13 +129,14 @@
 		
 		<div class="container stitched">
 			<h2>How It Works</h2>
-			<p>This page uses the <a href="https://github.com/Tw1ddle/geometrize-haxe/" target="_blank">Geometrize Haxe</a> library to recreate images with geometric primitives. Given a target image to recreate, the library generates hundreds of random shapes, and repeatedly mutates them as part of a hillclimbing optimization approach. Internally, the code uses a web worker to keep the webpage responsive while the geometrization algorithm ranks thousands of these shapes behind the scenes - only picking the best-fitting shapes for use in the final image.</p>
-			<p>The "run/pause" button starts or stops the geometrization process, the "step" button adds one primitive to the image when pressed, the "open image" button lets you select your own images, the "random image" button selects a random preset image, and the "reset" button clears all of the current shapes, starting again from scratch. The "save image" button saves a raster PNG of the geometrized image, while the "save SVG" button saves an infinitely scalable vector-based image.</p>
-			<p>Options can be changed through the "settings" section. The shape opacity slider controls the transparency of added shapes, while the random mutations and shapes per step parameters can be changed to strike a balance between speed and quality. The shape type checkboxes allow you to select the shape types used in the final image. If you want to leave an image geometrizing in the background, you can set a cap on the number of shapes to add.</p>
-			<p>For more information and tutorials, see this <a href="http://resources.geometrize.co.uk/" target="_blank">list of resources</a>. Also check out Geometrizer, the <a href="https://github.com/Tw1ddle/geometrize-twitter-bot" target="_blank">Twitter bot</a> built on top of my cross-platform desktop app, <a href="http://www.geometrize.co.uk/" target="_blank">Geometrize</a>.</p>
-			<p>If you have suggestions, requests or comments, please <a href="https://github.com/Tw1ddle/geometrize-haxe" target="_blank">open an issue</a> or <a href="https://twitter.com/Sam_Twidale" target="_blank">contact me</a>.</p>
+			<p>This webpage uses the <a href="https://github.com/Tw1ddle/geometrize-haxe/" target="_blank">Geometrize Haxe</a> library to transform images into shapes. It's a demo for <a href="https://www.geometrize.co.uk/" target="_blank">Geometrize</a>, my <a href="https://github.com/Tw1ddle/geometrize" target="_blank">open source</a> desktop app designed for recreating images as geometric primitives.</p>
+			<p>Given an image to recreate, Geometrize generates hundreds of random shapes, and repeatedly mutates these as part of a hillclimbing optimization approach. Internally, this demo uses a web worker so the webpage remains responsive while the geometrization algorithm ranks thousands of these shapes behind the scenes, only picking the best-fitting shapes for use in the final image.</p>
+			<p>The "Run/Pause" button starts or stops the geometrization process, the "Step" button adds one primitive to the image when pressed, the "Open Image" button lets you select your own images, the "Random Image" button picks a random preset image, and the "Reset" button clears all of the current shapes, restarting the geometrization from scratch. The "Save Image" button saves a PNG of the geometrized image, while the "Save SVG" button saves an infinitely scalable vector-based image.</p>
+			<p>Additional controls are accessed by clicking on the "Settings" section. The "Shape Opacity" slider controls the how transparent added shapes are. The "Random Mutations" and "Shapes Per Step" parameters are adjustable for striking a balance between speed and quality. The "Shape Type" checkboxes allow you to select the shape types used in the final image. To leave an image geometrizing in the background, it is often useful to set the "Max Shape Cap" to your desired number of shapes.</p>
+			<p>For more, see the <a href="https://resources.geometrize.co.uk/" target="_blank">list of Geometrize resources</a>. Also try Geometrizer, the <a href="https://github.com/Tw1ddle/geometrize-twitter-bot" target="_blank">Twitter bot</a> built on top of the <a href="https://www.geometrize.co.uk/" target="_blank">Geometrize</a> desktop app.</p>
+			<p>If you have suggestions, requests or comments, please <a href="https://github.com/Tw1ddle/geometrize-haxe" target="_blank">open an issue</a> or <a href="https://twitter.com/Sam_Twidale" target="_blank">contact Sam</a>.</p>
 		</div>
-		
+
 		<div id="sampleimages">
 			<img id="defaultimage" src="assets/images/demo_images/seagull.jpg" alt="default image - this is the default image that will be geometrized into geometric primitives when the page loads">
 		</div>
