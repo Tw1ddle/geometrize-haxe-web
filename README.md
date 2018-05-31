@@ -7,7 +7,7 @@ Web demo for [Geometrize](https://www.geometrize.co.uk/), a tool for recreating 
 
 Made using the [Geometrize Haxe](https://github.com/Tw1ddle/geometrize-haxe) library, a [Haxe](https://haxe.org/) port of [primitive](https://github.com/fogleman/primitive).
 
-[![Geometrized Train 230 Rotated Ellipses](https://github.com/Tw1ddle/geometrize-haxe/blob/master/screenshots/train.png?raw=true "Train - 230 Rotated Ellipses")](https://www.geometrize.co.uk/)
+[![Geometrized Cat 500 Triangles](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/cat.gif?raw=true "Geometrized Cat - 500 Geometric Primitives")](https://www.geometrize.co.uk/)
 
 ## Features
 * Recreate images as geometric primitives - rectangles, triangles, circles, ellipses and lines are supported.
@@ -37,6 +37,7 @@ The matrix shows results for circles, triangles, rotated rectangles, rotated ell
 
 Geometrized public domain [artwork](https://commons.wikimedia.org/wiki/Category:Paintings_by_painter) and [photos](https://www.pexels.com/public-domain-images/):
 
+[![Geometrized Train 230 Rotated Ellipses](https://github.com/Tw1ddle/geometrize-haxe/blob/master/screenshots/train.png?raw=true "Train - 230 Rotated Ellipses")](https://www.geometrize.co.uk/)
 [![Geometrized Flower - 330 Rotated Ellipses](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/flower.png?raw=true "Flower - 330 Rotated Ellipses")](https://www.geometrize.co.uk/)
 [![Geometrized Woodland Cemetery - 600 Rotated Rectangles](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/woodland_cemetery.png?raw=true "Woodland Cemetery - 600 Rotated Rectangles")](https://www.geometrize.co.uk/)
 [![Geometrized Pomegranate - 300 Rotated Ellipses](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/pomegranate.png?raw=true "Pomegranate - 300 Rotated Ellipses")](https://www.geometrize.co.uk/)
