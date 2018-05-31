@@ -220,12 +220,13 @@ HxOverrides.remove = function(a,obj) {
 };
 var Main = function() {
 	this.targetImage = null;
-	this.shapeData = [];
+	this.shapeJsonData = [];
+	this.shapeSvgData = [];
 	this.shapeMutationsPerStep = 100;
 	this.candidateShapesPerStep = 50;
 	this.shapeOpacity = 128;
 	this.shapeTypes = geometrize__$ArraySet_ArraySet_$Impl_$.create([4]);
-	this.maxInputImageSize = 1024;
+	this.maxInputImageSize = 768;
 	window.onload = $bind(this,this.onWindowLoaded);
 };
 Main.__name__ = true;
@@ -234,7 +235,7 @@ Main.main = function() {
 };
 Main.prototype = {
 	get_shapeCount: function() {
-		return this.shapeData.length;
+		return this.shapeSvgData.length;
 	}
 	,get_maxShapeCountLimit: function() {
 		var text = Main.maxShapesCapTextEdit.value;
@@ -242,7 +243,7 @@ Main.prototype = {
 		if(value != null) {
 			return value;
 		}
-		return 7000;
+		return 3000;
 	}
 	,set_maxShapeCountLimit: function(limit) {
 		Main.maxShapesCapTextEdit.value = limit == null ? "null" : "" + limit;
@@ -338,17 +339,23 @@ Main.prototype = {
 			};
 			svgImage.setAttribute("src",svgData);
 		},false);
-		Main.saveSvgButton.addEventListener("click",function(e4) {
-			var data1 = Main.currentSvgContainer.innerHTML;
-			var svgBlob = new Blob([data1],{ type : "image/svg+xml;charset=utf-8"});
+		var saveBlob = function(data1,dataType,filename,anchor) {
+			var blob1 = new Blob([data1],{ type : dataType});
 			var navigator1 = window.navigator;
 			if(navigator1.msSaveBlob != null) {
-				navigator1.msSaveBlob(svgBlob,"geometrized_svg.svg");
+				navigator1.msSaveBlob(blob1,filename);
 			} else {
-				var svgUrl = URL.createObjectURL(svgBlob);
-				Main.saveSvgButton.download = "geometrized_svg.svg";
-				Main.saveSvgButton.href = svgUrl;
+				var dataUrl = URL.createObjectURL(blob1);
+				anchor.download = filename;
+				anchor.href = dataUrl;
 			}
+		};
+		Main.saveSvgButton.addEventListener("click",function(e4) {
+			saveBlob(Main.currentSvgContainer.innerHTML,"image/svg+xml;charset=utf-8","geometrized_svg.svg",Main.saveSvgButton);
+		},false);
+		Main.saveJsonButton.addEventListener("click",function(e5) {
+			var tmp3 = "[\r\n" + _gthis1.shapeJsonData.join(",\r\n") + "\r\n]";
+			saveBlob(tmp3,"data:text/json;charset=utf-8","geometrized_json.json",Main.saveJsonButton);
 		},false);
 		var setShapeOption = function(option,enable) {
 			if(enable) {
@@ -378,7 +385,7 @@ Main.prototype = {
 		Main.linesCheckbox.addEventListener("click",function() {
 			setShapeOption(6,Main.linesCheckbox.checked);
 		},false);
-		this.set_maxShapeCountLimit(7000);
+		this.set_maxShapeCountLimit(3000);
 		if(this.worker != null) {
 			this.worker.terminate();
 		}
@@ -419,8 +426,8 @@ Main.prototype = {
 		case "did_set_target_image":
 			break;
 		case "did_step":
-			var svgShapeData = message.data;
-			this.appendShapeData(svgShapeData);
+			this.shapeJsonData.push(message.jsonData);
+			this.appendSvgShapeData(message.svgData);
 			this.checkStopConditions();
 			break;
 		}
@@ -428,8 +435,8 @@ Main.prototype = {
 			this.stepRunner();
 		}
 	}
-	,appendShapeData: function(data) {
-		this.shapeData = this.shapeData.concat(data);
+	,appendSvgShapeData: function(data) {
+		this.shapeSvgData.push(data);
 		var tmp = this.get_shapeCount();
 		Main.shapesAddedText.innerHTML = Std.string(tmp);
 		var data1 = this.makeSvgData();
@@ -503,13 +510,15 @@ Main.prototype = {
 	}
 	,onTargetImageChanged: function() {
 		var backgroundColor = geometrize_Util.getAverageImageColor(this.targetImage);
-		this.shapeData = [];
 		var backgroundRect = new geometrize_shape_Rectangle(this.targetImage.width,this.targetImage.height);
 		backgroundRect.x1 = 0;
 		backgroundRect.y1 = 0;
 		backgroundRect.x2 = this.targetImage.width - 1;
 		backgroundRect.y2 = this.targetImage.height - 1;
-		this.appendShapeData([geometrize_exporter_SvgExporter.exportShape({ score : 0.0, color : backgroundColor, shape : backgroundRect})]);
+		this.shapeSvgData = [];
+		this.shapeJsonData = [];
+		this.appendSvgShapeData(geometrize_exporter_SvgExporter.exportShape({ score : 0.0, color : backgroundColor, shape : backgroundRect}));
+		this.shapeJsonData.push(geometrize_exporter_ShapeJsonExporter.exportShape({ score : 0.0, color : backgroundColor, shape : backgroundRect}));
 		if(this.worker != null) {
 			this.worker.terminate();
 		}
@@ -521,7 +530,7 @@ Main.prototype = {
 		}
 	}
 	,makeSvgData: function() {
-		return geometrize_exporter_SvgExporter.getSvgPrelude() + geometrize_exporter_SvgExporter.getSvgNodeOpen(this.targetImage.width,this.targetImage.height) + Std.string(this.shapeData) + geometrize_exporter_SvgExporter.getSvgNodeClose();
+		return geometrize_exporter_SvgExporter.getSvgPrelude() + geometrize_exporter_SvgExporter.getSvgNodeOpen(this.targetImage.width,this.targetImage.height) + Std.string(this.shapeSvgData) + geometrize_exporter_SvgExporter.getSvgNodeClose();
 	}
 	,set_running: function(running) {
 		Main.runPauseButton.innerHTML = running ? "<h2>Pause</h2>" : "<h2>Run</h2>";
@@ -653,6 +662,36 @@ geometrize_bitmap_Bitmap.__name__ = true;
 geometrize_bitmap_Bitmap.prototype = {
 	__class__: geometrize_bitmap_Bitmap
 };
+var geometrize_exporter_ShapeJsonExporter = function() { };
+geometrize_exporter_ShapeJsonExporter.__name__ = true;
+geometrize_exporter_ShapeJsonExporter.exportShape = function(shape) {
+	var result = "    {\n";
+	var type = shape.shape.getType();
+	var data = shape.shape.getRawShapeData();
+	var color = shape.color;
+	var score = shape.score;
+	result += "        \"type\":" + type + ",\n";
+	result += "        \"data\":" + "[";
+	var _g1 = 0;
+	var _g = data.length;
+	while(_g1 < _g) {
+		var item = _g1++;
+		result += data[item];
+		if(item <= data.length - 2) {
+			result += ",";
+		}
+	}
+	result += "],\n";
+	result += "        \"color\":" + "[";
+	result += (color >> 24 & 255) + ",";
+	result += (color >> 16 & 255) + ",";
+	result += (color >> 8 & 255) + ",";
+	result += color & 255;
+	result += "],\n";
+	result += "        \"score\":" + score + "\n";
+	result += "    }";
+	return result;
+};
 var geometrize_exporter_SvgExporter = function() { };
 geometrize_exporter_SvgExporter.__name__ = true;
 geometrize_exporter_SvgExporter.exportShape = function(shape) {
@@ -718,6 +757,17 @@ geometrize_shape_Rectangle.__interfaces__ = [geometrize_shape_Shape];
 geometrize_shape_Rectangle.prototype = {
 	getType: function() {
 		return 0;
+	}
+	,getRawShapeData: function() {
+		var first = this.x1;
+		var second = this.x2;
+		var first1 = this.y1;
+		var second1 = this.y2;
+		var first2 = this.x1;
+		var second2 = this.x2;
+		var first3 = this.y1;
+		var second3 = this.y2;
+		return [first < second ? first : second,first1 < second1 ? first1 : second1,first2 > second2 ? first2 : second2,first3 > second3 ? first3 : second3];
 	}
 	,getSvgShapeData: function() {
 		var first = this.x1;
@@ -1211,6 +1261,7 @@ Main.randomImageButton = window.document.getElementById("randomimagebutton");
 Main.resetButton = window.document.getElementById("resetbutton");
 Main.saveImageButton = window.document.getElementById("saveimagebutton");
 Main.saveSvgButton = window.document.getElementById("savesvgbutton");
+Main.saveJsonButton = window.document.getElementById("savejsonbutton");
 Main.rectanglesCheckbox = window.document.getElementById("rectangles");
 Main.rotatedRectanglesCheckbox = window.document.getElementById("rotatedrectangles");
 Main.trianglesCheckbox = window.document.getElementById("triangles");

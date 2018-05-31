@@ -30,5 +30,6 @@ typedef FrontendToWorkerMessage = {
 
 typedef WorkerToFrontendMessage = {
 	var id:WorkerToFrontendMessageId;
-	var data:Dynamic;
+	@:optional var jsonData:String;
+	@:optional var svgData:String;
 }

@@ -7,6 +7,7 @@ import geometrize.Model.ShapeResult;
 import geometrize.Util;
 import geometrize.bitmap.Bitmap;
 import geometrize.bitmap.Rgba;
+import geometrize.exporter.ShapeJsonExporter;
 import geometrize.exporter.SvgExporter;
 import geometrize.runner.ImageRunner;
 import geometrize.runner.ImageRunnerOptions;
@@ -39,10 +40,10 @@ class ID {}
 
 /**
  * A one-page app that demonstrates the Geometrize Haxe library
- * @author Sam Twidale (http://www.geometrize.co.uk/)
+ * @author Sam Twidale (https://www.geometrize.co.uk/)
  */
 class Main {
-	private static inline var WEBSITE_URL:String = "http://www.samcodes.co.uk/project/geometrize-haxe-web/"; // Hosted demo URL
+	private static inline var WEBSITE_URL:String = "https://www.samcodes.co.uk/project/geometrize-haxe-web/"; // Hosted demo URL
 
 	// References to the HTML page elements we need
 	private static inline function getElement(id:String):Dynamic {
@@ -56,6 +57,7 @@ class Main {
 	private static var resetButton:ButtonElement = getElement(ID.resetbutton);
 	private static var saveImageButton:AnchorElement = getElement(ID.saveimagebutton);
 	private static var saveSvgButton:AnchorElement = getElement(ID.savesvgbutton);
+	private static var saveJsonButton:AnchorElement = getElement(ID.savejsonbutton);
 	
 	private static var rectanglesCheckbox:InputElement = getElement(ID.rectangles);
 	private static var rotatedRectanglesCheckbox:InputElement = getElement(ID.rotatedrectangles);
@@ -107,20 +109,22 @@ class Main {
 	
 	private var worker:GeometrizeWorkerInterface;
 
-	private var maxInputImageSize:Int = 1024; // Max image width or height, if this is exceeded then the input image is scaled down 0.5x
+	private var maxInputImageSize:Int = 768; // Max image width or height, if this is exceeded then the input image is scaled down 0.5x
 	private var shapeTypes:ArraySet<ShapeType> = ArraySet.create([ShapeType.ROTATED_ELLIPSE]);
 	private var shapeOpacity:Int = 128;
 	private var candidateShapesPerStep:Int = 50;
 	private var shapeMutationsPerStep:Int = 100;
 	
-	private var shapeData:Array<String> = []; // Shape results
+	private var shapeSvgData:Array<String> = []; // SVG shape results
+	private var shapeJsonData:Array<String> = []; // JSON shape results
+	
 	private var shapeCount(get, never):Int; // Number of shapes in the current geometrized image data
 	public function get_shapeCount():Int {
-		return shapeData.length;
+		return shapeSvgData.length;
 	}
 	
 	private var maxShapeCountLimit(get, set):Int;
-	private static inline var defaultMaxShapeCountLimit:Int = 7000;
+	private static inline var defaultMaxShapeCountLimit:Int = 3000;
 	private function get_maxShapeCountLimit():Int {
 		var text:String = maxShapesCapTextEdit.value;
 		var value:Null<Int> = Std.parseInt(text);
@@ -308,18 +312,25 @@ class Main {
 			svgImage.setAttribute("src", svgData);
 		}, false);
 		
-		saveSvgButton.addEventListener("click", function(e:Dynamic):Void {
-			var data = currentSvgContainer.innerHTML;
-			var svgBlob = new Blob([data], { type: "image/svg+xml;charset=utf-8" });
+		var saveBlob = function(data:String, dataType:String, filename:String, anchor:AnchorElement) {
+			var blob = new Blob([data], { type: dataType });
 			
 			var navigator:Dynamic = Browser.window.navigator;
 			if (navigator.msSaveBlob != null) {
-				navigator.msSaveBlob(svgBlob, "geometrized_svg.svg");
+				navigator.msSaveBlob(blob, filename);
 			} else {
-				var svgUrl = URL.createObjectURL(svgBlob);
-				saveSvgButton.download = "geometrized_svg.svg";
-				saveSvgButton.href = svgUrl;
+				var dataUrl = URL.createObjectURL(blob);
+				anchor.download = filename;
+				anchor.href = dataUrl;
 			}
+		};
+		
+		saveSvgButton.addEventListener("click", function(e:Dynamic):Void {
+			saveBlob(currentSvgContainer.innerHTML, "image/svg+xml;charset=utf-8", "geometrized_svg.svg", saveSvgButton);
+		}, false);
+		
+		saveJsonButton.addEventListener("click", function(e:Dynamic):Void {
+			saveBlob("[\r\n" + shapeJsonData.join(",\r\n") + "\r\n]", "data:text/json;charset=utf-8", "geometrized_json.json", saveJsonButton);
 		}, false);
 		
 		var setShapeOption = function(option:ShapeType, enable:Bool):Void {
@@ -425,8 +436,9 @@ class Main {
 			case WorkerToFrontendMessageId.DID_SET_TARGET_IMAGE:
 				
 			case WorkerToFrontendMessageId.STEPPED:
-				var svgShapeData:Array<String> = message.data;
-				appendShapeData(svgShapeData);
+				shapeJsonData.push(message.jsonData);
+				appendSvgShapeData(message.svgData);
+				
 				checkStopConditions();
 		}
 		
@@ -439,8 +451,8 @@ class Main {
 	/**
 	 * Appends some shape result info to the current shape results.
 	 */
-	private function appendShapeData(data:Array<String>) {
-		shapeData = shapeData.concat(data);
+	private function appendSvgShapeData(data:String) {
+		shapeSvgData.push(data);
 		
 		shapesAddedText.innerHTML = Std.string(shapeCount);
 		
@@ -497,16 +509,16 @@ class Main {
 	 */
 	private function onTargetImageChanged():Void {
 		var backgroundColor:Rgba = Util.getAverageImageColor(targetImage);
-		
-		shapeData = [];
-		
 		var backgroundRect = new Rectangle(targetImage.width, targetImage.height);
 		backgroundRect.x1 = 0;
 		backgroundRect.y1 = 0;
 		backgroundRect.x2 = targetImage.width - 1;
 		backgroundRect.y2 = targetImage.height - 1;
 		
-		appendShapeData([ SvgExporter.exportShape({ score : 0.0, color: backgroundColor, shape: backgroundRect }) ]);
+		shapeSvgData = [];
+		shapeJsonData = [];
+		appendSvgShapeData(SvgExporter.exportShape({ score : 0.0, color: backgroundColor, shape: backgroundRect }));
+		shapeJsonData.push(ShapeJsonExporter.exportShape({ score : 0.0, color: backgroundColor, shape: backgroundRect }));
 		
 		setupWorker();
 		worker.postMessage({ id : FrontendToWorkerMessageId.SET_TARGET_IMAGE, data: targetImage });
@@ -521,7 +533,7 @@ class Main {
 	 * @return A string representing an SVG of a geometrized image
 	 */
 	private function makeSvgData():String {
-		return SvgExporter.getSvgPrelude() + SvgExporter.getSvgNodeOpen(targetImage.width, targetImage.height) + shapeData + SvgExporter.getSvgNodeClose();
+		return SvgExporter.getSvgPrelude() + SvgExporter.getSvgNodeOpen(targetImage.width, targetImage.height) + shapeSvgData + SvgExporter.getSvgNodeClose();
 	}
 	
 	private function set_running(running:Bool):Bool {

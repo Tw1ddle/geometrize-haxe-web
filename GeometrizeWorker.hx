@@ -17,6 +17,7 @@ class GeometrizeWorker {
 import geometrize.Util;
 import geometrize.Model.ShapeResult;
 import geometrize.bitmap.Bitmap;
+import geometrize.exporter.ShapeJsonExporter;
 import geometrize.exporter.SvgExporter;
 import geometrize.runner.ImageRunner;
 import geometrize.runner.ImageRunnerOptions;
@@ -52,13 +53,14 @@ class GeometrizeWorker {
 				// Set the target image and send back an acknowledgement
 				var target:Bitmap = message.data;
 				runner = new ImageRunner(target, Util.getAverageImageColor(target));
-				postMessage({ id: WorkerToFrontendMessageId.DID_SET_TARGET_IMAGE, data: null });
+				postMessage({ id: WorkerToFrontendMessageId.DID_SET_TARGET_IMAGE });
 			case FrontendToWorkerMessageId.STEP:
 				// Step the image runner and send back the SVG data for the shapes produced
 				var options:ImageRunnerOptions = message.data;
 				var results:Array<ShapeResult> = runner.step(options);
 				var svgData:String = SvgExporter.exportShapes(results);
-				postMessage({ id: WorkerToFrontendMessageId.STEPPED, data: svgData });
+				var jsonData:String = ShapeJsonExporter.exportShapes(results);
+				postMessage({ id: WorkerToFrontendMessageId.STEPPED, svgData: svgData, jsonData: jsonData });
 		}
 	}
 	

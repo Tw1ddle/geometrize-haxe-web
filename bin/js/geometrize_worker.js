@@ -18,13 +18,14 @@ GeometrizeWorker.prototype = {
 		case "should_set_target_image":
 			var target = message.data;
 			this.runner = new geometrize_runner_ImageRunner(target,geometrize_Util.getAverageImageColor(target));
-			this.postMessage({ id : "did_set_target_image", data : null});
+			this.postMessage({ id : "did_set_target_image"});
 			break;
 		case "should_step":
 			var options = message.data;
 			var results = this.runner.step(options);
 			var svgData = geometrize_exporter_SvgExporter.exportShapes(results);
-			this.postMessage({ id : "did_step", data : svgData});
+			var jsonData = geometrize_exporter_ShapeJsonExporter.exportShapes(results);
+			this.postMessage({ id : "did_step", svgData : svgData, jsonData : jsonData});
 			break;
 		}
 	}
@@ -455,6 +456,48 @@ geometrize_Util.getAverageImageColor = function(image) {
 };
 var geometrize_bitmap_Bitmap = function() {
 };
+var geometrize_exporter_ShapeJsonExporter = function() { };
+geometrize_exporter_ShapeJsonExporter.exportShapes = function(shapes) {
+	var results = "";
+	var _g1 = 0;
+	var _g = shapes.length;
+	while(_g1 < _g) {
+		var i = _g1++;
+		results += geometrize_exporter_ShapeJsonExporter.exportShape(shapes[i]);
+		if(i != shapes.length - 1) {
+			results += "\n";
+		}
+	}
+	return results;
+};
+geometrize_exporter_ShapeJsonExporter.exportShape = function(shape) {
+	var result = "    {\n";
+	var type = shape.shape.getType();
+	var data = shape.shape.getRawShapeData();
+	var color = shape.color;
+	var score = shape.score;
+	result += "        \"type\":" + type + ",\n";
+	result += "        \"data\":" + "[";
+	var _g1 = 0;
+	var _g = data.length;
+	while(_g1 < _g) {
+		var item = _g1++;
+		result += data[item];
+		if(item <= data.length - 2) {
+			result += ",";
+		}
+	}
+	result += "],\n";
+	result += "        \"color\":" + "[";
+	result += (color >> 24 & 255) + ",";
+	result += (color >> 16 & 255) + ",";
+	result += (color >> 8 & 255) + ",";
+	result += color & 255;
+	result += "],\n";
+	result += "        \"score\":" + score + "\n";
+	result += "    }";
+	return result;
+};
 var geometrize_exporter_SvgExporter = function() { };
 geometrize_exporter_SvgExporter.exportShapes = function(shapes) {
 	var results = "";
@@ -808,6 +851,9 @@ geometrize_shape_Ellipse.prototype = {
 	,getType: function() {
 		return 3;
 	}
+	,getRawShapeData: function() {
+		return [this.x,this.y,this.rx,this.ry];
+	}
 	,getSvgShapeData: function() {
 		return "<ellipse cx=\"" + this.x + "\" cy=\"" + this.y + "\" rx=\"" + this.rx + "\" ry=\"" + this.ry + "\" " + geometrize_exporter_SvgExporter.SVG_STYLE_HOOK + " />";
 	}
@@ -867,6 +913,9 @@ geometrize_shape_Circle.prototype = $extend(geometrize_shape_Ellipse.prototype,{
 	}
 	,getType: function() {
 		return 5;
+	}
+	,getRawShapeData: function() {
+		return [this.x,this.y,this.rx];
 	}
 	,getSvgShapeData: function() {
 		return "<circle cx=\"" + this.x + "\" cy=\"" + this.y + "\" r=\"" + this.rx + "\" " + geometrize_exporter_SvgExporter.SVG_STYLE_HOOK + " />";
@@ -956,6 +1005,9 @@ geometrize_shape_Line.prototype = {
 	}
 	,getType: function() {
 		return 6;
+	}
+	,getRawShapeData: function() {
+		return [this.x1,this.y1,this.x2,this.y2];
 	}
 	,getSvgShapeData: function() {
 		return "<line x1=\"" + this.x1 + "\" y1=\"" + this.y1 + "\" x2=\"" + this.x2 + "\" y2=\"" + this.y2 + "\" " + geometrize_exporter_SvgExporter.SVG_STYLE_HOOK + " />";
@@ -1052,6 +1104,17 @@ geometrize_shape_Rectangle.prototype = {
 	}
 	,getType: function() {
 		return 0;
+	}
+	,getRawShapeData: function() {
+		var first = this.x1;
+		var second = this.x2;
+		var first1 = this.y1;
+		var second1 = this.y2;
+		var first2 = this.x1;
+		var second2 = this.x2;
+		var first3 = this.y1;
+		var second3 = this.y2;
+		return [first < second ? first : second,first1 < second1 ? first1 : second1,first2 > second2 ? first2 : second2,first3 > second3 ? first3 : second3];
 	}
 	,getSvgShapeData: function() {
 		var first = this.x1;
@@ -1167,6 +1230,9 @@ geometrize_shape_RotatedEllipse.prototype = {
 	}
 	,getType: function() {
 		return 4;
+	}
+	,getRawShapeData: function() {
+		return [this.x,this.y,this.rx,this.ry,this.angle];
 	}
 	,getSvgShapeData: function() {
 		var s = "<g transform=\"translate(" + this.x + " " + this.y + ") rotate(" + this.angle + ") scale(" + this.rx + " " + this.ry + ")\">";
@@ -1295,6 +1361,17 @@ geometrize_shape_RotatedRectangle.prototype = {
 	}
 	,getType: function() {
 		return 1;
+	}
+	,getRawShapeData: function() {
+		var first = this.x1;
+		var second = this.x2;
+		var first1 = this.y1;
+		var second1 = this.y2;
+		var first2 = this.x1;
+		var second2 = this.x2;
+		var first3 = this.y1;
+		var second3 = this.y2;
+		return [first < second ? first : second,first1 < second1 ? first1 : second1,first2 > second2 ? first2 : second2,first3 > second3 ? first3 : second3,this.angle];
 	}
 	,getSvgShapeData: function() {
 		var first = this.x1;
@@ -1474,6 +1551,9 @@ geometrize_shape_Triangle.prototype = {
 	}
 	,getType: function() {
 		return 2;
+	}
+	,getRawShapeData: function() {
+		return [this.x1,this.y1,this.x2,this.y2,this.x3,this.y3];
 	}
 	,getSvgShapeData: function() {
 		return "<polygon points=\"" + this.x1 + "," + this.y1 + " " + this.x2 + "," + this.y2 + " " + this.x3 + "," + this.y3 + "\" " + geometrize_exporter_SvgExporter.SVG_STYLE_HOOK + "/>";
