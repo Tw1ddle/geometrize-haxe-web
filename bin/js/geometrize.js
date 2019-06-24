@@ -376,7 +376,7 @@ Main.prototype = {
 		}
 	}
 	,stepRunner: function() {
-		var options = { shapeTypes : this.shapeTypes.length == 0 ? [2] : geometrize__$ArraySet_ArraySet_$Impl_$.toArray(this.shapeTypes), alpha : this.shapeOpacity, candidateShapesPerStep : this.candidateShapesPerStep, shapeMutationsPerStep : this.shapeMutationsPerStep};
+		var options = { shapeTypes : this.shapeTypes.length == 0 ? [2] : geometrize__$ArraySet_ArraySet_$Impl_$.toArray(this.shapeTypes), alpha : this.shapeOpacity | 0, candidateShapesPerStep : this.candidateShapesPerStep, shapeMutationsPerStep : this.shapeMutationsPerStep};
 		this.worker.postMessage({ id : "should_step", data : options});
 	}
 	,onWorkerMessageReceived: function(message) {
@@ -466,7 +466,24 @@ Main.prototype = {
 		return this.canvasToBitmap(this.imageToCanvas(Main.defaultImageElement));
 	}
 	,onTargetImageChanged: function() {
-		var backgroundColor = geometrize_Util.getAverageImageColor(this.targetImage,this.initialBackgroundOpacity);
+		var backgroundColor = geometrize_Util.getAverageImageColor(this.targetImage);
+		var red = (backgroundColor >> 24 & 255) * this.initialBackgroundOpacity / 255.0 | 0;
+		var green = (backgroundColor >> 16 & 255) * this.initialBackgroundOpacity / 255.0 | 0;
+		var blue = (backgroundColor >> 8 & 255) * this.initialBackgroundOpacity / 255.0 | 0;
+		var alpha = this.initialBackgroundOpacity | 0;
+		if(!true) {
+			throw new js__$Boot_HaxeError("FAIL: min <= max");
+		}
+		if(!true) {
+			throw new js__$Boot_HaxeError("FAIL: min <= max");
+		}
+		if(!true) {
+			throw new js__$Boot_HaxeError("FAIL: min <= max");
+		}
+		if(!true) {
+			throw new js__$Boot_HaxeError("FAIL: min <= max");
+		}
+		var premultipliedColor = ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
 		var backgroundRect = new geometrize_shape_Rectangle(this.targetImage.width,this.targetImage.height);
 		backgroundRect.x1 = 0;
 		backgroundRect.y1 = 0;
@@ -474,8 +491,8 @@ Main.prototype = {
 		backgroundRect.y2 = this.targetImage.height - 1;
 		this.shapeSvgData = [];
 		this.shapeJsonData = [];
-		this.appendSvgShapeData(geometrize_exporter_SvgExporter.exportShape({ score : 0.0, color : backgroundColor, shape : backgroundRect}));
-		this.shapeJsonData.push(geometrize_exporter_ShapeJsonExporter.exportShape({ score : 0.0, color : backgroundColor, shape : backgroundRect}));
+		this.appendSvgShapeData(geometrize_exporter_SvgExporter.exportShape({ score : 0.0, color : premultipliedColor, shape : backgroundRect}));
+		this.shapeJsonData.push(geometrize_exporter_ShapeJsonExporter.exportShape({ score : 0.0, color : premultipliedColor, shape : backgroundRect}));
 		if(this.worker != null) {
 			this.worker.terminate();
 		}

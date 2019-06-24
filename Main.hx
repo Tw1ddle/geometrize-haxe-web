@@ -112,8 +112,8 @@ class Main {
 
 	private var maxInputImageSize:Int = 768; // Max image width or height, if this is exceeded then the input image is scaled down 0.5x
 	private var shapeTypes:ArraySet<ShapeType> = ArraySet.create([ShapeType.ROTATED_ELLIPSE]);
-	private var shapeOpacity:Int = 128;
-	private var initialBackgroundOpacity:Int = 255;
+	private var shapeOpacity:Float = 128;
+	private var initialBackgroundOpacity:Float = 255;
 	private var candidateShapesPerStep:Int = 50;
 	private var shapeMutationsPerStep:Int = 100;
 	
@@ -442,7 +442,7 @@ class Main {
 		
 		var options:ImageRunnerOptions = {
 			shapeTypes: shapeTypes.length == 0 ? [ ShapeType.TRIANGLE ] : shapeTypes,
-			alpha: shapeOpacity,
+			alpha: Std.int(shapeOpacity),
 			candidateShapesPerStep: candidateShapesPerStep,
 			shapeMutationsPerStep: shapeMutationsPerStep
 		};
@@ -530,7 +530,8 @@ class Main {
 	 * Resets things when target image is changed.
 	 */
 	private function onTargetImageChanged():Void {
-		var backgroundColor:Rgba = Util.getAverageImageColor(targetImage, initialBackgroundOpacity); // Alpha is based off the user preference (read from a slider)
+		var backgroundColor:Rgba = Util.getAverageImageColor(targetImage); // Alpha is based off the user preference (read from a slider)
+		var premultipliedColor:Rgba = Rgba.create(Std.int(backgroundColor.r * initialBackgroundOpacity / 255.0), Std.int(backgroundColor.g * initialBackgroundOpacity / 255.0), Std.int(backgroundColor.b * initialBackgroundOpacity / 255.0), Std.int(initialBackgroundOpacity));
 		var backgroundRect = new Rectangle(targetImage.width, targetImage.height);
 		backgroundRect.x1 = 0;
 		backgroundRect.y1 = 0;
@@ -539,8 +540,8 @@ class Main {
 		
 		shapeSvgData = [];
 		shapeJsonData = [];
-		appendSvgShapeData(SvgExporter.exportShape({ score : 0.0, color: backgroundColor, shape: backgroundRect }));
-		shapeJsonData.push(ShapeJsonExporter.exportShape({ score : 0.0, color: backgroundColor, shape: backgroundRect }));
+		appendSvgShapeData(SvgExporter.exportShape({ score : 0.0, color: premultipliedColor, shape: backgroundRect }));
+		shapeJsonData.push(ShapeJsonExporter.exportShape({ score : 0.0, color: premultipliedColor, shape: backgroundRect }));
 		
 		setupWorker();
 		worker.postMessage({ id : FrontendToWorkerMessageId.SET_TARGET_IMAGE, data: targetImage });
