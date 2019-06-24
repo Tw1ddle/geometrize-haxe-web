@@ -174,6 +174,7 @@ var Main = function() {
 	this.shapeSvgData = [];
 	this.shapeMutationsPerStep = 100;
 	this.candidateShapesPerStep = 50;
+	this.initialBackgroundOpacity = 255;
 	this.shapeOpacity = 128;
 	this.shapeTypes = geometrize__$ArraySet_ArraySet_$Impl_$.create([4]);
 	this.maxInputImageSize = 768;
@@ -210,21 +211,29 @@ Main.prototype = {
 		Main.shapeOpacitySlider.noUiSlider.on("update",function(values1,handle1,rawValues1) {
 			_gthis.updateTooltips(Main.shapeOpacitySlider,handle1,values1[handle1] | 0);
 		});
+		noUiSlider.create(Main.initialBackgroundOpacitySlider,{ start : [this.initialBackgroundOpacity], connect : "lower", range : { "min" : [0,1], "max" : [255]}, pips : { mode : "range", density : 10}});
+		this.createTooltips(Main.initialBackgroundOpacitySlider);
+		Main.initialBackgroundOpacitySlider.noUiSlider.on("change",function(values2,handle2,rawValues2) {
+			_gthis.initialBackgroundOpacity = values2[handle2] | 0;
+		});
+		Main.initialBackgroundOpacitySlider.noUiSlider.on("update",function(values3,handle3,rawValues3) {
+			_gthis.updateTooltips(Main.initialBackgroundOpacitySlider,handle3,values3[handle3] | 0);
+		});
 		noUiSlider.create(Main.randomShapesPerStepSlider,{ start : [this.candidateShapesPerStep], connect : "lower", range : { "min" : [10,1], "max" : [300]}, pips : { mode : "range", density : 10}});
 		this.createTooltips(Main.randomShapesPerStepSlider);
-		Main.randomShapesPerStepSlider.noUiSlider.on("change",function(values2,handle2,rawValues2) {
-			_gthis.candidateShapesPerStep = values2[handle2] | 0;
+		Main.randomShapesPerStepSlider.noUiSlider.on("change",function(values4,handle4,rawValues4) {
+			_gthis.candidateShapesPerStep = values4[handle4] | 0;
 		});
-		Main.randomShapesPerStepSlider.noUiSlider.on("update",function(values3,handle3,rawValues3) {
-			_gthis.updateTooltips(Main.randomShapesPerStepSlider,handle3,values3[handle3] | 0);
+		Main.randomShapesPerStepSlider.noUiSlider.on("update",function(values5,handle5,rawValues5) {
+			_gthis.updateTooltips(Main.randomShapesPerStepSlider,handle5,values5[handle5] | 0);
 		});
 		noUiSlider.create(Main.shapeMutationsPerStepSlider,{ start : [this.shapeMutationsPerStep], connect : "lower", range : { "min" : [10,1], "max" : [300]}, pips : { mode : "range", density : 10}});
 		this.createTooltips(Main.shapeMutationsPerStepSlider);
-		Main.shapeMutationsPerStepSlider.noUiSlider.on("change",function(values4,handle4,rawValues4) {
-			_gthis.shapeMutationsPerStep = values4[handle4] | 0;
+		Main.shapeMutationsPerStepSlider.noUiSlider.on("change",function(values6,handle6,rawValues6) {
+			_gthis.shapeMutationsPerStep = values6[handle6] | 0;
 		});
-		Main.shapeMutationsPerStepSlider.noUiSlider.on("update",function(values5,handle5,rawValues5) {
-			_gthis.updateTooltips(Main.shapeMutationsPerStepSlider,handle5,values5[handle5] | 0);
+		Main.shapeMutationsPerStepSlider.noUiSlider.on("update",function(values7,handle7,rawValues7) {
+			_gthis.updateTooltips(Main.shapeMutationsPerStepSlider,handle7,values7[handle7] | 0);
 		});
 		var _gthis1 = this;
 		Main.runPauseButton.addEventListener("click",function() {
@@ -457,7 +466,7 @@ Main.prototype = {
 		return this.canvasToBitmap(this.imageToCanvas(Main.defaultImageElement));
 	}
 	,onTargetImageChanged: function() {
-		var backgroundColor = geometrize_Util.getAverageImageColor(this.targetImage);
+		var backgroundColor = geometrize_Util.getAverageImageColor(this.targetImage,this.initialBackgroundOpacity);
 		var backgroundRect = new geometrize_shape_Rectangle(this.targetImage.width,this.targetImage.height);
 		backgroundRect.x1 = 0;
 		backgroundRect.y1 = 0;
@@ -883,7 +892,10 @@ geometrize_State.prototype = {
 };
 var geometrize_Util = function() { };
 geometrize_Util.__name__ = true;
-geometrize_Util.getAverageImageColor = function(image) {
+geometrize_Util.getAverageImageColor = function(image,alpha) {
+	if(alpha == null) {
+		alpha = 255;
+	}
 	if(!(image != null)) {
 		throw new js__$Boot_HaxeError("FAIL: image != null");
 	}
@@ -920,7 +932,7 @@ geometrize_Util.getAverageImageColor = function(image) {
 	if(!true) {
 		throw new js__$Boot_HaxeError("FAIL: min <= max");
 	}
-	return ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + 255;
+	return ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
 };
 var geometrize_bitmap_Bitmap = $hx_exports["geometrize"]["bitmap"]["Bitmap"] = function() {
 };
@@ -2343,6 +2355,7 @@ Main.rotatedEllipsesCheckbox = window.document.getElementById("rotatedellipses")
 Main.circlesCheckbox = window.document.getElementById("circles");
 Main.linesCheckbox = window.document.getElementById("lines");
 Main.shapeOpacitySlider = window.document.getElementById("shapeopacity");
+Main.initialBackgroundOpacitySlider = window.document.getElementById("initialbackgroundopacity");
 Main.randomShapesPerStepSlider = window.document.getElementById("randomshapesperstep");
 Main.shapeMutationsPerStepSlider = window.document.getElementById("shapemutationsperstep");
 Main.shapesAddedText = window.document.getElementById("shapesaddedtext");

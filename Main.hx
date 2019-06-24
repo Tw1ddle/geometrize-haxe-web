@@ -68,6 +68,7 @@ class Main {
 	private static var linesCheckbox:InputElement = getElement(ID.lines);
 	
 	private static var shapeOpacitySlider:Element = getElement(ID.shapeopacity);
+	private static var initialBackgroundOpacitySlider:Element = getElement(ID.initialbackgroundopacity);
 	private static var randomShapesPerStepSlider:Element = getElement(ID.randomshapesperstep);
 	private static var shapeMutationsPerStepSlider:Element = getElement(ID.shapemutationsperstep);
 	
@@ -112,6 +113,7 @@ class Main {
 	private var maxInputImageSize:Int = 768; // Max image width or height, if this is exceeded then the input image is scaled down 0.5x
 	private var shapeTypes:ArraySet<ShapeType> = ArraySet.create([ShapeType.ROTATED_ELLIPSE]);
 	private var shapeOpacity:Int = 128;
+	private var initialBackgroundOpacity:Int = 255;
 	private var candidateShapesPerStep:Int = 50;
 	private var shapeMutationsPerStep:Int = 100;
 	
@@ -193,6 +195,26 @@ class Main {
 		});
 		untyped shapeOpacitySlider.noUiSlider.on(UiSliderEvent.UPDATE, function(values:Array<Float>, handle:Int, rawValues:Array<Float>):Void {
 			updateTooltips(shapeOpacitySlider, handle, Std.int(values[handle]));
+		});
+		
+		NoUiSlider.create(initialBackgroundOpacitySlider, {
+			start: [ initialBackgroundOpacity ],
+			connect: 'lower',
+			range: {
+				'min': [ 0, 1 ],
+				'max': [ 255 ]
+			},
+			pips: {
+				mode: 'range',
+				density: 10,
+			}
+		});
+		createTooltips(initialBackgroundOpacitySlider);
+		untyped initialBackgroundOpacitySlider.noUiSlider.on(UiSliderEvent.CHANGE, function(values:Array<Float>, handle:Int, rawValues:Array<Float>):Void {
+			initialBackgroundOpacity = Std.int(values[handle]);
+		});
+		untyped initialBackgroundOpacitySlider.noUiSlider.on(UiSliderEvent.UPDATE, function(values:Array<Float>, handle:Int, rawValues:Array<Float>):Void {
+			updateTooltips(initialBackgroundOpacitySlider, handle, Std.int(values[handle]));
 		});
 		
 		NoUiSlider.create(randomShapesPerStepSlider, {
@@ -508,7 +530,7 @@ class Main {
 	 * Resets things when target image is changed.
 	 */
 	private function onTargetImageChanged():Void {
-		var backgroundColor:Rgba = Util.getAverageImageColor(targetImage);
+		var backgroundColor:Rgba = Util.getAverageImageColor(targetImage, initialBackgroundOpacity); // Alpha is based off the user preference (read from a slider)
 		var backgroundRect = new Rectangle(targetImage.width, targetImage.height);
 		backgroundRect.x1 = 0;
 		backgroundRect.y1 = 0;

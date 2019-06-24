@@ -11,7 +11,7 @@ Made using the [Geometrize Haxe](https://github.com/Tw1ddle/geometrize-haxe) lib
 
 ## Features
 * Recreate images as geometric primitives - rectangles, triangles, circles, ellipses and lines are supported.
-* Modify interactive options for adjusting shape types, shape opacity, speed and accuracy.
+* Interactive options for adjusting shape types, shape and background opacity, speed and accuracy.
 * Save geometrized images as raster PNGs, vector SVGs or as JSON data.
 * Watch the geometrized images being generated in realtime.
 

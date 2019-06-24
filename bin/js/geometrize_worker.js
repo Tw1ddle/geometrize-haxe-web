@@ -418,7 +418,10 @@ geometrize_State.prototype = {
 	}
 };
 var geometrize_Util = function() { };
-geometrize_Util.getAverageImageColor = function(image) {
+geometrize_Util.getAverageImageColor = function(image,alpha) {
+	if(alpha == null) {
+		alpha = 255;
+	}
 	if(!(image != null)) {
 		throw new js__$Boot_HaxeError("FAIL: image != null");
 	}
@@ -455,7 +458,7 @@ geometrize_Util.getAverageImageColor = function(image) {
 	if(!true) {
 		throw new js__$Boot_HaxeError("FAIL: min <= max");
 	}
-	return ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + 255;
+	return ((red < 0 ? 0 : red > 255 ? 255 : red) << 24) + ((green < 0 ? 0 : green > 255 ? 255 : green) << 16) + ((blue < 0 ? 0 : blue > 255 ? 255 : blue) << 8) + (alpha < 0 ? 0 : alpha > 255 ? 255 : alpha);
 };
 var geometrize_bitmap_Bitmap = $hx_exports["geometrize"]["bitmap"]["Bitmap"] = function() {
 };
