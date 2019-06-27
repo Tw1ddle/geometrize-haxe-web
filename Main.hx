@@ -66,6 +66,7 @@ class Main {
 	private static var rotatedEllipsesCheckbox:InputElement = getElement(ID.rotatedellipses);
 	private static var circlesCheckbox:InputElement = getElement(ID.circles);
 	private static var linesCheckbox:InputElement = getElement(ID.lines);
+	private static var quadraticBeziersCheckbox:InputElement = getElement(ID.quadraticbeziers);
 	
 	private static var shapeOpacitySlider:Element = getElement(ID.shapeopacity);
 	private static var initialBackgroundOpacitySlider:Element = getElement(ID.initialbackgroundopacity);
@@ -382,6 +383,9 @@ class Main {
 		}, false);
 		linesCheckbox.addEventListener("click", function() {
 			setShapeOption(ShapeType.LINE, linesCheckbox.checked);
+		}, false);
+		quadraticBeziersCheckbox.addEventListener("click", function() {
+			setShapeOption(ShapeType.QUADRATIC_BEZIER, quadraticBeziersCheckbox.checked);
 		}, false);
 	}
 
