@@ -1390,16 +1390,28 @@ var geometrize_shape_Rectangle = function(xBound,yBound) {
 geometrize_shape_Rectangle.prototype = {
 	rasterize: function() {
 		var lines = [];
-		var _g = this.y1;
-		var _g1 = this.y2;
-		while(_g < _g1) {
-			var y = _g++;
-			if(this.x1 != this.x2) {
-				var first = this.x1;
-				var second = this.x2;
-				var first1 = this.x1;
-				var second1 = this.x2;
-				lines.push(new geometrize_rasterizer_Scanline(y,first < second ? first : second,first1 > second1 ? first1 : second1));
+		var first = this.y1;
+		var second = this.y2;
+		var yMin = first < second ? first : second;
+		var first1 = this.y1;
+		var second1 = this.y2;
+		var yMax = first1 > second1 ? first1 : second1;
+		if(yMin == yMax) {
+			var first2 = this.x1;
+			var second2 = this.x2;
+			var first3 = this.x1;
+			var second3 = this.x2;
+			lines.push(new geometrize_rasterizer_Scanline(yMin,first2 < second2 ? first2 : second2,first3 > second3 ? first3 : second3));
+		} else {
+			var _g = yMin;
+			var _g1 = yMax;
+			while(_g < _g1) {
+				var y = _g++;
+				var first4 = this.x1;
+				var second4 = this.x2;
+				var first5 = this.x1;
+				var second5 = this.x2;
+				lines.push(new geometrize_rasterizer_Scanline(y,first4 < second4 ? first4 : second4,first5 > second5 ? first5 : second5));
 			}
 		}
 		return lines;
