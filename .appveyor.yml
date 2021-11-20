@@ -1,0 +1,50 @@
+branches:
+  only:
+    - master
+
+image:
+  - Ubuntu2004
+
+environment:
+  GITHUB_API_KEY:
+    secure: w1zaTUARBAuhkAKUke5sBvSkVtlDGL8YfQxROzv5oGIynVJImn+KWGFVDxyjQore
+
+  global:
+    HAXELIB_ROOT: /home/appveyor/haxelib
+    HAXE_INSTALLDIR: /home/appveyor/haxe
+
+install:
+  - cd /home/appveyor
+  - sudo add-apt-repository ppa:haxe/releases -y
+  - sudo apt update
+  - sudo apt install neko tar -y
+  - wget https://github.com/HaxeFoundation/haxe/releases/download/4.2.4/haxe-4.2.4-linux64.tar.gz
+  - mkdir $HAXE_INSTALLDIR
+  - tar -xf haxe-4.2.4-linux64.tar.gz -C $HAXE_INSTALLDIR
+  - export PATH=$PATH:$HAXE_INSTALLDIR/haxe_20211022152000_ab0c054
+  - mkdir $HAXELIB_ROOT && haxelib setup $HAXELIB_ROOT
+  - haxelib list
+  
+  - cd $APPVEYOR_BUILD_FOLDER
+  
+  # Configure CI bot git email/username
+  - git config --global user.name "AppVeyor CI Bot"
+  - git config --global user.email "appveyor@appveyor.org"
+
+  - git submodule update --init --recursive
+  - git submodule update --remote --merge
+
+  # Push the latest versions of the submodules to the repository
+  - |
+    if [[ `git status --porcelain` ]]; then
+      git checkout master
+      git add geometrize
+      git commit --message "Build bot updating submodule"
+      git remote rm origin
+      git remote add origin https://${GITHUB_API_KEY}@github.com/Tw1ddle/geometrize-haxe-web.git > /dev/null 2>&1
+      git push origin master
+    fi
+
+build_script:
+  - cd $APPVEYOR_BUILD_FOLDER
+  - haxe GeometrizeHaxeWeb.hxml

@@ -1,6 +1,6 @@
 [![Project logo](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/screenshots/logo.png?raw=true "Geometrize Haxe Project logo")](https://www.geometrize.co.uk/)
 
-[![Build Status](https://img.shields.io/travis/Tw1ddle/geometrize-haxe-web.svg?style=flat-square)](https://travis-ci.org/Tw1ddle/geometrize-haxe-web)
+[![Geometrize Haxe Web Build Status](https://ci.appveyor.com/api/projects/status/github/Tw1ddle/geometrize-haxe-web)](https://ci.appveyor.com/project/Tw1ddle/geometrize-haxe-web)
 [![License](https://img.shields.io/:license-mit-blue.svg?style=flat-square)](https://github.com/Tw1ddle/geometrize-haxe-web/blob/master/LICENSE)
 
 Web demo for [Geometrize](https://www.geometrize.co.uk/), a tool for recreating images as geometric primitives. Run it now [in your browser](https://www.samcodes.co.uk/project/geometrize-haxe-web/).
