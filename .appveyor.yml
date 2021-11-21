@@ -23,6 +23,7 @@ install:
   - tar -xf haxe-4.2.4-linux64.tar.gz -C $HAXE_INSTALLDIR
   - export PATH=$PATH:$HAXE_INSTALLDIR/haxe_20211022152000_ab0c054
   - mkdir $HAXELIB_ROOT && haxelib setup $HAXELIB_ROOT
+  - haxelib install sure
   - haxelib list
   
   - cd $APPVEYOR_BUILD_FOLDER
