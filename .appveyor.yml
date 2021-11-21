@@ -39,7 +39,7 @@ install:
   - |
     if [[ `git status --porcelain` ]]; then
       git checkout master
-      git add geometrize
+      git add lib/geometrize
       git commit --message "Build bot updating submodule"
       git remote rm origin
       git remote add origin https://${GITHUB_API_KEY}@github.com/Tw1ddle/geometrize-haxe-web.git > /dev/null 2>&1
