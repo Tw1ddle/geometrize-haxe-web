@@ -6,7 +6,7 @@ import js.html.CanvasElement;
 
 /**
  * Helper functions for manipulating HTML5 canvas data.
- * @author Sam Twidale (http://www.geometrize.co.uk/)
+ * @author Sam Twidale (https://www.geometrize.co.uk/)
  */
 class CanvasTools {
 	/**

@@ -5,7 +5,7 @@ import haxe.macro.Expr;
 
 /**
  * Code completion helper macros that gather ids from HTML files for autocompletion when working with such files in Haxe.
- * These are based on the macro by Nicolas Cannasse: http://code.haxe.org/category/macros/completion-from-url.html
+ * These are based on the macro by Nicolas Cannasse: https://code.haxe.org/category/macros/completion-from-url.html
  */
 class CodeCompletion {
 	/**

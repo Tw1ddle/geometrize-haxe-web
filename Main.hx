@@ -35,7 +35,7 @@ import GeometrizeWorkerMessages;
 
 // Automatic HTML code completion, you need to point these to your HTML
 @:build(CodeCompletion.buildLocalFile("bin/index.html"))
-//@:build(CodeCompletion.buildUrl("http://www.samcodes.co.uk/project/geometrize-haxe-web/"))
+//@:build(CodeCompletion.buildUrl("https://www.samcodes.co.uk/project/geometrize-haxe-web/"))
 class ID {}
 
 /**

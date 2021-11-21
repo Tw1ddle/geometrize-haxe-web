@@ -5,7 +5,7 @@ import geometrize.runner.ImageRunnerOptions;
 
 /**
  * Ids for messages that are sent from the frontend to the Geometrize web worker.
- * @author Sam Twidale (http://www.geometrize.co.uk/)
+ * @author Sam Twidale (https://www.geometrize.co.uk/)
  */
 @:enum abstract FrontendToWorkerMessageId(String)
 {
@@ -20,7 +20,7 @@ typedef FrontendToWorkerMessage = {
 
 /**
  * Ids for messages that are sent from the Geometrize web worker to the frontend.
- * @author Sam Twidale (http://www.geometrize.co.uk/)
+ * @author Sam Twidale (https://www.geometrize.co.uk/)
  */
 @:enum abstract WorkerToFrontendMessageId(String)
 {

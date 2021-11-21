@@ -8,7 +8,7 @@ import GeometrizeWorkerMessages;
 
 /**
  * Wrapper class for handling and communicating with a web worker that runs the Geometrize worker script.
- * @author Sam Twidale (http://www.geometrize.co.uk/)
+ * @author Sam Twidale (https://www.geometrize.co.uk/)
  */
 class GeometrizeWorkerInterface {
 	private var worker:Worker;

@@ -4,7 +4,7 @@ package;
 
 /**
  * Names required for the Geometrize web worker script. Used by a web worker created by the frontend.
- * @author Sam Twidale (http://www.samcodes.co.uk/)
+ * @author Sam Twidale (https://www.samcodes.co.uk/)
  */
 class GeometrizeWorker {
 	public static inline var scriptPath:String = "js/geometrize_worker.js";
@@ -27,7 +27,7 @@ import GeometrizeWorkerMessages;
 
 /**
  * Web worker used to offload most of the geometrizing work to a thread that won't block the UI.
- * @author Sam Twidale (http://www.geometrize.co.uk/)
+ * @author Sam Twidale (https://www.geometrize.co.uk/)
  */
 @:keep
 class GeometrizeWorker {
